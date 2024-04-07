@@ -1,4 +1,4 @@
-import './App.css';
+// App.js
 import React, { useState, useEffect } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,12 +10,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Icon from '@mdi/react';
 import { mdiWhiteBalanceSunny, mdiMoonWaningCrescent } from '@mdi/js';
 import Login from "./components/Login";
-import StudentList from "./bricks/StudentList";
-import AddGradeToStudent from "./components/AddGradeToStudent";
-import AddAssignment from "./components/AddAssignment";
-import AddScoreToStudent from "./components/AddScoreToStudent";
-import EnrollToAssignment from "./components/EnrollToAssignment";
 import axios from 'axios';
+import './App.css'; // Import CSS file
 
 function App() {
   let navigate = useNavigate();
@@ -42,44 +38,10 @@ function App() {
     setLoggedIn(false);
   };
 
-  const handleAddAssignment = async (assignmentData) => {
-    try {
-      // Make a POST request to the server to add the assignment
-      const response = await axios.post('/api/subjDetail/teacher/addAssignment', assignmentData);
-      // Handle success or show a success message
-    } catch (error) {
-      // Handle error or show an error message
-    }
-  };
-
-  const handleAddScoreToStudent = async (scoreData) => {
-    try {
-      // Make a POST request to the server to add the score to the student
-      const response = await axios.post('/api/subjDetail/teacher/assignment/addScoreToStudent', scoreData);
-      // Handle success or show a success message
-    } catch (error) {
-      // Handle error or show an error message
-    }
-  };
-
-  const handleAddGradeToStudent = async (gradeData) => {
-    try {
-      // Make a POST request to the server to add the grade to the student
-      const response = await axios.post('/api/subjDetail/teacher/addGradeToStudent', gradeData);
-      // Handle success or show a success message
-    } catch (error) {
-      // Handle error or show an error message
-    }
-  };
-
-  const handleEnrollToAssignment = async (enrollmentData) => {
-    try {
-      // Make a POST request to the server to enroll the student to the assignment
-      const response = await axios.post('/api/subjDetail/student/enrollToAssignment', enrollmentData);
-      // Handle success or show a success message
-    } catch (error) {
-      // Handle error or show an error message
-    }
+  // Function to open subject details
+  const openSubjectDetails = () => {
+    // Navigate to the subject details page
+    navigate("/subject-details");
   };
 
   return (
@@ -122,6 +84,9 @@ function App() {
 
       {/* Render components based on routes */}
       <Outlet />
+
+      {/* Button to open subject details */}
+      <button onClick={openSubjectDetails}>Open Subject Details</button>
     </div>
   );
 }

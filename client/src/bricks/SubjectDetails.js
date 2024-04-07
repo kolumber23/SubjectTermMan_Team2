@@ -1,16 +1,35 @@
 // SubjectDetails.js
-import React from "react";
+import React from 'react';
 
-function SubjectDetails({ match }) {
-  const { subjectId } = match.params;
+function SubjectDetails({ loggedInUser }) {
+  const handleAddAssignment = () => {
+    // Logic to add assignment
+  };
 
-  // Fetch subject details using subjectId from API or database
+  const handleAddScore = () => {
+    // Logic to add score
+  };
+
+  const handleAddGrade = () => {
+    // Logic to add grade
+  };
+
+  const handleEnroll = () => {
+    // Logic to enroll in assignment
+  };
 
   return (
     <div>
       <h2>Subject Details</h2>
-      <p>Subject ID: {subjectId}</p>
-      {/* Display other subject details */}
+      {loggedInUser.role === 'teacher' ? (
+        <div>
+          <button onClick={handleAddAssignment}>Add Assignment</button>
+          <button onClick={handleAddScore}>Add Score</button>
+          <button onClick={handleAddGrade}>Add Grade</button>
+        </div>
+      ) : (
+        <button onClick={handleEnroll}>Enroll</button>
+      )}
     </div>
   );
 }
