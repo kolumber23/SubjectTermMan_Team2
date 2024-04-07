@@ -13,11 +13,7 @@ function HomeR() {
       <h2>Welcome to uuSubjectTermMan</h2>
       <p>This is the home page of uuSubjectTermMan. Here, you can manage subjects and students.</p>
       
-      {/* Render a single login button */}
-      <button onClick={handleLoginButtonClick}>Login</button>
-
-      {/* Render login modal */}
-      <Login show={showLoginModal} onClose={() => setShowLoginModal(false)} />
+     
     </div>
   );
 };

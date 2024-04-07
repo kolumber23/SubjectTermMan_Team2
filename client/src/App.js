@@ -13,24 +13,29 @@ import './App.css'; // Import CSS file
 
 function App() {
   let navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false); // State to track login status
   const [showLoginModal, setShowLoginModal] = useState(false); // State to control the visibility of the login modal
 
-  // Function to handle opening the login modal
+  // Function to handle login
+  const handleLogin = () => {
+    // For simplicity, let's assume authentication is successful
+    setLoggedIn(true);
+    setShowLoginModal(false); // Close the login modal after successful login
+  };
+
+  // Function to handle logout
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
+  // Function to navigate to the subject details page
+  const openSubjectDetails = () => {
+    navigate("/subject-details");
+  };
+
+  // Function to handle opening login modal
   const handleLoginButtonClick = () => {
     setShowLoginModal(true);
-  };
-
-  // Function to handle closing the login modal
-  const handleCloseLoginModal = () => {
-    setShowLoginModal(false);
-  };
-
-  // Function to handle login (not implemented here)
-  const handleLogin = () => {
-    // Logic for handling login
-    // For simplicity, assume successful login
-    console.log("Logged in successfully");
-    setShowLoginModal(false); // Close the login modal after successful login
   };
 
   return (
@@ -68,14 +73,13 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* Render login button */}
-      <button onClick={handleLoginButtonClick}>Login</button>
+      {/* Render Login modal */}
+      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} onLogin={handleLogin} />
 
-      {/* Render login modal */}
-      <LoginModal show={showLoginModal} onClose={handleCloseLoginModal} onLogin={handleLogin} />
-      
-      {/* Render components based on routes */}
-      <Outlet />
+      {/* Render components based on login status */}
+      {!loggedIn && <button onClick={handleLoginButtonClick}>Login</button>}
+      {loggedIn && <Outlet />}
+
     </div>
   );
 }
