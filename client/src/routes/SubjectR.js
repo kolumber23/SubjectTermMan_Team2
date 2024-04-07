@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import SubjectList from "../bricks/SubjectList"
-
+// SubjectR.js
+import React from "react";
+import SubjectList from "../bricks/SubjectList";
 
 function SubjectR() {
   const subjectL = [
@@ -19,10 +19,11 @@ function SubjectR() {
   ];
 
   return (
-        <div>
-            <SubjectList subjectL={subjectL}/>
-        </div>
-    );
+    <div>
+      <h2>Subject List</h2>
+      <SubjectList subjectL={subjectL}/>
+    </div>
+  );
 };
 
 export default SubjectR;
