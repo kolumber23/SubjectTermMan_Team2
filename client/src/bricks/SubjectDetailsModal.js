@@ -1,47 +1,61 @@
-import React from "react";
+// SubjectDetailsModal.js
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import SubjectDetails from "./SubjectDetails";
+import AddAssignmentModal from "../components/AddAssignmentModal";
+import AddGradeModal from "../components/AddGradeModal"; // Import AddGradeModal component
 
 function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
-  if (!subjectDetails || !subjectDetails.subjectId) {
-    return (
-      <Modal show={show} onHide={onHide}>
+  const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
+  const [showAddGradeModal, setShowAddGradeModal] = useState(false); // State for showing AddGradeModal
+
+  const handleAddAssignment = (assignmentName) => {
+    // Add the assignment to subject details
+    subjectDetails.assignments.push(assignmentName);
+  };
+
+  const handleAddGrade = (gradeData) => {
+    // Add the grade to subject details
+    subjectDetails.grades.push(gradeData);
+  };
+
+  return (
+    <>
+      <Modal show={show} onHide={onHide} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Error</Modal.Title>
+          <Modal.Title>Subject Details</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Subject details not found.</Modal.Body>
+        <Modal.Body>
+          <SubjectDetails subjectDetails={subjectDetails} loggedInUser={loggedInUser} />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
+          {loggedInUser?.role === 'teacher' && (
+            <>
+              <Button variant="primary" onClick={() => setShowAddAssignmentModal(true)}>
+                Add Assignment
+              </Button>
+              <Button variant="primary" onClick={() => setShowAddGradeModal(true)}> {/* Button to show AddGradeModal */}
+                Add Grade
+              </Button>
+            </>
+          )}
         </Modal.Footer>
       </Modal>
-    );
-  }
-
-  // Check if loggedInUser exists and has a role property
-  const userRole = loggedInUser?.role || '';
-
-  return (
-    <Modal show={show} onHide={onHide} size="lg">
-      <Modal.Header closeButton>
-        <Modal.Title>Subject Details</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {/* Pass loggedInUser prop to SubjectDetails component */}
-        <SubjectDetails subjectId={subjectDetails.subjectId} loggedInUser={loggedInUser} />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Close
-        </Button>
-        {/* Render additional buttons based on user role */}
-        {userRole === 'teacher' && (
-          <Button variant="primary">Add Assignment</Button>
-        )}
-      </Modal.Footer>
-    </Modal>
+      <AddAssignmentModal
+        show={showAddAssignmentModal}
+        onHide={() => setShowAddAssignmentModal(false)}
+        addAssignment={handleAddAssignment}
+      />
+      <AddGradeModal
+        show={showAddGradeModal}
+        onHide={() => setShowAddGradeModal(false)}
+        addGrade={handleAddGrade}
+      />
+    </>
   );
 }
 
