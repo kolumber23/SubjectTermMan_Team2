@@ -1,5 +1,6 @@
+// App.js
 import './App.css';
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/Navbar";
@@ -11,9 +12,33 @@ import Icon from '@mdi/react';
 import { mdiMoonWaningCrescent } from '@mdi/js';
 import SubjectList from "./bricks/SubjectList"; // Import SubjectList component
 import SubjectDetails from "./bricks/SubjectDetails"; // Import SubjectDetails component
+import AddAssignmentModal from "./components/AddAssignmentModal"; // Import AddAssignmentModal component
+import AddGradeModal from "./components/AddGradeModal"; // Import AddGradeModal component
+import AddScoreModal from "./components/AddScoreModal"; // Import AddScoreModal component
 
 function App() {
   const navigate = useNavigate();
+  const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
+  const [showAddGradeModal, setShowAddGradeModal] = useState(false);
+  const [showAddScoreModal, setShowAddScoreModal] = useState(false);
+
+  const handleAddAssignment = (assignmentName) => {
+    // Implement logic to add assignment
+    console.log("Adding assignment:", assignmentName);
+    setShowAddAssignmentModal(false); // Hide the modal after adding assignment
+  };
+
+  const handleAddGrade = ({ student, grade }) => {
+    // Implement logic to add grade
+    console.log("Adding grade:", student, grade);
+    setShowAddGradeModal(false); // Hide the modal after adding grade
+  };
+
+  const handleAddScore = ({ student, score }) => {
+    // Implement logic to add score
+    console.log("Adding score:", student, score);
+    setShowAddScoreModal(false); // Hide the modal after adding score
+  };
 
   return (
     <div className="App">
@@ -50,6 +75,27 @@ function App() {
 
       {/* Outlet for rendering nested routes */}
       <Outlet />
+
+      {/* Render AddAssignmentModal */}
+      <AddAssignmentModal
+        show={showAddAssignmentModal}
+        onHide={() => setShowAddAssignmentModal(false)}
+        addAssignment={handleAddAssignment}
+      />
+
+      {/* Render AddGradeModal */}
+      <AddGradeModal
+        show={showAddGradeModal}
+        onHide={() => setShowAddGradeModal(false)}
+        addGrade={handleAddGrade}
+      />
+
+      {/* Render AddScoreModal */}
+      <AddScoreModal
+        show={showAddScoreModal}
+        onHide={() => setShowAddScoreModal(false)}
+        addScore={handleAddScore}
+      />
     </div>
   );
 }

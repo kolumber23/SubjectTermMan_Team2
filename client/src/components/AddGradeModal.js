@@ -11,6 +11,7 @@ function AddGradeModal({ show, onHide, addGrade }) {
     addGrade({ student, grade });
     setStudent(""); // Clear the input fields after adding grade
     setGrade("");
+    onHide(); // Hide the modal
   };
 
   return (

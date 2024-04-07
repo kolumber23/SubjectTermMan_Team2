@@ -11,6 +11,7 @@ function AddScoreModal({ show, onHide, addScore }) {
     addScore({ student, score });
     setStudent(""); // Clear the input fields after adding score
     setScore("");
+    onHide(); // Hide the modal
   };
 
   return (

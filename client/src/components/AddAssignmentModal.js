@@ -9,6 +9,7 @@ function AddAssignmentModal({ show, onHide, addAssignment }) {
   const handleAddAssignment = () => {
     addAssignment(assignmentName);
     setAssignmentName(""); // Clear the input field after adding assignment
+    onHide(); // Hide the modal
   };
 
   return (

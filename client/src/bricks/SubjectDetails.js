@@ -1,8 +1,7 @@
 // SubjectDetails.js
-
 import React, { useState, useEffect } from "react";
 
-function SubjectDetails({ subjectId, loggedInUser }) {
+function SubjectDetails({ subjectId, loggedInUser, currentStudentId }) {
   const [subjectDetails, setSubjectDetails] = useState(null);
 
   useEffect(() => {
@@ -18,8 +17,8 @@ function SubjectDetails({ subjectId, loggedInUser }) {
       supervisor: "Name Surname",
       goal: "goal",
       grades: [
-        { student: "Student 1", grade: "A" },
-        { student: "Student 2", grade: "B" },
+        { studentId: "1", student: "Student 1", grade: "A" },
+        { studentId: "2", student: "Student 2", grade: "B" },
         // Add more grades as needed
       ],
       // Add more details such as assignments, scores, etc.
@@ -30,16 +29,19 @@ function SubjectDetails({ subjectId, loggedInUser }) {
     return <div>Loading...</div>;
   }
 
+  // Filter grades for the current student
+  const filteredGrades = subjectDetails.grades.filter(grade => grade.studentId === currentStudentId);
+
   return (
     <div>
       <h2>{subjectDetails.name}</h2>
       <p>Credits: {subjectDetails.credits}</p>
       <p>Supervisor: {subjectDetails.supervisor}</p>
       <p>Goal: {subjectDetails.goal}</p>
-      {/* Display grades */}
+      {/* Display filtered grades */}
       <h3>Grades</h3>
       <ul>
-        {subjectDetails.grades.map((grade, index) => (
+        {filteredGrades.map((grade, index) => (
           <li key={index}>
             {grade.student}: {grade.grade}
           </li>
