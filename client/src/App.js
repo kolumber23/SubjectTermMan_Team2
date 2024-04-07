@@ -1,5 +1,4 @@
-// App.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/Navbar";
@@ -9,39 +8,29 @@ import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Icon from '@mdi/react';
 import { mdiWhiteBalanceSunny, mdiMoonWaningCrescent } from '@mdi/js';
-import Login from "./components/Login";
-import axios from 'axios';
+import LoginModal from "./components/LoginModal"; // Import the LoginModal component
 import './App.css'; // Import CSS file
 
 function App() {
   let navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false); // State to track login status
+  const [showLoginModal, setShowLoginModal] = useState(false); // State to control the visibility of the login modal
 
-  useEffect(() => {
-    // Check if user is already logged in from previous session
-    const isLoggedIn = localStorage.getItem("loggedIn");
-    if (isLoggedIn) {
-      setLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogin = (username) => {
-    // Perform authentication logic
-    // For simplicity, let's assume authentication is successful
-    localStorage.setItem("loggedIn", "true");
-    setLoggedIn(true);
+  // Function to handle opening the login modal
+  const handleLoginButtonClick = () => {
+    setShowLoginModal(true);
   };
 
-  const handleLogout = () => {
-    // Perform logout logic
-    localStorage.removeItem("loggedIn");
-    setLoggedIn(false);
+  // Function to handle closing the login modal
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
   };
 
-  // Function to open subject details
-  const openSubjectDetails = () => {
-    // Navigate to the subject details page
-    navigate("/subject-details");
+  // Function to handle login (not implemented here)
+  const handleLogin = () => {
+    // Logic for handling login
+    // For simplicity, assume successful login
+    console.log("Logged in successfully");
+    setShowLoginModal(false); // Close the login modal after successful login
   };
 
   return (
@@ -67,9 +56,9 @@ function App() {
                 <Nav.Link href="/student">  Students  </Nav.Link>
                 <Nav.Link href="/subject">  Subjects   </Nav.Link>
                 <span className='me-3'></span>
-                <NavDropdown title="EN" id="basic-nav-dropdown" noCaret>
-                  <NavDropdown.Item href="#en">English     EN</NavDropdown.Item>
-                  <NavDropdown.Item href="#sk">Čeština     CZ</NavDropdown.Item>
+                <NavDropdown title="EN" id="basic-nav-dropdown" noCaret>  
+                  <NavDropdown.Item href="#en">English     EN</NavDropdown.Item>  
+                  <NavDropdown.Item href="#sk">Čeština     CZ</NavDropdown.Item>  
                 </NavDropdown>
                 <span className="me-2"></span>
                 <Icon path={mdiMoonWaningCrescent} size={1} color="white"/>
@@ -79,14 +68,14 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* Render Login component only if user is not logged in */}
-      {!loggedIn && <Login onLogin={handleLogin} />}
+      {/* Render login button */}
+      <button onClick={handleLoginButtonClick}>Login</button>
 
+      {/* Render login modal */}
+      <LoginModal show={showLoginModal} onClose={handleCloseLoginModal} onLogin={handleLogin} />
+      
       {/* Render components based on routes */}
       <Outlet />
-
-      {/* Button to open subject details */}
-      <button onClick={openSubjectDetails}>Open Subject Details</button>
     </div>
   );
 }

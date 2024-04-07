@@ -3,12 +3,15 @@ import React, { useState, useMemo } from "react";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiChevronRight } from "@mdi/js";
-import { Link } from "react-router-dom"; // Import Link for navigation
+// Remove unused import statement for Link
+// import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/styles.css"; // Corrected import statement
 
 export default function SubjectList({ subjectL }) {
   const [searchBy, setSearchBy] = useState("");
+  // Remove unused hook
+  // const navigate = useNavigate(); 
 
   const filteredSubjectL = useMemo(() => {
     const filteredList = subjectL.filter((item) => {
@@ -29,6 +32,12 @@ export default function SubjectList({ subjectL }) {
   function handleSearchDelete(event) {
     if (!event.target.value) setSearchBy("");
   }
+
+  // Function to open subject details
+  const openSubjectDetails = (subjectId) => {
+    // Remove navigate function as it's not used
+    // navigate(`/subject-details/${subjectId}`);
+  };
 
   return (
     <div>
@@ -82,13 +91,13 @@ export default function SubjectList({ subjectL }) {
                   <td> {subject.supervisor} </td>
                   <td> {subject.goal} </td>
                   <td>
-                    {/* Link to SubjectDetails page */}
-                    <Link
-                      to={`/subject-details/${subject.subjectId}`}
-                      className="details-link"
+                    {/* Button to open subject details */}
+                    <button
+                      onClick={() => openSubjectDetails(subject.subjectId)}
+                      className="details-button"
                     >
                       <Icon size={1} path={mdiChevronRight} />
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               );
