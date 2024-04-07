@@ -1,4 +1,3 @@
-// App.js
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -11,9 +10,12 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Icon from '@mdi/react';
 import { mdiWhiteBalanceSunny, mdiMoonWaningCrescent } from '@mdi/js';
 import Login from "./components/Login";
-import HomeR from "./routes/HomeR"; 
-import StudentR from "./routes/StudentR"; 
-import SubjectR from "./routes/SubjectR"; 
+import StudentList from "./bricks/StudentList";
+import AddGradeToStudent from "./components/AddGradeToStudent";
+import AddAssignment from "./components/AddAssignment";
+import AddScoreToStudent from "./components/AddScoreToStudent";
+import EnrollToAssignment from "./components/EnrollToAssignment";
+import axios from 'axios';
 
 function App() {
   let navigate = useNavigate();
@@ -38,6 +40,46 @@ function App() {
     // Perform logout logic
     localStorage.removeItem("loggedIn");
     setLoggedIn(false);
+  };
+
+  const handleAddAssignment = async (assignmentData) => {
+    try {
+      // Make a POST request to the server to add the assignment
+      const response = await axios.post('/api/subjDetail/teacher/addAssignment', assignmentData);
+      // Handle success or show a success message
+    } catch (error) {
+      // Handle error or show an error message
+    }
+  };
+
+  const handleAddScoreToStudent = async (scoreData) => {
+    try {
+      // Make a POST request to the server to add the score to the student
+      const response = await axios.post('/api/subjDetail/teacher/assignment/addScoreToStudent', scoreData);
+      // Handle success or show a success message
+    } catch (error) {
+      // Handle error or show an error message
+    }
+  };
+
+  const handleAddGradeToStudent = async (gradeData) => {
+    try {
+      // Make a POST request to the server to add the grade to the student
+      const response = await axios.post('/api/subjDetail/teacher/addGradeToStudent', gradeData);
+      // Handle success or show a success message
+    } catch (error) {
+      // Handle error or show an error message
+    }
+  };
+
+  const handleEnrollToAssignment = async (enrollmentData) => {
+    try {
+      // Make a POST request to the server to enroll the student to the assignment
+      const response = await axios.post('/api/subjDetail/student/enrollToAssignment', enrollmentData);
+      // Handle success or show a success message
+    } catch (error) {
+      // Handle error or show an error message
+    }
   };
 
   return (
