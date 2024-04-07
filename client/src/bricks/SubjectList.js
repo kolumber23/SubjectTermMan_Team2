@@ -1,27 +1,20 @@
-// SubjectList.js
 import React, { useState, useMemo } from "react";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiChevronRight } from "@mdi/js";
-// Remove unused import statement for Link
-// import { Link, useNavigate } from "react-router-dom";
 
-import "../styles/styles.css"; // Corrected import statement
-
-export default function SubjectList({ subjectL }) {
+export default function SubjectList({ subjectL, onViewDetails }) {
   const [searchBy, setSearchBy] = useState("");
-  // Remove unused hook
-  // const navigate = useNavigate(); 
 
   const filteredSubjectL = useMemo(() => {
-    const filteredList = subjectL.filter((item) => {
+    if (!subjectL) return [];
+    return subjectL.filter((item) => {
       return (
         item.name.toLowerCase().includes(searchBy.toLowerCase()) ||
         item.supervisor.toLowerCase().includes(searchBy.toLowerCase()) ||
         item.goal.toLowerCase().includes(searchBy.toLowerCase())
       );
     });
-    return filteredList;
   }, [searchBy, subjectL]);
 
   function handleSearch(event) {
@@ -32,12 +25,6 @@ export default function SubjectList({ subjectL }) {
   function handleSearchDelete(event) {
     if (!event.target.value) setSearchBy("");
   }
-
-  // Function to open subject details
-  const openSubjectDetails = (subjectId) => {
-    // Remove navigate function as it's not used
-    // navigate(`/subject-details/${subjectId}`);
-  };
 
   return (
     <div>
@@ -78,7 +65,7 @@ export default function SubjectList({ subjectL }) {
               <th>Credits</th>
               <th>Supervisor</th>
               <th>Goal</th>
-              <th>Details</th> {/* New column for details */}
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
@@ -91,9 +78,8 @@ export default function SubjectList({ subjectL }) {
                   <td> {subject.supervisor} </td>
                   <td> {subject.goal} </td>
                   <td>
-                    {/* Button to open subject details */}
                     <button
-                      onClick={() => openSubjectDetails(subject.subjectId)}
+                      onClick={() => onViewDetails(subject.subjectId)}
                       className="details-button"
                     >
                       <Icon size={1} path={mdiChevronRight} />
