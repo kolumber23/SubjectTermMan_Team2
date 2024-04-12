@@ -13,8 +13,31 @@ function StudentR() {
       "scores": [],
       "assignments": []
     },
-    // Add more students as needed
+    // Add more students here
+    {
+      "studentId": "456",
+      "name": "Emily",
+      "surname": "Jones",
+      "degree": "Bs",
+      "subjectTermList": ["24-S01-MA-BS","24-S02-MA-BS", "23-W01-MA-BS"],
+      "grades": [],
+      "scores": [],
+      "assignments": []
+    },
+    {
+      "studentId": "789",
+      "name": "Michael",
+      "surname": "Johnson",
+      "degree": "Ba",
+      "subjectTermList": ["24-S01-MA-BA","24-S02-MA-BA", "23-W01-MA-BA"],
+      "grades": [],
+      "scores": [],
+      "assignments": []
+    }
   ]);
+
+
+
 
   // Function to add a new student
   const addStudent = (newStudent) => {
