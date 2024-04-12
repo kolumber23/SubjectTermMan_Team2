@@ -38,6 +38,18 @@ function SubjectR() {
       school: "Unicorn University"
     },
     // Add more subjects here
+    {
+      subjectId: "PHYS-SC",
+      name: "Physics",
+      credits: 6,
+      supervisor: "John Doe",
+      goal: "Understand the principles of physics",
+      degree: "Bs",
+      language: "en",
+      description: "A comprehensive course covering various aspects of physics.",
+      subjectTermList: ["24-S01-PHYS-SC", "24-S02-PHYS-SC", "23-W01-PHYS-SC"],
+      school: "Unicorn University"
+    }
   ];
 
   return (
