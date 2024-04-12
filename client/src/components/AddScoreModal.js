@@ -16,32 +16,33 @@ function AddScoreModal({ show, onHide, addScore }) {
 
   return (
     <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add Score</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <input
-          type="text"
-          value={student}
-          onChange={(e) => setStudent(e.target.value)}
-          placeholder="Enter student name"
-        />
-        <input
-          type="text"
-          value={score}
-          onChange={(e) => setScore(e.target.value)}
-          placeholder="Enter score"
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleAddScore}>
-          Add
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <Modal.Header closeButton>
+      <Modal.Title>Add Score</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <input
+        type="text"
+        value={student}
+        onChange={(e) => setStudent(e.target.value)}
+        placeholder="Enter student name"
+      />
+      <input
+        type="text"
+        value={score}
+        onChange={(e) => setScore(e.target.value)}
+        placeholder="Enter score"
+      />
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={onHide}>
+        Cancel
+      </Button>
+      <Button variant="primary" onClick={handleAddScore}>
+        Add
+      </Button>
+    </Modal.Footer>
+  </Modal>
+  
   );
 }
 

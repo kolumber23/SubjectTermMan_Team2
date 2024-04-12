@@ -18,8 +18,8 @@ export default function StudentList({ studentL }) {
     if (!studentL) return [];
     return studentL.filter((item) => {
       return (
-        item.surname.toLowerCase().includes(searchBy.toLowerCase()) ||
-        item.degree.toLowerCase().includes(searchBy.toLowerCase())
+        item.name.toLowerCase().includes(searchBy.toLowerCase()) ||
+        item.surname.toLowerCase().includes(searchBy.toLowerCase())
       );
     });
   }, [searchBy, studentL]);

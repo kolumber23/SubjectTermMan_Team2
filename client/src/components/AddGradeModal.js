@@ -16,32 +16,33 @@ function AddGradeModal({ show, onHide, addGrade }) {
 
   return (
     <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add Grade</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <input
-          type="text"
-          value={student}
-          onChange={(e) => setStudent(e.target.value)}
-          placeholder="Enter student name"
-        />
-        <input
-          type="text"
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-          placeholder="Enter grade"
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleAddGrade}>
-          Add
-        </Button>
-      </Modal.Footer>
-    </Modal>
+  <Modal.Header closeButton>
+    <Modal.Title>Add Grade</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <input
+      type="text"
+      value={student}
+      onChange={(e) => setStudent(e.target.value)}
+      placeholder="Enter student name"
+    />
+    <input
+      type="text"
+      value={grade}
+      onChange={(e) => setGrade(e.target.value)}
+      placeholder="Enter grade"
+    />
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={onHide}>
+      Cancel
+    </Button>
+    <Button variant="primary" onClick={handleAddGrade}>
+      Add
+    </Button>
+  </Modal.Footer>
+</Modal>
+
   );
 }
 

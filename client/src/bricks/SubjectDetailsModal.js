@@ -1,16 +1,15 @@
-// SubjectDetailsModal.js
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import SubjectDetails from "./SubjectDetails";
-import AddAssignmentModal from "../components/AddAssignmentModal";
-import AddGradeModal from "../components/AddGradeModal";
-import AddScoreModal from "../components/AddScoreModal"; // Import AddScoreModal component
+import AddAssignmentModal from "../components/AddAssignmentModal"; // Import AddAssignmentModal
+import AddGradeModal from "../components/AddGradeModal"; // Import AddGradeModal
+import AddScoreModal from "../components/AddScoreModal"; // Import AddScoreModal
 
 function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
   const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
   const [showAddGradeModal, setShowAddGradeModal] = useState(false);
-  const [showAddScoreModal, setShowAddScoreModal] = useState(false); // State for showing AddScoreModal
+  const [showAddScoreModal, setShowAddScoreModal] = useState(false);
 
   const handleAddAssignment = (assignmentName) => {
     if (!subjectDetails.assignments) {
@@ -21,23 +20,24 @@ function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
     subjectDetails.assignments.push(assignmentName);
   };
   
-  const handleAddGrade = (gradeData) => {
+  const handleAddGrade = ({ student, grade }) => {
     if (!subjectDetails.grades) {
       // Initialize grades array if it's undefined
       subjectDetails.grades = [];
     }
     // Add the grade to subject details
-    subjectDetails.grades.push(gradeData);
+    subjectDetails.grades.push({ student, grade });
   };
   
-  const handleAddScore = (scoreData) => {
+  const handleAddScore = ({ student, score }) => {
     if (!subjectDetails.scores) {
       // Initialize scores array if it's undefined
       subjectDetails.scores = [];
     }
     // Add the score to subject details
-    subjectDetails.scores.push(scoreData);
+    subjectDetails.scores.push({ student, score });
   };
+  
 
   return (
     <>
@@ -60,7 +60,7 @@ function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
               <Button variant="primary" onClick={() => setShowAddGradeModal(true)}>
                 Add Grade
               </Button>
-              <Button variant="primary" onClick={() => setShowAddScoreModal(true)}> {/* Button to show AddScoreModal */}
+              <Button variant="primary" onClick={() => setShowAddScoreModal(true)}>
                 Add Score
               </Button>
             </>

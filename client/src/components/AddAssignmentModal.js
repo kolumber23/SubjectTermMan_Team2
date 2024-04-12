@@ -1,4 +1,3 @@
-// AddAssignmentModal.js
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -18,6 +17,7 @@ function AddAssignmentModal({ show, onHide, addAssignment }) {
         <Modal.Title>Add Assignment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <p>Which assignment to import?</p>
         <input
           type="text"
           value={assignmentName}

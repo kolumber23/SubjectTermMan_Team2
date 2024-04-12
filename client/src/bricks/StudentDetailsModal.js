@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import Nav from "react-bootstrap/Nav"; // Import Nav from react-bootstrap
-import Button from "react-bootstrap/Button"; // Import Button from react-bootstrap
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
-function StudentDetailsModal({ show, onHide, studentDetails }) {
+function StudentDetailsModal({ show, onHide, studentDetails, addGrade, addAssignment, addScore }) {
   const [activeTab, setActiveTab] = useState("assignments");
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+  };
+
+  const handleAddAssignment = () => {
+    const assignment = prompt("Enter assignment:");
+    if (assignment) {
+      addAssignment(assignment);
+    }
+  };
+
+  const handleAddGrade = () => {
+    const subject = prompt("Enter subject:");
+    const grade = prompt("Enter grade:");
+    if (subject && grade) {
+      addGrade({ subject, grade });
+    }
+  };
+
+  const handleAddScore = () => {
+    const subject = prompt("Enter subject:");
+    const score = prompt("Enter score:");
+    if (subject && score) {
+      addScore({ subject, score });
+    }
   };
 
   if (!studentDetails) {
@@ -94,6 +117,15 @@ function StudentDetailsModal({ show, onHide, studentDetails }) {
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
             Close
+          </Button>
+          <Button variant="primary" onClick={handleAddAssignment}>
+            Add Assignment
+          </Button>
+          <Button variant="primary" onClick={handleAddGrade}>
+            Add Grade
+          </Button>
+          <Button variant="primary" onClick={handleAddScore}>
+            Add Score
           </Button>
         </Modal.Footer>
       </Modal>

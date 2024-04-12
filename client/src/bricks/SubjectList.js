@@ -79,7 +79,7 @@ export default function SubjectList({ subjectL, onViewDetails }) {
                   <td> {subject.goal} </td>
                   <td>
                     <button
-                      onClick={() => onViewDetails(subject.subjectId)}
+                      onClick={() => onViewDetails(subject)}
                       className="details-button"
                     >
                       <Icon size={1} path={mdiChevronRight} />
