@@ -1,4 +1,3 @@
-// AddGradeModal.js
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -9,40 +8,39 @@ function AddGradeModal({ show, onHide, addGrade }) {
 
   const handleAddGrade = () => {
     addGrade({ student, grade });
-    setStudent(""); // Clear the input fields after adding grade
+    setStudent("");
     setGrade("");
-    onHide(); // Hide the modal
+    onHide();
   };
 
   return (
     <Modal show={show} onHide={onHide}>
-  <Modal.Header closeButton>
-    <Modal.Title>Add Grade</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <input
-      type="text"
-      value={student}
-      onChange={(e) => setStudent(e.target.value)}
-      placeholder="Enter student name"
-    />
-    <input
-      type="text"
-      value={grade}
-      onChange={(e) => setGrade(e.target.value)}
-      placeholder="Enter grade"
-    />
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={onHide}>
-      Cancel
-    </Button>
-    <Button variant="primary" onClick={handleAddGrade}>
-      Add
-    </Button>
-  </Modal.Footer>
-</Modal>
-
+      <Modal.Header closeButton>
+        <Modal.Title>Add Grade</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <input
+          type="text"
+          value={student}
+          onChange={(e) => setStudent(e.target.value)}
+          placeholder="Enter student name"
+        />
+        <input
+          type="text"
+          value={grade}
+          onChange={(e) => setGrade(e.target.value)}
+          placeholder="Enter grade"
+        />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={handleAddGrade}>
+          Add
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function SubjectDetails({ subjectId }) {
   const [subjectDetails, setSubjectDetails] = useState({});
-  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние isLoading
 
   useEffect(() => {
     const fetchSubjectDetails = async () => {
@@ -13,10 +13,10 @@ function SubjectDetails({ subjectId }) {
         }
         const data = await response.json();
         setSubjectDetails(data);
-        setIsLoading(false); // Set isLoading to false after data is fetched
+        setIsLoading(false); // Устанавливаем isLoading в false после получения данных
       } catch (error) {
         console.error("Error fetching subject details:", error.message);
-        setIsLoading(false); // Set isLoading to false if there's an error
+        setIsLoading(false); // Устанавливаем isLoading в false в случае ошибки
       }
     };
 
@@ -24,7 +24,7 @@ function SubjectDetails({ subjectId }) {
   }, [subjectId]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show "Loading..." message while fetching data
+    return <div>Loading...</div>; // Отображаем сообщение "Loading..." во время загрузки данных
   }
 
   return (
@@ -33,17 +33,74 @@ function SubjectDetails({ subjectId }) {
       <p>Credits: {subjectDetails.credits}</p>
       <p>Supervisor: {subjectDetails.supervisor}</p>
       <p>Goal: {subjectDetails.goal}</p>
-      
-      {subjectDetails.grades && subjectDetails.grades.length > 0 && (
-        <ul>
-          {subjectDetails.grades.map((grade, index) => (
-            <li key={index}>
-              {grade.student}: {grade.grade}
-            </li>
-          ))}
-        </ul>
+
+      {subjectDetails.students && subjectDetails.students.length > 0 && (
+        <div>
+          <h3>Students:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subjectDetails.students.map((student, index) => (
+                <tr key={index}>
+                  <td>{student.name}</td>
+                  <td>{student.surname}</td>
+                  <td>{student.grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
-      {/* Add more sections to display assignments, scores, etc. */}
+
+      {subjectDetails.assignments && subjectDetails.assignments.length > 0 && (
+        <div>
+          <h3>Assignments:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Assignment</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subjectDetails.assignments.map((assignment, index) => (
+                <tr key={index}>
+                  <td>{assignment.name}</td>
+                  <td>{assignment.deadline}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {subjectDetails.scores && subjectDetails.scores.length > 0 && (
+        <div>
+          <h3>Scores:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subjectDetails.scores.map((score, index) => (
+                <tr key={index}>
+                  <td>{score.student}</td>
+                  <td>{score.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

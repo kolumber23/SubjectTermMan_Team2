@@ -1,43 +1,48 @@
+// SubjectDetailsModal.js
+
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import SubjectDetails from "./SubjectDetails";
-import AddAssignmentModal from "../components/AddAssignmentModal"; // Import AddAssignmentModal
-import AddGradeModal from "../components/AddGradeModal"; // Import AddGradeModal
-import AddScoreModal from "../components/AddScoreModal"; // Import AddScoreModal
+import AddAssignmentModal from "../components/AddAssignmentModal";
+import AddGradeModal from "../components/AddGradeModal";
+import AddScoreModal from "../components/AddScoreModal";
 
-function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
+function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser, addAssignment, addGrade, addScore }) {
   const [showAddAssignmentModal, setShowAddAssignmentModal] = useState(false);
   const [showAddGradeModal, setShowAddGradeModal] = useState(false);
   const [showAddScoreModal, setShowAddScoreModal] = useState(false);
+  const [error, setError] = useState("");
 
   const handleAddAssignment = (assignmentName) => {
-    if (!subjectDetails.assignments) {
-      // Initialize assignments array if it's undefined
-      subjectDetails.assignments = [];
+    if (!assignmentName.trim()) {
+      setError("Assignment name cannot be empty");
+      return;
     }
-    // Add the assignment to subject details
-    subjectDetails.assignments.push(assignmentName);
+    addAssignment(assignmentName);
+    setShowAddAssignmentModal(false);
+    setError("");
   };
-  
+
   const handleAddGrade = ({ student, grade }) => {
-    if (!subjectDetails.grades) {
-      // Initialize grades array if it's undefined
-      subjectDetails.grades = [];
+    if (!student.trim() || !grade) {
+      setError("Student name and grade are required");
+      return;
     }
-    // Add the grade to subject details
-    subjectDetails.grades.push({ student, grade });
+    addGrade({ student, grade });
+    setShowAddGradeModal(false);
+    setError("");
   };
-  
+
   const handleAddScore = ({ student, score }) => {
-    if (!subjectDetails.scores) {
-      // Initialize scores array if it's undefined
-      subjectDetails.scores = [];
+    if (!student.trim() || !score) {
+      setError("Student name and score are required");
+      return;
     }
-    // Add the score to subject details
-    subjectDetails.scores.push({ student, score });
+    addScore({ student, score });
+    setShowAddScoreModal(false);
+    setError("");
   };
-  
 
   return (
     <>
@@ -46,6 +51,7 @@ function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
           <Modal.Title>Subject Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <SubjectDetails subjectDetails={subjectDetails} loggedInUser={loggedInUser} />
         </Modal.Body>
         <Modal.Footer>
@@ -70,17 +76,17 @@ function SubjectDetailsModal({ show, onHide, subjectDetails, loggedInUser }) {
       <AddAssignmentModal
         show={showAddAssignmentModal}
         onHide={() => setShowAddAssignmentModal(false)}
-        addAssignment={handleAddAssignment}
+        addAssignment={handleAddAssignment} // Pass handleAddAssignment instead
       />
       <AddGradeModal
         show={showAddGradeModal}
         onHide={() => setShowAddGradeModal(false)}
-        addGrade={handleAddGrade}
+        addGrade={handleAddGrade} // Pass handleAddGrade instead
       />
       <AddScoreModal
         show={showAddScoreModal}
         onHide={() => setShowAddScoreModal(false)}
-        addScore={handleAddScore}
+        addScore={handleAddScore} // Pass handleAddScore instead
       />
     </>
   );
