@@ -1,15 +1,20 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
-import { mdiMagnify, mdiPencil } from "@mdi/js";
-import SubjectDetail from "./SubjectDetail";
+import { mdiMagnify } from "@mdi/js";
+
 import styles from "../styles/styles.css";
 
-export default function SubjectList ({ subjectL, subjectTermL, assigmentL }) {
-  const [selectedSubject, setSelectedSubject] = useState(null);
+export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
+  const navigate = useNavigate();
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
+
+  const handleSubjectClick = (selectedSubject) => {
+    navigate(`/subjDetail/${selectedSubject.id}`, {state: {selectedSubject, subjectTermL, activityL}});
+  };
 
   const filteredSubjectL = useMemo(() => {
     const filteredList = subjectL.filter((item) => {
@@ -75,7 +80,7 @@ return (
                 />
                 <Button
                   style={{ marginRight: "8px" }}
-                  variant="outline-success"
+                  variant="outline-primary"
                   type="submit"
                 >
                 <Icon size={1} path={mdiMagnify} />
@@ -89,9 +94,10 @@ return (
 <Table striped bordered>
   <thead>
     <tr>
-      <th onClick={() => handleSort("subjectId")}>ID</th>
+      <th onClick={() => handleSort("id")}>ID</th>
       <th onClick={() => handleSort("name")}>Subject</th>
       <th onClick={() => handleSort("credits")}>Credits</th>
+      <th onClick={() => handleSort("degree")}>Degree</th>
       <th onClick={() => handleSort("supervisor")}>Supervisor</th>
       <th onClick={() => handleSort("goal")}>Goal</th>
       <th>Detail</th>
@@ -100,18 +106,21 @@ return (
   <tbody>
     {filteredSubjectL.map((subject, index) => {
       return (
-        <tr key={index} onClick={() => setSelectedSubject(subject)}>
-          <td> {subject.subjectId} </td>
+        <tr key={index}>
+          <td> {subject.id} </td>
           <td> {subject.name} </td>
           <td> {subject.credits} </td>
+          <td> {subject.degree} </td>
           <td> {subject.supervisor} </td>
           <td> {subject.goal} </td>
-          <td>          
-            <Icon size={0.8} 
-              path={mdiPencil } 
-              style={{ cursor: "pointer" }}
-              onClick={() => setSelectedSubject(subject)}
-            />
+          <td> 
+            <Button
+              variant="outline-primary"
+              size="sm"
+              onClick={() => handleSubjectClick(subject)}
+            >
+              {"<"} 
+            </Button>         
           </td>
         </tr>  
       );
@@ -119,14 +128,6 @@ return (
   </tbody>
 </Table>
   </div>
-  {selectedSubject && (
-    <SubjectDetail
-      subjDetail={selectedSubject}
-      subjectTermL={subjectTermL}
-      assigmentL={assigmentL}
-      onClose={() => setSelectedSubject(null)}
-    />
-  )}
 </div>
 );
 };

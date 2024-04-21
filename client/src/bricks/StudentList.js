@@ -69,7 +69,7 @@ return (
                 />
                 <Button
                   style={{ marginRight: "8px" }}
-                  variant="outline-success"
+                  variant="outline-primary"
                   type="submit"
                 >
                 <Icon size={1} path={mdiMagnify} />
@@ -92,7 +92,7 @@ return (
   <tbody>
     {filteredStudentL.map((student, index) => {
       return (
-        <tr key={index}>
+        <tr key={student.id}>
           <td> {index + 1} </td>
           <td> {student.surname} </td>
           <td> {student.name} </td>
@@ -103,6 +103,6 @@ return (
   </tbody>
 </Table>
   </div>
-</div>
+  </div>
 );
 };

@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Provider} from "./Provider"
 import App from './App';
 import SubjectR from "./routes/SubjectR";
-import StudentR from './routes/StudentR';
-import HomeR from './routes/HomeR';
+import SubjDetailR from "./routes/SubjDetailR";
+import StudentR from "./routes/StudentR";
+import HomeR from "./routes/HomeR";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,8 +19,10 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="" element={<HomeR/>} />
+            <Route path="/home" element={<HomeR/>} />
             <Route path="/student" element={<StudentR/>} />
             <Route path="/subject" element={<SubjectR/>} />
+            <Route path="/subjDetail/:id" element={<SubjDetailR/>} />
           </Route>
         </Routes>
       </Router>

@@ -3,34 +3,65 @@ import React, { createContext } from 'react';
 const UserContext = createContext();
 
 export function Provider({ children })  {
-  const studentL = [
+  const users = [
     {
-       "studentId": "123",
+      "id": "te123",
+      "name": "Igor",
+      "surname": "Hnízdo",
+    },
+    {
+      "id": "ad123",
+      "name": "Admin",
+      "surname": "Administrator",
+    },
+    {
+       "id": "st123",
        "name": "Adam",
        "surname": "Smith",
        "degree": "Bc",
-       "subjectTermList": ["24-S01-MA-BC","24-S02-MA-BC", "23-W01-MA-BC"]
+       "language": "en"
     },
     {
-       "studentId": "456",
+       "id": "st456",
        "name": "Petra",
        "surname": "Nová",
        "degree": "Bc",
-       "subjectTermList": ["24-S01-MA-BC","24-S02-MA-BC", "23-W01-MA-BC"]
+       "language": "cz"
     },
     {
-       "studentId": "789",
+       "id": "st789",
        "name": "Jace",
        "surname": "Wayland",
        "degree": "Mgr",
-       "subjectTermList": ["24-S01-AJ-MG","24-S02-MA-BC", "23-W01-MA-BC"]
-    }
+       "language": "en"
+    },
+    {
+      "id": "st987",
+      "name": "Wiliam",
+      "surname": "Riker",
+      "degree": "Mgr",
+      "language": "cz"
+   },
+   {
+      "id": "st654",
+      "name": "Frodo",
+      "surname": "Bublik",
+      "degree": "Mgr",
+      "language": "en"
+   },
+   {
+      "id": "st321",
+      "name": "Robin",
+      "surname": "Cook",
+      "degree": "Mgr",
+      "language": "cz"
+   }
    ];
 
 return (
   <UserContext.Provider 
     value = {{ 
-      studentL
+      users
     }}
       >
         {children}
