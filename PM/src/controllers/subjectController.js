@@ -54,8 +54,7 @@ const staticSubjects = [{
   };
 
   exports.getSubject = (req, res) => {
-    const { subjectId } = req.body; // Assuming the ID is passed as a URL parameter
-
+    const { subjectId } = req.query; // Assuming the ID is passed as a URL parameter
     // Find the subject in the static array
     const subject = staticSubjects.find(sub => sub.subjectId === parseInt(subjectId));
 
