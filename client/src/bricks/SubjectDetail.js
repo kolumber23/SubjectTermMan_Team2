@@ -11,11 +11,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [selectedSubjectTerm, setSelectedSubjectTerm] = useState(null);
 
-  // Funkcia na získanie subjTerms predmetu
-  const getSubjectTerms = () => {
-    return subjectTermL.filter(term => term.subjectId === subjDetail.id);
-  };
-
   // Funkcia na získanie priradení pre daný predmet a vybraný subjekt
   const getActivities = () => {
     if (selectedSubjectTerm) {
@@ -26,7 +21,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   };
 
  // Pole so študentami priradenými k vybranému subjectTerm s ich známkami
-  const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList.map(student => {
+  const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.subjectTermStudentList.map(student => {
     const user = users.find(user => user.id === student.studentId);
     if (user) {
       return {
@@ -40,7 +35,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   }).filter(student => student !== null) : [];
   
-  const subjectTerms = getSubjectTerms();
 
   const handleSubjectTermClick = (term) => {
     setSelectedSubjectTerm(term);
@@ -50,9 +44,9 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const handleBack = () => navigate(`/subject`);
 
   useEffect(() => {
-    const subjectTerms = getSubjectTerms();
-    if (subjectTerms.length > 0) {
-      const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
+    
+    if (subjectTermL.length > 0) {
+      const latestTerm = subjectTermL[0]; // Predpokladáme, že prvý termín v zozname je najnovší
       setSelectedSubjectTerm(latestTerm);
     }
   }, [subjDetail]);
@@ -118,11 +112,11 @@ return (
       id="subject-terms-tabs"
       activeKey={selectedSubjectTerm ? selectedSubjectTerm.id : null}
       onSelect={(key) => {
-      const term = subjectTerms.find(term => term.id === key);
+      const term = subjectTermL.find(term => term.id === key);
         if (term) handleSubjectTermClick(term);
       }}
     >
-    {subjectTerms.map((term) => (
+    {subjectTermL.map((term) => (
       <Tab
         key={term.id}
         eventKey={term.id}

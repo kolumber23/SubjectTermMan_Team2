@@ -6,14 +6,14 @@ import { mdiMagnify } from "@mdi/js";
 
 import styles from "../styles/styles.css";
 
-export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
+export default function SubjectList ({ subjectL }) {
   const navigate = useNavigate();
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
 
   const handleSubjectClick = (selectedSubject) => {
-    navigate(`/subjDetail/${selectedSubject.id}`, {state: {selectedSubject, subjectTermL, activityL}});
+    navigate(`/subjDetail/${selectedSubject.subjectId}`);
   };
 
   const filteredSubjectL = useMemo(() => {
@@ -94,7 +94,7 @@ return (
 <Table striped bordered>
   <thead>
     <tr>
-      <th onClick={() => handleSort("id")}>ID</th>
+      <th onClick={() => handleSort("subjectId")}>ID</th>
       <th onClick={() => handleSort("name")}>Subject</th>
       <th onClick={() => handleSort("credits")}>Credits</th>
       <th onClick={() => handleSort("degree")}>Degree</th>
@@ -107,7 +107,7 @@ return (
     {filteredSubjectL.map((subject, index) => {
       return (
         <tr key={index}>
-          <td> {subject.id} </td>
+          <td> {subject.subjectId} </td>
           <td> {subject.name} </td>
           <td> {subject.credits} </td>
           <td> {subject.degree} </td>
