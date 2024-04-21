@@ -1,3 +1,0 @@
-npm install react-bootstrap bootstrap
-npm install @mdi/react @mdi/js
-npm install react-router-dom
