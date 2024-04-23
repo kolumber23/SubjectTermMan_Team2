@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import SubjectList from "../bricks/SubjectList"
-import CallBackend from "../helpers/apiCaller.js"
+import { CallBackendWithCallback } from "../helpers/apiCaller.js"
 
 
 function SubjectR() {
@@ -8,7 +8,7 @@ function SubjectR() {
   const [subjectTerm, setSubjectTerm] = useState({ state: "appStart" })
 
   useEffect(() => {
-    CallBackend("http://localhost:3011/api/subject/listSubjects", (response) => {
+    CallBackendWithCallback("http://localhost:3011/api/subject/listSubjects", (response) => {
       setSubject(
         {
           state: "succes",
@@ -19,7 +19,7 @@ function SubjectR() {
 
 
   useEffect(() => {
-    CallBackend("http://localhost:3011/api/subjectTerm/listActive?semester=summer 23/24", (response) => {
+    CallBackendWithCallback("http://localhost:3011/api/subjectTerm/listActive?semester=summer 23/24", (response) => {
       setSubjectTerm(
         {
           state: "succes",

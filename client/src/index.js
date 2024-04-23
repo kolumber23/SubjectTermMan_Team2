@@ -10,10 +10,12 @@ import SubjectR from "./routes/SubjectR";
 import SubjDetailR from "./routes/SubjDetailR";
 import StudentR from "./routes/StudentR";
 import HomeR from "./routes/HomeR";
+import { AuthProvider } from './AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <AuthProvider>
     <Provider>
       <Router>
         <Routes>
@@ -27,6 +29,7 @@ root.render(
         </Routes>
       </Router>
     </Provider>
+    </AuthProvider>
   </React.StrictMode>
 );
 
