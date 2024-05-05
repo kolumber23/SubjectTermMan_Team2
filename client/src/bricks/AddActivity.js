@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-function AddActivity({ show, handleClose, handleAddActivity }) {
+function AddActivity({ show, handleClose, addActivity }) {
   const [activityData, setActivityData] = useState({
     name: '',
     minScore: '',
     maxScore: '',
+    description: "",
     deadline: '' // Add deadline field to state
   });
 
-  const handleChange = (e) => {
+  /* const handleChange = (e) => {
     const { name, value } = e.target;
   
     // Validate if the value is negative for maxScore and minScore
@@ -20,9 +21,35 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
       // Otherwise, update the state normally
       setActivityData({ ...activityData, [name]: value });
     }
-  };
+  }; */
+
+  const handleAddActivity = () => {
+    
+   /*  setItemError(null);
+
+    if (formData.item.length < 2 || formData.item.length > 50) {
+      setItemError(t("The item name must be 2 - 50 characters long."));
+      return;
+    }; */
+
+    const newActivity = {
+      name: activityData.name,
+      minScore: activityData.minScore,
+      maxScore: activityData.maxScore,
+      description: activityData.description,
+      deadline: activityData.deadline
+    };
+    addActivity(newActivity);
+    handleClose();
+};
   
-  const handleSubmit = (e) => {
+const setField = (name, val) => {
+  setActivityData((activityData) => {
+  return { ...activityData, [name]: val };
+  });
+};
+
+  /* const handleAddActivity = (e) => {
     e.preventDefault();
   
     // Validate input data including the deadline field
@@ -42,7 +69,7 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
   
     // Call handleAddActivity if data is valid
     handleAddActivity(activityData);
-  };
+  }; */
   
   
 
@@ -51,15 +78,26 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
       <Modal.Header closeButton>
         <Modal.Title>Add New Activity</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Form.Group controlId="formActivityName">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               name="name"
               value={activityData.name}
-              onChange={handleChange}
+              onChange={(e) => setField("name", e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="formActivityDescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              name="description"
+              value={activityData.name}
+              onChange={(e) => setField("description", e.target.value)}
               required
             />
           </Form.Group>
@@ -69,7 +107,7 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
               type="number"
               name="minScore"
               value={activityData.minScore}
-              onChange={handleChange}
+              onChange={(e) => setField("minScore", e.target.value)}
               required
             />
           </Form.Group>
@@ -79,7 +117,7 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
               type="number"
               name="maxScore"
               value={activityData.maxScore}
-              onChange={handleChange}
+              onChange={(e) => setField("maxScore", e.target.value)}
               required
             />
           </Form.Group>
@@ -89,16 +127,21 @@ function AddActivity({ show, handleClose, handleAddActivity }) {
               type="datetime-local" // Use datetime-local input for deadline
               name="deadline"
               value={activityData.deadline}
-              onChange={handleChange}
+              onChange={(e) => setField("deadline", e.target.value)}
               required
             />
           </Form.Group>
-          <br />
-          <Button variant="primary" type="submit">
-            Add Activity
-          </Button>
+          
         </Form>
       </Modal.Body>
+      <Modal.Footer>
+          <Button 
+            variant="primary" 
+            onClick={handleAddActivity}         
+          >
+            Add Activity
+          </Button>
+      </Modal.Footer>
     </Modal>
   );
 }

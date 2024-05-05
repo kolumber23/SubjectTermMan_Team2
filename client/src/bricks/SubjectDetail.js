@@ -1,24 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Navbar, Table, Tab, Tabs, Form } from 'react-bootstrap';
+import { Button, Navbar, Table, Tab, Tabs, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import UserContext from "../Provider";
+import moment from 'moment';
+
 import AddActivity from "./AddActivity";
 import ActivityDetail from "./ActivityDetail";
 
 function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const navigate = useNavigate();
-  const { users } = useContext(UserContext);
+  const { users, user, isLoggedIn } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [selectedSubjectTerm, setSelectedSubjectTerm] = useState(null);
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
-  const [deadline, setDeadline] = useState(""); // State variable to store the deadline
+  const [deadline, setDeadline] = useState("");
+  const [now, setNow] = useState(0);
 
-  // Function to handle opening the modal to add an activity
+  // Function to handle opening and closing the modal to add an activity
   const handleOpenAddActivityModal = () => {
     setShowAddActivityModal(true);
   };
-
-  // Function to handle closing the modal to add an activity
   const handleCloseAddActivityModal = () => {
     setShowAddActivityModal(false);
   };
@@ -63,15 +64,13 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   }).filter(student => student !== null) : [];
   
-  const subjectTerms = getSubjectTerms();
-
   const handleSubjectTermClick = (term) => {
     setSelectedSubjectTerm(term);
     setSelectedActivity(null); // Zrušíme výber aktivity pri zmene subjektu
   };
 
   const handleBack = () => navigate(`/subject`);
-
+  
   useEffect(() => {
     const subjectTerms = getSubjectTerms();
     if (subjectTerms.length > 0) {
@@ -80,27 +79,75 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   }, [subjDetail]);
 
+  useEffect(() => {
+    if (selectedSubjectTerm && user) {
+      const ratio = calculateSuccessRatio(user.id, selectedSubjectTerm);
+      setNow(ratio);
+    }
+  }, [selectedSubjectTerm, user]);
+  
+  const calculateMaxScore = (subjTermId) => {
+    let maxScore = 0;  
+    activityL.forEach(activity => {
+      if (activity.subjTermId === subjTermId.id) {
+        maxScore += activity.maxScore;
+      }
+    });
+    return maxScore;
+  };
+  
+  const calculateTotalAchievedScore = (studentId, selectedSubjectTerm) => {
+    const student = selectedSubjectTerm.studentList.find(student => student.studentId === studentId);
+    if (student && student.scoreList) { 
+      let totalAchievedScore = 0;
+      student.scoreList.forEach(score => {totalAchievedScore += score.score});
+      return totalAchievedScore;
+    } else {
+      return 0;
+    }
+  };
+  
+  const calculateSuccessRatio = (studentId, subjTermId) => {
+    const maxScore = calculateMaxScore(selectedSubjectTerm);
+    const totalAchievedScore = calculateTotalAchievedScore(studentId, subjTermId);
+    const successRatio = (totalAchievedScore / maxScore) * 100;
+    
+    return Math.round(successRatio);
+  };
   
   return (
     <>
       <div className="formDetail">
+      {user && (
+
         <Navbar collapseOnSelect expand="sm" bg="light">
           <div className="container-fluid">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
               <div className="formDetailButton">
+              {!user.id.startsWith("st") && (
+                <>
                 <Button variant="primary" size="sm">
                   + SubjectTerm
                 </Button>
                 <Button variant="primary" size="sm" onClick={handleOpenAddActivityModal}>
                   + Activity
                 </Button>
+                </>
+              )}
+              {user.id.startsWith("st") && ( 
                 <Button variant="primary" size="sm">
-                  Enroll/Remove
+                  {selectedSubjectTerm.studentList.some(student => student.studentId === user.id)
+                  ? "Remove"
+                  : "Enroll"
+                  }
                 </Button>
+              )}
+              {!user.id.startsWith("st") && (
                 <Button variant="success" size="sm">
                   Update
                 </Button>
+              )}
                 <Button variant="outline-secondary"  size="sm" onClick={handleBack}>
                   Back
                 </Button>
@@ -108,6 +155,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
             </Navbar.Collapse> 
           </div>
         </Navbar>
+      )}
         <br />
         <div>
           <b style={{ fontSize: '1.2em' }}>{subjDetail.name}</b>
@@ -135,18 +183,20 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           <b> Description:  </b>{subjDetail.description}
         </div>
         <br />
+        {user && (
+          <>
         <div>
-          <b>Subject Terms: </b>
+          {/* <b>Subject Terms: </b> */}
           <br />
           <Tabs
             id="subject-terms-tabs"
             activeKey={selectedSubjectTerm ? selectedSubjectTerm.id : null}
             onSelect={(key) => {
-              const term = subjectTerms.find(term => term.id === key);
+              const term = getSubjectTerms().find(term => term.id === key);
               if (term) handleSubjectTermClick(term);
             }}
           >
-            {subjectTerms.map((term) => (
+            {getSubjectTerms().map((term) => (
               <Tab
                 key={term.id}
                 eventKey={term.id}
@@ -156,12 +206,16 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           </Tabs>
         </div>
         <br />
+
+        {/*         Tabuľka s aktivitami pre vyučujúceho */}        
+        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList.some(student => student.studentId === user.id)) ? null : (
         <Table striped bordered>
           <thead>
             <tr>
               <th> Activity </th>
               <th> Min Score </th>
               <th> Max Score </th>
+              <th> Dead Line </th>
               <th> Detail </th>
             </tr>
           </thead>
@@ -171,6 +225,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
                 <td>{activity.name}</td>
                 <td>{activity.minScore}</td>
                 <td>{activity.maxScore}</td>
+                <td>{moment(activity.deadline).format("DD. MM. YYYY HH:mm")}</td>
                 <td>
                   <Button
                     variant="outline-primary"
@@ -184,14 +239,19 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
             ))}
           </tbody>
         </Table>
+        )}
         <br />
-        <br />
+
+    {/*         Tabuľka so zoznamom prihlásených študentov pre vyučujúceho */}        
+     {!user.id.startsWith("st") && (
+      <>
         <div> <b>Enrolled students: </b></div>
         <Table striped bordered>
           <thead>
             <tr>
               <th> Name </th>
               <th> Surname </th>
+              <th> Total score </th>
               <th> Grade </th>
               <th> Detail </th>
             </tr>
@@ -201,6 +261,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
               <tr key={student.id}>
                 <td>{student.name}</td>
                 <td>{student.surname}</td>
+                <td>{calculateTotalAchievedScore(student.id, selectedSubjectTerm)}</td>
                 <td>{student.grade}</td>
                 <td>
                   <Button
@@ -214,7 +275,63 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
             ))}
           </tbody>
         </Table>
-  
+        </>
+        )}
+<br />
+{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList.some(student => student.studentId === user.id) && (
+  <>
+{/*         Tabuľka s aktivitami pre konkrétneho (prihláseného) študenta */}    
+<div> <b>Score of logged in student: </b></div>
+
+<Table striped bordered>
+          <thead>
+            <tr>
+              <th> Activity </th>
+              <th> Min Score </th>
+              <th> Max Score </th>
+              <th> Achieved score </th>
+              <th> Dead Line </th>
+            </tr>
+          </thead>
+          <tbody>
+          {getActivities().map((activity) => {
+      // Overíme, či je prihlásený študent na túto aktivitu
+      const isEnrolled = selectedSubjectTerm.studentList.some(student => student.studentId === user.id && student.scoreList.some(score => score.activityId === activity.id));
+      
+      // Ak je prihlásený, zobrazíme mu detaily aktivity
+      if (isEnrolled) {
+        const studentScore = selectedSubjectTerm.studentList.find(student => student.studentId === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
+        return (
+          <tr key={activity.id}>
+            <td>{activity.name}</td>
+            <td>{activity.minScore}</td>
+            <td>{activity.maxScore}</td>
+            <td>{studentScore || '-'}</td>
+            <td>{moment(activity.deadline).format("DD. MM. YYYY HH:mm")}</td>
+          </tr>
+        );
+      } else {
+        return null; // Skryjeme riadok pre aktivity, do ktorých študent nie je prihlásený
+      }
+    })}
+           
+          </tbody>
+        </Table>
+
+ <br />
+
+        <ProgressBar now={now} label={`${now}%`} />
+        </>
+        )}
+        </>
+        )}
+        {!isLoggedIn && (
+        <div>
+        <Button variant="outline-secondary"  size="sm" onClick={handleBack}>
+          Back
+        </Button>
+        </div>
+        )}
         {selectedActivity && (
           <ActivityDetail
             activity={selectedActivity}
@@ -231,8 +348,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         handleAddActivity={handleAddActivity}
       />
     </>   
+    
   );
-  
 }
 
 export default SubjectDetail;

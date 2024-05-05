@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
-import { mdiMagnify } from "@mdi/js";
+import { mdiMagnify, mdiPlus } from "@mdi/js";
 
 import styles from "../styles/styles.css";
 
@@ -84,6 +84,12 @@ return (
                   type="submit"
                 >
                 <Icon size={1} path={mdiMagnify} />
+                </Button>
+                <Button
+                  style={{ marginRight: "8px" }}
+                  variant="success"
+                >
+                <Icon size={1} path={mdiPlus} />
                 </Button>
               </Form>         
             </Navbar.Collapse> 
