@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 const UserContext = createContext();
 
@@ -58,10 +58,30 @@ export function Provider({ children })  {
    }
    ];
 
+  const alreadyLogged = JSON.parse(sessionStorage.getItem('authUser'));
+  const [isLoggedIn, setIsLoggedIn] = useState(!!alreadyLogged);
+  const [user, setUser] = useState(alreadyLogged ?? users.find(user => user.id === 0));
+  
+  const changeUser = (userId) => {
+    const selectedUser = users.find(user => user.id === userId);
+    if (selectedUser) {
+      setUser(selectedUser);
+      sessionStorage.setItem('authUser', JSON.stringify(selectedUser));
+      setIsLoggedIn(selectedUser.id !== 0);
+    } else {
+        setUser(null); 
+        sessionStorage.removeItem('authUser');
+        setIsLoggedIn(false);
+    }
+  };
+
 return (
   <UserContext.Provider 
     value = {{ 
-      users
+      users,
+      user,
+      isLoggedIn,
+      changeUser
     }}
       >
         {children}

@@ -1,14 +1,17 @@
 import './App.css';
-import React from "react";
+import React, { useContext } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "react-bootstrap/Navbar";
-import { Button, Nav } from "react-bootstrap/";
+import { Button, Nav, NavDropdown } from "react-bootstrap/";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import UserContext from "./Provider";
+
 
 function App() {
   let navigate = useNavigate();
+  const {user, users, changeUser} = useContext(UserContext);
 
   return (
     <div class="App">
@@ -31,12 +34,34 @@ function App() {
             </Offcanvas.Header>
             <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3 d-flex align-items-center">
+                
+                <NavDropdown 
+                  title={user ? user.surname : "Unregistred"} 
+                  id={"nav-dropdown-dark"}
+                  menuVariant={"dark"}
+                >
+                  {users
+                    .sort((a, b) => a.surname.localeCompare(b.surname))
+                    .map((user) => {
+                      return (
+                        <NavDropdown.Item onClick={() => changeUser(user.id)}>
+                          {user.surname} {" "} {user.name}
+                        </NavDropdown.Item>
+                      )
+                  })}
+                </NavDropdown>
+                
                 <Nav.Link href="/student">  Students  </Nav.Link>
                 <Nav.Link href="/subject">  Subjects   </Nav.Link>
-                <Button
-                  variant="dark">
-                  Login
+
+                <Button 
+                  variant={"dark"}
+                  style={{ marginLeft: "20px" }}
+                  onClick={() => changeUser(null)}
+                >
+                  Log out
                 </Button>
+
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
