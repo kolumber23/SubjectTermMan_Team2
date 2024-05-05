@@ -8,7 +8,7 @@ function SubjectR() {
       "id": "MA-BC",
       "name": "Mathematic Analysis",
       "credits": 6,
-      "supervisor": "Adam Smith",
+      "supervisor": "Marek Novotný",
       "goal": "Mathematic learning",
       "degree": "Bc",
       "language": "cz",
@@ -243,7 +243,7 @@ function SubjectR() {
     "description": "Test from issues 1-2", 
     "maxScore": 25, 
     "minScore": 15, 
-    "deadline": "2024-04-150T23:59:59", 
+    "deadline": "2024-04-15T23:59:59", 
   },
   {
     "id": "1845699", 
