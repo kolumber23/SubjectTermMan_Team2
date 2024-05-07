@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import SubjectList from "../bricks/SubjectList"
+import SubjContext from "../SubjProvider";
 
 
 function SubjectR() {
-  const subjectL = [
+  const {subjectL, subjectTermL, activityL} = useContext(SubjContext);
+
+  /* const subjectL = [
     {
       "id": "MA-BC",
       "name": "Mathematic Analysis",
@@ -281,7 +284,7 @@ function SubjectR() {
     "minScore": 40, 
     "deadline": "2024-05-30T23:59:59", 
   }
-];
+]; */
 
   return (
     <div>

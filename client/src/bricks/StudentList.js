@@ -3,11 +3,21 @@ import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
 import styles from "../styles/styles.css";
+import StudentDetail from "./StudentDetail";
 
 export default function StudentList ({ studentL }) {
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleOpen = () => {
+    setShow(true);
+  };
+  const handleClose = () => {
+    setShow(false);
+  };
 
   const filteredStudentL = useMemo(() => {
     let filteredList = studentL.filter((item) => {
@@ -87,6 +97,7 @@ return (
       <th onClick={() => handleSort("surname")}>Surname</th>
       <th onClick={() => handleSort("name")}>Name</th>
       <th onClick={() => handleSort("degree")}>Degree</th>
+      <th> Detail </th>
     </tr>
   </thead>
   <tbody>
@@ -97,11 +108,27 @@ return (
           <td> {student.surname} </td>
           <td> {student.name} </td>
           <td> {student.degree} </td>
+          <td>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => setSelectedStudent(student)}
+          >
+            {"<"} 
+          </Button>
+          </td>
         </tr>  
       );
     })}
   </tbody>
 </Table>
+
+{selectedStudent && (
+          <StudentDetail
+            selectedStudent={selectedStudent}
+            onClose={() => setSelectedStudent(null)}
+          />
+        )}
   </div>
   </div>
 );

@@ -7,31 +7,11 @@ function AddActivity({ show, handleClose, addActivity }) {
     minScore: '',
     maxScore: '',
     description: "",
-    deadline: '' // Add deadline field to state
+    deadline: '' 
   });
 
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
-  
-    // Validate if the value is negative for maxScore and minScore
-    if ((name === 'maxScore' || name === 'minScore') && parseFloat(value) < 0) {
-      // If value is negative, set it to 0
-      setActivityData({ ...activityData, [name]: 0 });
-    } else {
-      // Otherwise, update the state normally
-      setActivityData({ ...activityData, [name]: value });
-    }
-  }; */
-
   const handleAddActivity = () => {
-    
-   /*  setItemError(null);
-
-    if (formData.item.length < 2 || formData.item.length > 50) {
-      setItemError(t("The item name must be 2 - 50 characters long."));
-      return;
-    }; */
-
+  
     const newActivity = {
       name: activityData.name,
       minScore: activityData.minScore,
@@ -40,41 +20,17 @@ function AddActivity({ show, handleClose, addActivity }) {
       deadline: activityData.deadline
     };
     addActivity(newActivity);
-    handleClose();
+    handleClose("activity");
 };
   
 const setField = (name, val) => {
   setActivityData((activityData) => {
   return { ...activityData, [name]: val };
   });
-};
-
-  /* const handleAddActivity = (e) => {
-    e.preventDefault();
+}; 
   
-    // Validate input data including the deadline field
-    if (
-      activityData.name.trim() === '' ||
-      isNaN(activityData.minScore) ||
-      isNaN(activityData.maxScore) ||
-      isNaN(Date.parse(activityData.deadline)) || // Validate if the deadline is a valid date
-      parseFloat(activityData.minScore) < 0 ||
-      parseFloat(activityData.maxScore) < 0 ||
-      parseFloat(activityData.minScore) > parseFloat(activityData.maxScore)
-    ) {
-      // Display error message or handle invalid data
-      console.error('Invalid activity data.');
-      return;
-    }
-  
-    // Call handleAddActivity if data is valid
-    handleAddActivity(activityData);
-  }; */
-  
-  
-
-  return (
-    <Modal show={show} onHide={handleClose}>
+return (
+    <Modal show={show} onHide={() => handleClose("activity")}>
       <Modal.Header closeButton>
         <Modal.Title>Add New Activity</Modal.Title>
       </Modal.Header>

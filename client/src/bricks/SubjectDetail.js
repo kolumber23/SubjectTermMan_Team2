@@ -5,34 +5,63 @@ import UserContext from "../Provider";
 import moment from 'moment';
 
 import AddActivity from "./AddActivity";
+import AddSubjectTerm from "./AddSubjectTerm";
 import ActivityDetail from "./ActivityDetail";
+import StudentDetail from "./StudentDetail"
 
 function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const navigate = useNavigate();
   const { users, user, isLoggedIn } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedSubjectTerm, setSelectedSubjectTerm] = useState(null);
-  const [showAddActivityModal, setShowAddActivityModal] = useState(false);
+  const [showAA, setShowAA] = useState(false);
+  const [showAST, setShowAST] = useState(false);
   const [deadline, setDeadline] = useState("");
   const [now, setNow] = useState(0);
 
-  // Function to handle opening and closing the modal to add an activity
-  const handleOpenAddActivityModal = () => {
-    setShowAddActivityModal(true);
+  // Function to handle opening and closing the modal
+  const handleOpen = (modal) => {
+    switch (modal) {
+      case "activity":
+        setShowAA(true); 
+        break;
+      case "subjectTerm":
+        setShowAST(true); 
+        break;
+      case "student":
+        setShowAST(true); 
+        break;
+      case "addActivity":
+        setShowAST(true); 
+        break;
+      default:
+        break;
+    }
   };
-  const handleCloseAddActivityModal = () => {
-    setShowAddActivityModal(false);
+
+  const handleClose = (modal) => {
+    switch (modal) {
+      case "activity":
+        setShowAA(false); 
+        break;
+      case "subjectTerm":
+        setShowAST(false); 
+        break;
+      default:
+        break;
+    }
   };
 
   // Function to handle adding an activity
   const handleAddActivity = (activityData) => {
-    // Update the activity data with the deadline
     const activityWithDeadline = { ...activityData, deadline };
-    // Implement logic to add the activity
-    console.log("Adding activity with deadline:", activityWithDeadline);
-    // For example, you can update the activity list with the new activity
-    // Update the activity list using setActivityL([...activityL, activityWithDeadline]);
-    setShowAddActivityModal(false); // Close the modal after adding the activity
+    setShowAA(false);
+  };
+
+  const handleAddSubjectTerm = () => {
+    setShowAST(false);
+
   };
 
   // Funkcia na získanie subjTerms predmetu
@@ -50,7 +79,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   };
 
  // Pole so študentami priradenými k vybranému subjectTerm s ich známkami
-  const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList.map(student => {
+ const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList?.map(student => {
+  if (student.studentId.startsWith("st")) {
     const user = users.find(user => user.id === student.studentId);
     if (user) {
       return {
@@ -62,7 +92,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     } else {
       return null; 
     }
-  }).filter(student => student !== null) : [];
+  } else {
+    return null;
+  }
+}).filter(student => student !== null) : [];
   
   const handleSubjectTermClick = (term) => {
     setSelectedSubjectTerm(term);
@@ -71,12 +104,49 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
 
   const handleBack = () => navigate(`/subject`);
   
+  const handleEnroll = () => {
+    // Ak je študent prihlásený, odstráňte ho
+    if (isEnrolled) {
+      const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentId !== user.id);
+      setSelectedSubjectTerm(prevTerm => ({
+        ...prevTerm,
+        studentList: updatedStudentList
+      }));
+    } else {
+      // Ak študent nie je prihlásený, pridajte ho
+      const newStudent = {
+        studentId: user.id,
+        scoreList: [],
+        grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
+      };
+      setSelectedSubjectTerm(prevTerm => ({
+        ...prevTerm,
+        studentList: [...prevTerm.studentList, newStudent]
+      }));
+    }
+  };
+
   useEffect(() => {
     const subjectTerms = getSubjectTerms();
     if (subjectTerms.length > 0) {
       const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
       setSelectedSubjectTerm(latestTerm);
-    }
+    // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
+    if (user && latestTerm) {
+      const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
+      const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentId === user.id);
+      if (!userAlreadyEnrolled) {
+        const newUser = {
+          studentId: user.id,
+          scoreList: [],
+          grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
+        };
+        const updatedStudentList = [...latestTerm.studentList, newUser];
+        setSelectedSubjectTerm(prevTerm => ({
+          ...prevTerm,
+          studentList: updatedStudentList
+        }));
+      }}}
   }, [subjDetail]);
 
   useEffect(() => {
@@ -97,7 +167,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   };
   
   const calculateTotalAchievedScore = (studentId, selectedSubjectTerm) => {
-    const student = selectedSubjectTerm.studentList.find(student => student.studentId === studentId);
+    const student = selectedSubjectTerm.studentList?.find(student => student.studentId === studentId);
     if (student && student.scoreList) { 
       let totalAchievedScore = 0;
       student.scoreList.forEach(score => {totalAchievedScore += score.score});
@@ -114,6 +184,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     
     return Math.round(successRatio);
   };
+
+  const isEnrolled = selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
   
   return (
     <>
@@ -127,20 +199,21 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
               <div className="formDetailButton">
               {!user.id.startsWith("st") && (
                 <>
-                <Button variant="primary" size="sm">
+                <Button variant="primary" size="sm" onClick={() => handleOpen("subjectTerm")}>
                   + SubjectTerm
                 </Button>
-                <Button variant="primary" size="sm" onClick={handleOpenAddActivityModal}>
+                <Button variant="primary" size="sm" onClick={() => handleOpen("activity")}>
                   + Activity
                 </Button>
                 </>
               )}
               {user.id.startsWith("st") && ( 
-                <Button variant="primary" size="sm">
-                  {selectedSubjectTerm.studentList.some(student => student.studentId === user.id)
-                  ? "Remove"
-                  : "Enroll"
-                  }
+                <Button
+                  variant="primary"
+                  size="sm"
+                   onClick={() => handleEnroll()}
+                >
+                  {isEnrolled ? "Remove" : "Enroll"}
                 </Button>
               )}
               {!user.id.startsWith("st") && (
@@ -208,7 +281,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         <br />
 
         {/*         Tabuľka s aktivitami pre vyučujúceho */}        
-        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList.some(student => student.studentId === user.id)) ? null : (
+        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id)) ? null : (
         <Table striped bordered>
           <thead>
             <tr>
@@ -264,9 +337,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
                 <td>{calculateTotalAchievedScore(student.id, selectedSubjectTerm)}</td>
                 <td>{student.grade}</td>
                 <td>
-                  <Button
+                <Button
                     variant="outline-primary"
                     size="sm"
+                    onClick={() => setSelectedStudent(student)}
                   >
                     {"<"} 
                   </Button>
@@ -278,7 +352,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         </>
         )}
 <br />
-{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList.some(student => student.studentId === user.id) && (
+{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id) && (
   <>
 {/*         Tabuľka s aktivitami pre konkrétneho (prihláseného) študenta */}    
 <div> <b>Score of logged in student: </b></div>
@@ -296,11 +370,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           <tbody>
           {getActivities().map((activity) => {
       // Overíme, či je prihlásený študent na túto aktivitu
-      const isEnrolled = selectedSubjectTerm.studentList.some(student => student.studentId === user.id && student.scoreList.some(score => score.activityId === activity.id));
+      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentId === user.id && student.scoreList.some(score => score.activityId === activity.id));
       
       // Ak je prihlásený, zobrazíme mu detaily aktivity
       if (isEnrolled) {
-        const studentScore = selectedSubjectTerm.studentList.find(student => student.studentId === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
+        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentId === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
         return (
           <tr key={activity.id}>
             <td>{activity.name}</td>
@@ -339,13 +413,25 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
             onClose={() => setSelectedActivity(null)}
           />
         )}
+        {selectedStudent && (
+          <StudentDetail
+            selectedStudent={selectedStudent}
+            onClose={() => setSelectedStudent(null)}
+          />
+        )}
       </div>
   
-      {/* AddActivity modal */}
+      {/* MODALS MODULES */}
       <AddActivity
-        show={showAddActivityModal}
-        handleClose={handleCloseAddActivityModal}
+        show={showAA}
+        handleClose={handleClose}
         handleAddActivity={handleAddActivity}
+      />
+      <AddSubjectTerm
+        show={showAST}
+        handleClose={handleClose}
+        handleAddSubjectTerm={handleAddSubjectTerm}
+        subjDetail={subjDetail}
       />
     </>   
     
