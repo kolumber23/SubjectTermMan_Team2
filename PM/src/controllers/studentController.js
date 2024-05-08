@@ -1,19 +1,10 @@
-const staticStudents = [{
-    studentId: 1,
-    name: "Jan",
-    surname: "Dvořák",
-    degree: "undergraduate",
-    language: "czech",
-    subjectTermList: [
-      1
-    ]
-  }];
+const StudentDao = require('../dao/student-dao.js');
 
   exports.getStudent = (req, res) => {
     const { studentId } = req.body;
 
     // Find the student in the static array
-    const student = staticStudents.find(sub => sub.studentId === parseInt(studentId));
+    const student = StudentDao.getStudent(studentId);
 
     if (!student) {
         // Student not found

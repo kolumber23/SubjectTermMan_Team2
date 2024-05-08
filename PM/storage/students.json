@@ -1,0 +1,188 @@
+[
+    {
+        "studentId": "st-5492-5764",
+        "name": "Jakub Novák",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-6824-6544",
+        "name": "Sarah Walters",
+        "degree": "Bc",
+        "language": "en"
+    },
+	{
+        "studentId": "st-9267-3572",
+        "name": "Kateřina Zemanová",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-2341-5340",
+        "name": "Jan Svoboda",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-4023-4412",
+        "name": "Matěj Matoušek",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-5119-6693",
+        "name": "Ian McCoy",
+        "degree": "Mgr",
+        "language": "en"
+    },
+	{
+        "studentId": "st-9155-9119",
+        "name": "Mikuláš Hrubý",
+        "degree": "Bc",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-5290-3216",
+        "name": "Barbora Krausová",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-6580-7562",
+        "name": "Aneta Mrázková",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-5119-6693",
+        "name": "František Čermák",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-9155-9119",
+        "name": "Jana Šikolová",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-1066-4394",
+        "name": "Kryštof Štěpánek",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-6957-3533",
+        "name": "Věra Horáková",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-6567-9443",
+        "name": "Jitka Vránová",
+        "degree": "Bc",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-6943-1948",
+        "name": "Phil Jameson",
+        "degree": "Mgr",
+        "language": "en"
+    },
+	{
+        "studentId": "st-9611-9860",
+        "name": "Jiří Heřman",
+        "degree": "Bc",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-6170-3245",
+        "name": "Adéla Kramářová",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-7846-1627",
+        "name": "Petra Mlejnková",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-3847-6842",
+        "name": "Karel Janák",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-9467-5027",
+        "name": "Jane Hill",
+        "degree": "Bc",
+        "language": "en"
+    },
+	{
+        "studentId": "st-9467-5027",
+        "name": "Caroline Benedict",
+        "degree": "Bc",
+        "language": "en"
+	},
+	{
+        "studentId": "st-3578-3468",
+        "name": "Miloš Zemák",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-4357-8327",
+        "name": "Amanda Plummer",
+        "degree": "Bc",
+        "language": "en"
+    },
+	{
+        "studentId": "st-3847-6542",
+        "name": "Pavla Jirásková",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-3871-9773",
+        "name": "Radim Gazda",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-3418-6548",
+        "name": "Roman Pokorný",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-3875-1698",
+        "name": "Robert Smith",
+        "degree": "Mgr",
+        "language": "en"
+    },
+	{
+        "studentId": "st-9834-1687",
+        "name": "Zdeněk Janák",
+        "degree": "Bc",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-3357-6245",
+        "name": "Andrea Černá",
+        "degree": "Mgr",
+        "language": "cz"
+    },
+    {
+        "studentId": "st-2695-7169",
+        "name": "Simona Králová",
+        "degree": "Bc",
+        "language": "cz"
+    },
+	{
+        "studentId": "st-3215-4953",
+        "name": "Emily Peterson",
+        "degree": "Mgr",
+        "language": "en"
+    }
+]
