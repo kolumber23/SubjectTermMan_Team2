@@ -1,0 +1,19 @@
+[
+  {
+    "id": "ce0067314df27dce",
+    "name": "Project management",
+    "school": "Union University",
+    "credits": 9,
+    "supervisor": "Jaroslav Zimmermann",
+    "goal": "The goal of the course is to provide students with the skills to manage projects effectively. This includes understanding project management principles, using key tools, and applying these in real-world situations. The course aims to enhance critical thinking, problem-solving, and communication skills, preparing students to successfully complete projects on time and within budget.",
+    "degree": "Bc",
+    "language": "cz",
+    "description": "This semester-long course provides a comprehensive introduction to the principles and practices of project management. Students will learn about project initiation, planning, execution, control, and closure. Key topics include project scope, time management, cost control, quality assurance, and stakeholder communication. Real-world case studies will be used to illustrate project management challenges and solutions. By the end of the course, students will be equipped with the skills to manage projects effectively in various professional settings."
+  },
+  {
+    "id": "ac1e3c5b73e23022"
+  },
+  {
+    "id": "963c3c20b2bd0230"
+  }
+]

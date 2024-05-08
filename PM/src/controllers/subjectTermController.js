@@ -1,10 +1,13 @@
 const SubjectTermDao = require('../dao/subjectTerm-dao.js');
 const SubjectDao = require('../dao/subject-dao.js');
 
-exports.createSubjectTerm = (req, res) => {
+const SubjectDaoInstance = new SubjectDao();
+const SubjectTermDaoInstance = new SubjectTermDao();
+
+exports.createSubjectTerm = async (req, res) => {
   const { subjectId, semester, studentList } = req.body;
 
-  const subject = SubjectDao.getSubjectTerm(subjectId)
+  const subject = await SubjectDaoInstance.getSubject(subjectId)
 
   if (!subject) {
     // Subject term not found
@@ -16,17 +19,16 @@ exports.createSubjectTerm = (req, res) => {
     subjectId,
     studentList: studentList || [],
   };
-  SubjectTermDao.createSubjectTerm(newSubjectTerm)
+  const createdSubjectTerm = await SubjectTermDaoInstance.createSubjectTerm(newSubjectTerm)
   
-  res.status(201).json({ message: "Subject term created", data: newSubjectTerm });
+  res.status(201).json({ message: "Subject term created", data: createdSubjectTerm });
 };
 
-exports.updateSubjectTerm = (req, res) => {
+exports.updateSubjectTerm = async (req, res) => {
   const { subjectTermId, semester, studentList } = req.body;
 
   // Find the index of the subject term in the array
-  SubjectTermDao.createSubjectTerm(newSubjectTerm)
-  const subjectTerm = SubjectTermDao.getSubjectTerm(subjectTermId);
+  const subjectTerm = await SubjectTermDaoInstance.getSubjectTerm(subjectTermId);
 
   if (!subjectTerm) {
       // Subject term not found
@@ -41,18 +43,18 @@ exports.updateSubjectTerm = (req, res) => {
     subjectTerm.studentList = studentList;
   }
 
-  SubjectTermDao.updateSubjectTerm(subjectTerm);
+  SubjectTermDaoInstance.updateSubjectTerm(subjectTerm);
   
 
   // Return the updated subject term
   res.status(200).json({ message: "Subject term updated", data: subjectTerm });
 };
 
-exports.getSubjectTerm = (req, res) => {
-  const { subjectTermId } = req.params;  // Assuming the ID is passed as a URL parameter
+exports.getSubjectTerm = async (req, res) => {
+  const { subjectTermId } = req.body;  // Assuming the ID is passed as a URL parameter
 
   // Find the subject term in the array
-  const subjectTerm = SubjectTermDao.getSubjectTerm(subjectTermId)
+  const subjectTerm = await SubjectTermDaoInstance.getSubjectTerm(subjectTermId)
 
   if (!subjectTerm) {
       // Subject term not found
@@ -63,11 +65,11 @@ exports.getSubjectTerm = (req, res) => {
   res.status(200).json({ message: "Subject term retrieved successfully", data: subjectTerm });
 };
   
-exports.listSubjectTerms = (req, res) => {
+exports.listSubjectTerms = async (req, res) => {
   const {  } = req.query;  // Access the semester query parameter
 
   // Filter the subject terms by semester
-  const filteredTerms = SubjectTermDao.listSubjectTerms();
+  const filteredTerms = await SubjectTermDaoInstance.listSubjectTerm();
 
   if (filteredTerms.length === 0) {
       // No subject terms found for the semester

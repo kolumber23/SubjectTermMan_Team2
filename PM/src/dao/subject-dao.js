@@ -1,6 +1,7 @@
 "use strict";
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 // load promise api for reading and writing file
 const rf = fs.promises.readFile;
@@ -22,7 +23,7 @@ class SubjectDao {
             this._getStorageLocation(),
             JSON.stringify(subjectList, null, 2)
         );
-        return recipe;
+        return subject;
     }
 
     async getSubject(id) {

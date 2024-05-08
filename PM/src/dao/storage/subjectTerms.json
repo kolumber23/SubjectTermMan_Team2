@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1487823ca0c33069",
+    "semester": "summer 2024",
+    "subjectID": "ce0067314df27dce",
+    "studentList": [
+      {
+        "studentID": "st-9267-3572",
+        "scoreList": [],
+        "grade": 0
+      },
+      {
+        "studentID": "st-9155-9119",
+        "scoreList": [],
+        "grade": 0
+      },
+      {
+        "studentID": "st-6580-7562",
+        "scoreList": [],
+        "grade": 0
+      }
+    ]
+  },
+  {
+    "subjectId": "ce0067314df27dce",
+    "studentList": [
+      {
+        "studentID": "st-4023-4412",
+        "scoreList": [],
+        "grade": 0
+      }
+    ],
+    "id": "2fcdab6161fb0e8d"
+  }
+]

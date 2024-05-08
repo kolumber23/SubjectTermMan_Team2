@@ -1,6 +1,7 @@
 const SubjectDao = require('../dao/subject-dao.js');
+const SubjectDaoInstance = new SubjectDao();
 
-const createSubject = (req, res) => {
+const createSubject = async (req, res) => {
     const { name, credits, supervisor, goal, degree, language, description, school } = req.body;
     const newSubject = {
       name,
@@ -12,27 +13,29 @@ const createSubject = (req, res) => {
       language,
       description,      
     };
-    SubjectDao.createSubject(newSubject);
+    const createdSubject = await SubjectDaoInstance.createSubject(newSubject);
     
-    res.status(201).json({ message: "Subject created", data: newSubject });
+    res.status(201).json({ message: "Subject created", data: createdSubject });
   };
 
-const listSubjects = (req, res) => {
+const listSubjects = async (req, res) => {
     // Check if there are any subjects in the array
-    if (staticSubjects.length === 0) {
+
+    const listedSubjects = await SubjectDaoInstance.listSubject()
+    if (listedSubjects.length === 0) {
         // No subjects found
         return res.status(404).json({ message: "No subjects found" });
     }
 
     // Return all subjects in the staticSubjects array
-    res.status(200).json({ message: "Subjects retrieved successfully", data: SubjectDao.listSubject() });
+    res.status(200).json({ message: "Subjects retrieved successfully", data: listedSubjects });
   };
 
-const getSubject = (req, res) => {
+const getSubject = async (req, res) => {
     const { subjectId } = req.body; // Assuming the ID is passed as a URL parameter
 
     // Find the subject in the static array
-    const subject = SubjectDao.getSubject(subjectId);
+    const subject = await SubjectDaoInstance.getSubject(subjectId);
 
     if (!subject) {
         // Subject not found

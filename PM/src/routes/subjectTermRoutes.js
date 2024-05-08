@@ -6,8 +6,9 @@ const {
   createSubjectTerm,
   updateSubjectTerm,
   getSubjectTerm,
-  listSubjectTermsBySemester,
-  listSubjectTermsBySubjectId
+  listSubjectTerms,
+  // listSubjectTermsBySemester,
+  // listSubjectTermsBySubjectId
 } = require('../controllers/subjectTermController');
 const router = express.Router();
 
@@ -17,8 +18,10 @@ router.post('/create', createSubjectTerm);
 
 router.put('/update', updateSubjectTerm);
 
-router.get('/listActive', listSubjectTermsBySemester);
+router.get('/list', listSubjectTerms);
 
-router.get('/listArchived', listSubjectTermsBySubjectId);
+// router.get('/listActive', listSubjectTermsBySemester);
+
+// router.get('/listArchived', listSubjectTermsBySubjectId);
 
 module.exports = router;
