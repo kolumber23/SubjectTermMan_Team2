@@ -1,0 +1,46 @@
+[
+	{
+		"id": "MA-BC",
+		"name": "Mathematic Analysis",
+		"credits": 6,
+		"supervisor": "Marek Novotný",
+		"goal": "Mathematic learning",
+		"degree": "Bc",
+		"language": "cz",
+		"description": "description",
+		"school": "Union University"
+	  },
+	  {
+		"id": "PM-BC",
+		"name": "Project management",
+		"credits": 9,
+		"supervisor": "Petr Novák",
+		"goal": "To learn management",
+		"degree": "Bc",
+		"language": "cz",
+		"description": "description",
+		"school": "Union University"
+	  },
+	  {
+		"id": "AJ-MG",
+		"name": "Bussiness english",
+		"credits": 3,
+		"supervisor": "Jozef Mrkva",
+		"goal": "To learn english language",
+		"degree": "Mgr",
+		"language": "en",
+		"description": "description",
+		"school": "Union University"
+	  },
+	  {
+		"id": "BE-MG",
+		"name": "Backend",
+		"credits": 6,
+		"supervisor": "Jaroslav Svoboda",
+		"goal": "To learn backend",
+		"degree": "Mgr",
+		"language": "en",
+		"description": "description",
+		"school": "Union University"
+	  }
+]
