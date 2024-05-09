@@ -9,13 +9,6 @@ function SubjectR() {
   const { id } = useParams();
   const selectedSubject = subjectL.find(subject => subject.id === id);
 
-  console.warn(subjectL)
-
-  if (subjectL.length === 0) {
-    return <></>
-  }
-  else
-  {
     return (
       <div>
         <SubjectDetail
@@ -25,7 +18,6 @@ function SubjectR() {
         />
       </div>
     );
-  }
 };
 
 export default SubjectR;

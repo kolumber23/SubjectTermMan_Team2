@@ -66,13 +66,13 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
 
   // Funkcia na získanie subjTerms predmetu
   const getSubjectTerms = () => {
-    return subjectTermL.filter(term => term.subjectId === subjDetail.id);
+    return subjectTermL.filter(term => term.subjectID === subjDetail.id);
   };
 
   // Funkcia na získanie priradení pre daný predmet a vybraný subjekt
   const getActivities = () => {
     if (selectedSubjectTerm) {
-      return activityL.filter(activity => activity.subjTermId === selectedSubjectTerm.id);
+      return activityL.filter(activity => activity.subjTermID === selectedSubjectTerm.id);
     } else {
       return [];
     }
@@ -133,7 +133,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
       setSelectedSubjectTerm(latestTerm);
     // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
     if (user && latestTerm) {
-      const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
+      const enrolledActivities = activityL.filter(activity => activity.subjTermID === latestTerm.id);
       const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentID === user.id);
       if (!userAlreadyEnrolled) {
         const newUser = {
@@ -156,10 +156,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   }, [selectedSubjectTerm, user]);
   
-  const calculateMaxScore = (subjTermId) => {
+  const calculateMaxScore = (subjTermID) => {
     let maxScore = 0;  
     activityL.forEach(activity => {
-      if (activity.subjTermId === subjTermId.id) {
+      if (activity.subjTermID === subjTermID.id) {
         maxScore += activity.maxScore;
       }
     });
@@ -177,9 +177,9 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   };
   
-  const calculateSuccessRatio = (studentID, subjTermId) => {
+  const calculateSuccessRatio = (studentID, subjTermID) => {
     const maxScore = calculateMaxScore(selectedSubjectTerm);
-    const totalAchievedScore = calculateTotalAchievedScore(studentID, subjTermId);
+    const totalAchievedScore = calculateTotalAchievedScore(studentID, subjTermID);
     const successRatio = (totalAchievedScore / maxScore) * 100;
     
     return Math.round(successRatio);
@@ -370,11 +370,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           <tbody>
           {getActivities().map((activity) => {
       // Overíme, či je prihlásený študent na túto aktivitu
-      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentID === user.id && student.scoreList.some(score => score.activityId === activity.id));
+      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentID === user.id && student.scoreList.some(score => score.activityID === activity.id));
       
       // Ak je prihlásený, zobrazíme mu detaily aktivity
       if (isEnrolled) {
-        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentID === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
+        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentID === user.id)?.scoreList.find(score => score.activityID === activity.id)?.score;
         return (
           <tr key={activity.id}>
             <td>{activity.name}</td>

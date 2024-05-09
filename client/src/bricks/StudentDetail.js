@@ -33,8 +33,8 @@ function StudentDetail({ selectedStudent, onClose }) {
               // Zjistit, zda je vybraný student zapsán do tohoto termínu předmětu
               const studentEntry = subjectTerm.studentList.find((student) => student.id === selectedStudent.id);
                 if (studentEntry) {
-              // Najít odpovídající předmět v subjectL podle subjectId
-              const subject = subjectL.find((subj) => subj.id === subjectTerm.subjectId);
+              // Najít odpovídající předmět v subjectL podle subjectID
+              const subject = subjectL.find((subj) => subj.id === subjectTerm.subjectID);
               if (subject) {
                 // Vypočítat celkové skóre studenta v daném termínu
               const totalScore = studentEntry.scoreList.reduce((acc, curr) => {

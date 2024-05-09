@@ -45,22 +45,22 @@ function SubjectR() {
   const subjectTermL = [
     {
       "id": "24-S01-MA-BC",
-      "subjectId": "MA-BC",
+      "subjectID": "MA-BC",
       "semester": "Summer 2024",
       "studentList": [
         {
           "studentID": "st123",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 10
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 20
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 22
             }
           ],
@@ -70,15 +70,15 @@ function SubjectR() {
           "studentID": "st456",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 7
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 18
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 25
             }
           ],
@@ -88,15 +88,15 @@ function SubjectR() {
           "studentID": "st789",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 8
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 23
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 24
             }
           ],
@@ -106,26 +106,26 @@ function SubjectR() {
     },
     {
       "id": "23-W01-MA-BC",
-      "subjectId": "MA-BC",
+      "subjectID": "MA-BC",
       "semester": "Winter 2023",
       "studentList": [
         {
           "studentID": "st123",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 5
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 5
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 5
             },
             {
-              "activityId": "7488150",
+              "activityID": "7488150",
               "score": 5
             }
           ],
@@ -135,19 +135,19 @@ function SubjectR() {
           "studentID": "st456",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 10
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 15
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 7
             },
             {
-              "activityId": "7488150",
+              "activityID": "7488150",
               "score": 0
             }
           ],
@@ -157,19 +157,19 @@ function SubjectR() {
           "studentID": "st789",
           "scoreList": [
             {
-              "activityId": "1653285",
+              "activityID": "1653285",
               "score": 4
             },
             {
-              "activityId": "9875368",
+              "activityID": "9875368",
               "score": 3
             },
             {
-              "activityId": "1845699",
+              "activityID": "1845699",
               "score": 3
             },
             {
-              "activityId": "7488150",
+              "activityID": "7488150",
               "score": 10
             }
           ],
@@ -179,18 +179,18 @@ function SubjectR() {
     },
     {
       "id": "24-S01-AJ-MG",
-      "subjectId": "AJ-MG",
+      "subjectID": "AJ-MG",
       "semester": "Summer 2024",
       "studentList": [
         {
           "studentID": "st987",
           "scoreList": [
             {
-              "activityId": "2874936",
+              "activityID": "2874936",
               "score": 40
             },
             {
-              "activityId": "9856355",
+              "activityID": "9856355",
               "score": 60
             }
           ],
@@ -200,11 +200,11 @@ function SubjectR() {
           "studentID": "st654",
           "scoreList": [
             {
-              "activityId": "2874936",
+              "activityID": "2874936",
               "score": 45
             },
             {
-              "activityId": "9856355",
+              "activityID": "9856355",
               "score": 25
             }
           ],
@@ -214,11 +214,11 @@ function SubjectR() {
           "studentID": "st321",
           "scoreList": [
             {
-              "activityId": "2874936",
+              "activityID": "2874936",
               "score": 30
             },
             {
-              "activityId": "9856355",
+              "activityID": "9856355",
               "score": 15
             }
           ],
@@ -233,7 +233,7 @@ function SubjectR() {
   {
     "id": "1653285", 
     "name": "Course", 
-    "subjTermId": "24-S01-MA-BC", // subjectTerm identifier
+    "subjTermID": "24-S01-MA-BC", // subjectTerm identifier
     "description": "Elementary function - uuCourse", // assignment description, string; length is limited to 1-1000 characters
     "maxScore": 10, // maxScore amount, number; range from 1 to 100
     "minScore": 4, // minScore amount, number; range from 0 to 100
@@ -242,7 +242,7 @@ function SubjectR() {
   {
     "id": "9875368", 
     "name": "Test1", 
-    "subjTermId": "24-S01-MA-BC", 
+    "subjTermID": "24-S01-MA-BC", 
     "description": "Test from issues 1-2", 
     "maxScore": 25, 
     "minScore": 15, 
@@ -251,7 +251,7 @@ function SubjectR() {
   {
     "id": "1845699", 
     "name": "Test2", 
-    "subjTermId": "24-S01-MA-BC", 
+    "subjTermID": "24-S01-MA-BC", 
     "description": "Test from issues 3-4", 
     "maxScore": 25, 
     "minScore": 15, 
@@ -260,7 +260,7 @@ function SubjectR() {
   {
     "id": "7488150", 
     "name": "Test3", 
-    "subjTermId": "24-S01-MA-BC", 
+    "subjTermID": "24-S01-MA-BC", 
     "description": "Test from issues 5-6", 
     "maxScore": 40, 
     "minScore": 25, 
@@ -269,7 +269,7 @@ function SubjectR() {
   {
     "id": "2874936", 
     "name": "Homework", 
-    "subjTermId": "24-S01-AJ-MG", 
+    "subjTermID": "24-S01-AJ-MG", 
     "description": "Essay", 
     "maxScore": 40, 
     "minScore": 25, 
@@ -278,7 +278,7 @@ function SubjectR() {
   {
     "id": "9856355", 
     "name": "Test", 
-    "subjTermId": "24-S01-AJ-MG", 
+    "subjTermID": "24-S01-AJ-MG", 
     "description": "Test from issues 1-6", 
     "maxScore": 60, 
     "minScore": 40, 

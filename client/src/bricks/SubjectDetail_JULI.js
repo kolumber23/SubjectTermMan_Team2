@@ -58,13 +58,13 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
 
   // Funkcia na získanie subjTerms predmetu
   const getSubjectTerms = () => {
-    return subjectTermL.filter(term => term.subjectId === subjDetail.id);
+    return subjectTermL.filter(term => term.subjectID === subjDetail.id);
   };
 
   // Funkcia na získanie priradení pre daný predmet a vybraný subjekt
   const getActivities = () => {
     if (selectedSubjectTerm) {
-      return activityL.filter(activity => activity.subjTermId === selectedSubjectTerm.id);
+      return activityL.filter(activity => activity.subjTermID === selectedSubjectTerm.id);
     } else {
       return [];
     }

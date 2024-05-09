@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
   const [subjectTermData, setsubjectTermData] = useState({
-    subjectId: subjDetail.id,
+    subjectID: subjDetail.id,
     semester: '',
     year: new Date().getFullYear()
   });
@@ -25,7 +25,7 @@ function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
     const { semester, year } = subjectTermData;
 
     const newSubjectTerm = {
-      subjectId: subjDetail.id,
+      subjectID: subjDetail.id,
       semester: `${semester} ${year}`
     };
     addSubjectTerm(newSubjectTerm);

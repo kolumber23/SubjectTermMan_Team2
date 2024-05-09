@@ -2,10 +2,10 @@ const ActivityDao = require('../dao/activity-dao.js');
 const ActivityDaoInstance = new ActivityDao();
 
 exports.getActivity = async (req, res) => {
-    const { activityId } = req.body;
+    const { activityID } = req.body;
 
     // Find the student in the static array
-    const activity = await ActivityDaoInstance.getActivity(activityId);
+    const activity = await ActivityDaoInstance.getActivity(activityID);
 
     if (!activity) {
         // Activity not found
@@ -45,17 +45,17 @@ exports.listActivity = async (req, res) => {
 };
 
 exports.deleteActivity = async (req, res) => {
-  const { activityId } = req.body; // Assuming the ID is passed as a URL parameter
+  const { activityID } = req.body; // Assuming the ID is passed as a URL parameter
 
   // Find the activity in the static array
-  const activity = await ActivityDaoInstance.getActivity(activityId);
+  const activity = await ActivityDaoInstance.getActivity(activityID);
 
   if (!activity) {
     // Activity not found
     return res.status(404).json({ message: "Activity not found" });
   }
 
-  await ActivityDaoInstance.deleteActivity(activityId)
+  await ActivityDaoInstance.deleteActivity(activityID)
   // Return the found activity
   res.status(200).json({ message: "Activity deleted successfully" });
 };

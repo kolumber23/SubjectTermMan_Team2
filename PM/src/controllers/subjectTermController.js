@@ -5,18 +5,18 @@ const SubjectDaoInstance = new SubjectDao();
 const SubjectTermDaoInstance = new SubjectTermDao();
 
 exports.createSubjectTerm = async (req, res) => {
-  const { subjectId, semester, studentList } = req.body;
+  const { subjectID, semester, studentList } = req.body;
 
-  const subject = await SubjectDaoInstance.getSubject(subjectId)
+  const subject = await SubjectDaoInstance.getSubject(subjectID)
 
   if (!subject) {
     // Subject term not found
-    return res.status(400).json({ message: `Subject with id '${subjectId}' not found` });
+    return res.status(400).json({ message: `Subject with id '${subjectID}' not found` });
 }
 
   const newSubjectTerm = {
     semester,
-    subjectId,
+    subjectID,
     studentList: studentList || [],
   };
   const createdSubjectTerm = await SubjectTermDaoInstance.createSubjectTerm(newSubjectTerm)
@@ -96,13 +96,13 @@ exports.listSubjectTerms = async (req, res) => {
 // };
 
 // exports.listSubjectTermsBySubjectId = (req, res) => {
-//   const { subjectId } = req.query;  // Access the subjectId query parameter
+//   const { subjectID } = req.query;  // Access the subjectID query parameter
 
-//   // Convert subjectId to an integer for comparison
-//   const subjectIdInt = parseInt(subjectId);
+//   // Convert subjectID to an integer for comparison
+//   const subjectIDInt = parseInt(subjectID);
 
-//   // Filter the subject terms by subjectId
-//   const filteredTerms = staticSubjectTerms.filter(term => term.subjectId === subjectIdInt);
+//   // Filter the subject terms by subjectID
+//   const filteredTerms = staticSubjectTerms.filter(term => term.subjectID === subjectIDInt);
 
 //   if (filteredTerms.length === 0) {
 //       // No subject terms found for the subject ID
