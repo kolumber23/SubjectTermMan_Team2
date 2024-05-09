@@ -72,7 +72,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
 
   // Pole so študentami priradenými k vybranému subjectTerm s ich známkami
   const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList.map(student => {
-    const user = users.find(user => user.id === student.studentId);
+    const user = users.find(user => user.id === student.id);
     if (user) {
       return {
         id: user.id,

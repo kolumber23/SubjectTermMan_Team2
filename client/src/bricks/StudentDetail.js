@@ -31,7 +31,7 @@ function StudentDetail({ selectedStudent, onClose }) {
             <tbody>
             {subjectTermL.map((subjectTerm) => {
               // Zjistit, zda je vybraný student zapsán do tohoto termínu předmětu
-              const studentEntry = subjectTerm.studentList.find((student) => student.studentId === selectedStudent.id);
+              const studentEntry = subjectTerm.studentList.find((student) => student.id === selectedStudent.id);
                 if (studentEntry) {
               // Najít odpovídající předmět v subjectL podle subjectId
               const subject = subjectL.find((subj) => subj.id === subjectTerm.subjectId);

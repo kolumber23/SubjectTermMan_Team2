@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { CallBackendAsync } from "./helpers/apiCaller.js"
 
 const SubjContext = createContext();
 
@@ -11,23 +12,22 @@ export function SubjProvider({ children })  {
  
   const fetchData = async () => {
     try {
-      const responseActivities = await fetch('/storage/activities.json');
-      const dataActivities = await responseActivities.json();
-      setActivityL(dataActivities);
+      const responseActivities = await CallBackendAsync("http://localhost:3011/api/activity/list")
+      setActivityL(responseActivities.data);
 
-      const responseSubjects = await fetch('/storage/subjects.json');
-      const dataSubjects = await responseSubjects.json();
-      setSubjectL(dataSubjects);
+      const responseSubjects = await CallBackendAsync("http://localhost:3011/api/subject/listSubjects")
+      setSubjectL(responseSubjects.data);
 
-      const responseSubjectTerms = await fetch('/storage/subjectTerms.json');
-      const dataSubjectTerms = await responseSubjectTerms.json();
-      setSubjectTermL(dataSubjectTerms);
+      const responseSubjectTerms = await CallBackendAsync("http://localhost:3011/api/subjectTerm/list")
+      setSubjectTermL(responseSubjectTerms.data);
     } catch (error) {
       console.error('Error loading data:', error);
     }
   };
 
-  fetchData();
+  useEffect(() => {
+    fetchData();
+  }, [])
 
 return (
   <SubjContext.Provider 

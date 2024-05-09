@@ -1,28 +1,36 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { CallBackendAsync } from './helpers/apiCaller';
 
 const UserContext = createContext();
 
-export function Provider({ children })  {
+export function Provider({ children }) {
   const alreadyLogged = JSON.parse(sessionStorage.getItem('authUser'));
   const [users, setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(!!alreadyLogged);
-  const [user, setUser] = useState(alreadyLogged ?? users.find(user => user.id === 0));
-  
+  const [user, setUser] = useState(null);
+
+  async function getStudents() {
+    try {
+
+      const responseStudents = await CallBackendAsync("http://localhost:3011/api/student/list")
+      // Skontrolujeme, či je užívateľ už prihlásený
+      setUsers(responseStudents.data);
+      const alreadyLogged = JSON.parse(sessionStorage.getItem('authUser'));
+      if (user == null) {
+        setUser(alreadyLogged ?? responseStudents.find(item => item.id === 0))
+      }
+      const loggedUser = responseStudents.data.find(user => user.id === alreadyLogged?.id);
+      if (loggedUser) {
+        setUser(loggedUser);
+        setIsLoggedIn(true);
+      }
+    } catch (error) {
+      console.error('Error loading users:', error)
+    }
+  }
+
   useEffect(() => {
-    // Načítanie zoznamu študentov zo súboru users.json pri načítaní komponentu
-    fetch('/storage/students.json')
-      .then(response => response.json())
-      .then(data => {
-        setUsers(data);
-        // Skontrolujeme, či je užívateľ už prihlásený
-        const alreadyLogged = JSON.parse(sessionStorage.getItem('authUser'));
-        const loggedUser = data.find(user => user.id === alreadyLogged?.id);
-        if (loggedUser) {
-          setUser(loggedUser);
-          setIsLoggedIn(true);
-        }
-      })
-      .catch(error => console.error('Error loading users:', error));
+    getStudents()
   }, []);
 
   const changeUser = (userId) => {
@@ -32,22 +40,22 @@ export function Provider({ children })  {
       sessionStorage.setItem('authUser', JSON.stringify(selectedUser));
       setIsLoggedIn(selectedUser.id !== 0);
     } else {
-        setUser(null); 
-        sessionStorage.removeItem('authUser');
-        setIsLoggedIn(false);
+      setUser(null);
+      sessionStorage.removeItem('authUser');
+      setIsLoggedIn(false);
     }
   };
 
-return (
-  <UserContext.Provider 
-    value = {{ 
-      users,
-      user,
-      isLoggedIn,
-      changeUser
-    }}
-      >
-        {children}
+  return (
+    <UserContext.Provider
+      value={{
+        users,
+        user,
+        isLoggedIn,
+        changeUser
+      }}
+    >
+      {children}
     </UserContext.Provider>
   );
 };

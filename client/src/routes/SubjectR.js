@@ -49,7 +49,7 @@ function SubjectR() {
       "semester": "Summer 2024",
       "studentList": [
         {
-          "studentId": "st123",
+          "studentID": "st123",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -67,7 +67,7 @@ function SubjectR() {
           "grade": 1
         },
         {
-          "studentId": "st456",
+          "studentID": "st456",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -85,7 +85,7 @@ function SubjectR() {
           "grade": 2
         },
         {
-          "studentId": "st789",
+          "studentID": "st789",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -110,7 +110,7 @@ function SubjectR() {
       "semester": "Winter 2023",
       "studentList": [
         {
-          "studentId": "st123",
+          "studentID": "st123",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -132,7 +132,7 @@ function SubjectR() {
           "grade": 0
         },
         {
-          "studentId": "st456",
+          "studentID": "st456",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -154,7 +154,7 @@ function SubjectR() {
           "grade": 0
         },
         {
-          "studentId": "st789",
+          "studentID": "st789",
           "scoreList": [
             {
               "activityId": "1653285",
@@ -183,7 +183,7 @@ function SubjectR() {
       "semester": "Summer 2024",
       "studentList": [
         {
-          "studentId": "st987",
+          "studentID": "st987",
           "scoreList": [
             {
               "activityId": "2874936",
@@ -197,7 +197,7 @@ function SubjectR() {
           "grade": 1
         },
         {
-          "studentId": "st654",
+          "studentID": "st654",
           "scoreList": [
             {
               "activityId": "2874936",
@@ -211,7 +211,7 @@ function SubjectR() {
           "grade": 3
         },
         {
-          "studentId": "st321",
+          "studentID": "st321",
           "scoreList": [
             {
               "activityId": "2874936",

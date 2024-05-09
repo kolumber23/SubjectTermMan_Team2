@@ -80,8 +80,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
 
  // Pole so študentami priradenými k vybranému subjectTerm s ich známkami
  const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList?.map(student => {
-  if (student.studentId.startsWith("st")) {
-    const user = users.find(user => user.id === student.studentId);
+  if (student.studentID.startsWith("st")) {
+    const user = users.find(user => user.id === student.studentID);
     if (user) {
       return {
         id: user.id,
@@ -107,7 +107,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const handleEnroll = () => {
     // Ak je študent prihlásený, odstráňte ho
     if (isEnrolled) {
-      const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentId !== user.id);
+      const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentID !== user.id);
       setSelectedSubjectTerm(prevTerm => ({
         ...prevTerm,
         studentList: updatedStudentList
@@ -115,7 +115,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     } else {
       // Ak študent nie je prihlásený, pridajte ho
       const newStudent = {
-        studentId: user.id,
+        studentID: user.id,
         scoreList: [],
         grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
       };
@@ -134,10 +134,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
     if (user && latestTerm) {
       const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
-      const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentId === user.id);
+      const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentID === user.id);
       if (!userAlreadyEnrolled) {
         const newUser = {
-          studentId: user.id,
+          studentID: user.id,
           scoreList: [],
           grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
         };
@@ -166,8 +166,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     return maxScore;
   };
   
-  const calculateTotalAchievedScore = (studentId, selectedSubjectTerm) => {
-    const student = selectedSubjectTerm.studentList?.find(student => student.studentId === studentId);
+  const calculateTotalAchievedScore = (studentID, selectedSubjectTerm) => {
+    const student = selectedSubjectTerm.studentList?.find(student => student.studentID === studentID);
     if (student && student.scoreList) { 
       let totalAchievedScore = 0;
       student.scoreList.forEach(score => {totalAchievedScore += score.score});
@@ -177,15 +177,15 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   };
   
-  const calculateSuccessRatio = (studentId, subjTermId) => {
+  const calculateSuccessRatio = (studentID, subjTermId) => {
     const maxScore = calculateMaxScore(selectedSubjectTerm);
-    const totalAchievedScore = calculateTotalAchievedScore(studentId, subjTermId);
+    const totalAchievedScore = calculateTotalAchievedScore(studentID, subjTermId);
     const successRatio = (totalAchievedScore / maxScore) * 100;
     
     return Math.round(successRatio);
   };
 
-  const isEnrolled = selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
+  const isEnrolled = selectedSubjectTerm && user && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id);
   
   return (
     <>
@@ -281,7 +281,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         <br />
 
         {/*         Tabuľka s aktivitami pre vyučujúceho */}        
-        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id)) ? null : (
+        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id)) ? null : (
         <Table striped bordered>
           <thead>
             <tr>
@@ -352,7 +352,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         </>
         )}
 <br />
-{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id) && (
+{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id) && (
   <>
 {/*         Tabuľka s aktivitami pre konkrétneho (prihláseného) študenta */}    
 <div> <b>Score of logged in student: </b></div>
@@ -370,11 +370,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           <tbody>
           {getActivities().map((activity) => {
       // Overíme, či je prihlásený študent na túto aktivitu
-      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentId === user.id && student.scoreList.some(score => score.activityId === activity.id));
+      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentID === user.id && student.scoreList.some(score => score.activityId === activity.id));
       
       // Ak je prihlásený, zobrazíme mu detaily aktivity
       if (isEnrolled) {
-        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentId === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
+        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentID === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
         return (
           <tr key={activity.id}>
             <td>{activity.name}</td>

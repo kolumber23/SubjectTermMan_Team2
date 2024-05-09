@@ -36,16 +36,16 @@ function App() {
             <Nav className="justify-content-end flex-grow-1 pe-3 d-flex align-items-center">
                 
                 <NavDropdown 
-                  title={user ? user.surname : "Unregistred"} 
+                  title={user ? user.name : "Unregistred"} 
                   id={"nav-dropdown-dark"}
                   menuVariant={"dark"}
                 >
                   {users
-                    .sort((a, b) => a.surname.localeCompare(b.surname))
+                    .sort((a, b) => a.name.localeCompare(b.name))
                     .map((user) => {
                       return (
                         <NavDropdown.Item onClick={() => changeUser(user.id)}>
-                          {user.surname} {" "} {user.name}
+                          {user.name}
                         </NavDropdown.Item>
                       )
                   })}
