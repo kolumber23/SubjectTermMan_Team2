@@ -104,7 +104,7 @@ return (
   <tbody>
     {filteredStudentL.map((student, index) => {
       return (
-        <tr key={student.id}>
+        <tr key={index}>
           <td> {index + 1} </td>
           <td> {student.surname} </td>
           <td> {student.name} </td>
