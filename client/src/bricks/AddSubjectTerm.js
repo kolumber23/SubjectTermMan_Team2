@@ -8,27 +8,15 @@ function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
     year: new Date().getFullYear()
   });
 
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
-  
-    // Validate if the value is negative for maxScore and minScore
-    if ((name === 'maxScore' || name === 'minScore') && parseFloat(value) < 0) {
-      // If value is negative, set it to 0
-      setsubjectTermData({ ...subjectTermData, [name]: 0 });
-    } else {
-      // Otherwise, update the state normally
-      setsubjectTermData({ ...subjectTermData, [name]: value });
-    }
-  }; */
-
-  const handleAddSubjectTerm = async () => {
+  const handleAddSubjectTerm = () => {
     const { semester, year } = subjectTermData;
 
     const newSubjectTerm = {
       subjectId: subjDetail.id,
-      semester: `${semester} ${year}`
+      semester: `${semester} ${year}`,
+      studentList: [],
     };
-    await addSubjectTerm(newSubjectTerm);
+    addSubjectTerm(newSubjectTerm);
     handleClose("subjectTerm");
 };
   
