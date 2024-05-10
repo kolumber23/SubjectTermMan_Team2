@@ -15,187 +15,218 @@
     },
     {
         "id": "st-5492-5764",
-        "name": "Jakub Novák",
+        "surname": "Novák",
+        "name": "Jakub",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-6824-6544",
-        "name": "Sarah Walters",
+        "surname": "Walters",
+        "name": "Sarah",
         "degree": "Bc",
         "language": "en"
     },
 	{
         "id": "st-9267-3572",
-        "name": "Kateřina Zemanová",
+        "surname": "Zemanová",
+        "name": "Kateřina",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-2341-5340",
-        "name": "Jan Svoboda",
+        "surname": "Svoboda",
+        "name": "Jan",
         "degree": "Mgr",
         "language": "cz"
     },
 	{
         "id": "st-4023-4412",
-        "name": "Matěj Matoušek",
+        "surname": "Matoušek",
+        "name": "Matěj",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-5119-6693",
-        "name": "Ian McCoy",
+        "surname": "McCoy",
+        "name": "Ian",
         "degree": "Mgr",
         "language": "en"
     },
 	{
         "id": "st-9155-9119",
-        "name": "Mikuláš Hrubý",
+        "surname": "Hrubý",
+        "name": "Mikuláš",
         "degree": "Bc",
         "language": "cz"
     },
     {
         "id": "st-5290-3216",
-        "name": "Barbora Krausová",
+        "surname": "Krausová",
+        "name": "Barbora",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-6580-7562",
-        "name": "Aneta Mrázková",
+        "surname": "Mrázková",
+        "name": "Aneta",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-5119-6693",
-        "name": "František Čermák",
+        "surname": "Čermák",
+        "name": "František",
         "degree": "Mgr",
         "language": "cz"
     },
 	{
         "id": "st-9155-9132",
-        "name": "Jana Šikolová",
+        "surname": "Šikolová",
+        "name": "Jana",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-1066-4394",
-        "name": "Kryštof Štěpánek",
+        "surname": "Štěpánek",
+        "name": "Kryštof",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-6957-3533",
-        "name": "Věra Horáková",
+        "surname": "Horáková",
+        "name": "Věra",
         "degree": "Mgr",
         "language": "cz"
     },
 	{
         "id": "st-6567-9443",
-        "name": "Jitka Vránová",
+        "surname": "Vránová",
+        "name": "Jitka",
         "degree": "Bc",
         "language": "cz"
     },
     {
         "id": "st-6943-1948",
-        "name": "Phil Jameson",
+        "surname": "Jameson",
+        "name": "Phil",
         "degree": "Mgr",
         "language": "en"
     },
 	{
         "id": "st-9611-9860",
-        "name": "Jiří Heřman",
+        "surname": "Heřman",
+        "name": "Jiří",
         "degree": "Bc",
         "language": "cz"
     },
     {
         "id": "st-6170-3245",
-        "name": "Adéla Kramářová",
+        "surname": "Kramářová",
+        "name": "Adéla",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-7846-1627",
-        "name": "Petra Mlejnková",
+        "surname": "Mlejnková",
+        "name": "Petra",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-3847-6842",
-        "name": "Karel Janák",
+        "surname": "Janák",
+        "name": "Karel",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-9467-5027",
-        "name": "Jane Hill",
+        "surname": "Hill",
+        "name": "Jane",
         "degree": "Bc",
         "language": "en"
     },
 	{
         "id": "st-9467-5027",
-        "name": "Caroline Benedict",
+        "surname": "Benedict",
+        "name": "Caroline",
         "degree": "Bc",
         "language": "en"
 	},
 	{
         "id": "st-3578-3468",
-        "name": "Miloš Zemák",
+        "surname": "Zemák",
+        "name": "Miloš",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-4357-8327",
-        "name": "Amanda Plummer",
+        "surname": "Plummer",
+        "name": "Amanda",
         "degree": "Bc",
         "language": "en"
     },
 	{
         "id": "st-3847-6542",
-        "name": "Pavla Jirásková",
+        "surname": "Jirásková",
+        "name": "Pavla",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-3871-9773",
-        "name": "Radim Gazda",
+        "surname": "Gazda",
+        "name": "Radim",
         "degree": "Mgr",
         "language": "cz"
     },
 	{
         "id": "st-3418-6548",
-        "name": "Roman Pokorný",
+        "surname": "Pokorný",
+        "name": "Roman",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-3875-1698",
-        "name": "Robert Smith",
+        "surname": "Smith",
+        "name": "Robert",
         "degree": "Mgr",
         "language": "en"
     },
 	{
         "id": "st-9834-1687",
-        "name": "Zdeněk Janák",
+        "surname": "Janák",
+        "name": "Zdeněk ",
         "degree": "Bc",
         "language": "cz"
     },
     {
         "id": "st-3357-6245",
-        "name": "Andrea Černá",
+        "surname": "Černá",
+        "name": "Andrea",
         "degree": "Mgr",
         "language": "cz"
     },
     {
         "id": "st-2695-7169",
-        "name": "Simona Králová",
+        "surname": "Králová",
+        "name": "Simona",
         "degree": "Bc",
         "language": "cz"
     },
 	{
         "id": "st-3215-4953",
-        "name": "Emily Peterson",
+        "surname": "Peterson",
+        "name": "Emily",
         "degree": "Mgr",
         "language": "en"
     }

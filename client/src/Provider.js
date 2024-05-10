@@ -17,7 +17,7 @@ export function Provider({ children }) {
       setUsers(responseStudents.data);
       const alreadyLogged = JSON.parse(sessionStorage.getItem('authUser'));
       if (user == null) {
-        setUser(alreadyLogged ?? responseStudents.find(item => item.id === 0))
+        setUser(alreadyLogged ?? responseStudents.data.find(item => item.id === 0))
       }
       const loggedUser = responseStudents.data.find(user => user.id === alreadyLogged?.id);
       if (loggedUser) {

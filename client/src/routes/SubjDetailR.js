@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 
 function SubjectR() {
-  const { subjectL, subjectTermL, activityL } = useContext(SubjContext);
+  const { subjectL, subjectTermL, activityL, updateSubjectTerm } = useContext(SubjContext);
   const { id } = useParams();
   const selectedSubject = subjectL.find(subject => subject.id === id);
 
@@ -15,6 +15,7 @@ function SubjectR() {
           subjDetail={selectedSubject}
           subjectTermL={subjectTermL}
           activityL={activityL}
+          updateSubjectTerm={updateSubjectTerm}
         />
       </div>
     );

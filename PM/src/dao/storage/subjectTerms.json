@@ -5,31 +5,20 @@
     "subjectID": "ce0067314df27dce",
     "studentList": [
       {
-        "studentID": "st-9267-3572",
-        "scoreList": [],
-        "grade": 0
-      },
-      {
-        "studentID": "st-9155-9119",
-        "scoreList": [],
-        "grade": 0
-      },
-      {
-        "studentID": "st-6580-7562",
-        "scoreList": [],
+        "studentID": "st-6170-3245",
+        "scoreList": [
+          {
+            "activityID": "0b1886e28829a3bb",
+            "score": "6"
+          }
+        ],
         "grade": 0
       }
     ]
   },
   {
     "subjectID": "ce0067314df27dce",
-    "studentList": [
-      {
-        "studentID": "st-4023-4412",
-        "scoreList": [],
-        "grade": 0
-      }
-    ],
+    "studentList": [],
     "id": "2fcdab6161fb0e8d"
   }
 ]

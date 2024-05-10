@@ -2,21 +2,22 @@ import React, { useState, useContext } from "react";
 import { Modal, Button, Table, Form } from 'react-bootstrap';
 import UserContext from "../Provider";
 
-function ActivityDetail({ activity, subjectTerm, onClose }) {
+function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     const { users } = useContext(UserContext);
-    
+
     // Filter users enrolled in the selected activity
     const enrolledUsers = users.filter(user =>
-        subjectTerm.studentList.some(student =>
-            student.studentId === user.id &&
-            student.scoreList.some(scoreEntry => scoreEntry.activityId === activity.id)
+        subjectTerm.studentList.some(student => {
+            return student.studentID === user.id &&
+                student.scoreList.some(scoreEntry => scoreEntry.activityID === activity.id)
+        }
         )
     );
-    
+
     const [studentScores, setStudentScores] = useState(() => {
         const initialScores = {};
         enrolledUsers.forEach(user => {
-            const userScore = subjectTerm.studentList.find(student => student.studentId === user.id).scoreList.find(scoreEntry => scoreEntry.activityId === activity.id).score;
+            const userScore = subjectTerm.studentList.find(student => student.studentID === user.id).scoreList.find(scoreEntry => scoreEntry.activityID === activity.id).score;
             initialScores[user.id] = userScore;
         });
         return initialScores;
@@ -28,6 +29,33 @@ function ActivityDetail({ activity, subjectTerm, onClose }) {
             [userId]: score
         }));
     };
+
+    const onSave = async () => {
+        try {
+            const updatedSubjectTerm = { ...subjectTerm };
+            enrolledUsers.forEach(user => {
+                if (studentScores[user.id]) {
+                    const student = subjectTerm.studentList
+                        .map((student, id) => { return { ...student, index: id } })
+                        .find(student => student.studentID === user.id)
+                    const activityEntry = student.scoreList
+                        .map((scoreEntry, id) => { return { ...scoreEntry, index: id } })
+                        .find(scoreEntry => scoreEntry.activityID === activity.id)
+                        updatedSubjectTerm.studentList[student.index].scoreList[activityEntry.index] = { 
+                        ...activityEntry, 
+                        score: studentScores[user.id],
+                        index: undefined,
+                    };
+                }
+            });
+            updateSubjectTerm(updatedSubjectTerm)
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+        onClose();
+
+    }
 
     return (
         <Modal show={true} onHide={onClose}>
@@ -52,27 +80,27 @@ function ActivityDetail({ activity, subjectTerm, onClose }) {
                     <tbody>
                         {enrolledUsers.map(user => {
                             const userScore = studentScores[user.id];
-                                return (
-                                    <tr key={user.id}>
-                                        <td>{user.name}</td>
-                                        <td>{user.surname}</td>
-                                        <td>
-                                            <Form.Control
-                                                type="number"
-                                                max={activity.maxScore}
-                                                value={userScore}
-                                                onChange={(e) => setScore(user.id, e.target.value)}
-                                            />
-                                        </td>
-                                    </tr>
-                                );  
+                            return (
+                                <tr key={user.id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.surname}</td>
+                                    <td>
+                                        <Form.Control
+                                            type="number"
+                                            max={activity.maxScore}
+                                            value={userScore}
+                                            onChange={(e) => setScore(user.id, e.target.value)}
+                                        />
+                                    </td>
+                                </tr>
+                            );
                         })}
                     </tbody>
                 </Table>
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="primary" style={{ marginLeft: "8px" }}>
+                <Button variant="primary" style={{ marginLeft: "8px" }} onClick={onSave} >
                     Save
                 </Button>
                 <Button variant="outline-secondary" style={{ marginLeft: "8px" }} onClick={onClose}>
