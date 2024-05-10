@@ -45,7 +45,7 @@ function App() {
                     .map((user) => {
                       return (
                         <NavDropdown.Item onClick={() => changeUser(user.id)}>
-                          {user.name}
+                          {user.surname} {" "} {user.name}
                         </NavDropdown.Item>
                       )
                   })}
