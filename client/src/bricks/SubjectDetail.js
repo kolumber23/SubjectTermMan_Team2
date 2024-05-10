@@ -9,7 +9,7 @@ import AddSubjectTerm from "./AddSubjectTerm";
 import ActivityDetail from "./ActivityDetail";
 import StudentDetail from "./StudentDetail"
 
-function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm }) {
+function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm, createSubjectTerm, createActivity }) {
   const navigate = useNavigate();
   const { users, user, isLoggedIn } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -74,6 +74,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
   // SUBJECTTERM
   // ADDIMG subjectTerm
   const handleAddSubjectTerm = (subjectTermData) => {
+    createSubjectTerm(subjectTermData)
     setShowAST(false);
   };
 
@@ -92,7 +93,12 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
     const subjectTerms = getSubjectTerms();
     if (subjectTerms.length > 0) {
       const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
-      setSelectedSubjectTerm(latestTerm);
+      if (!selectedSubjectTerm) {
+        setSelectedSubjectTerm(latestTerm);
+      }
+      else {
+        setSelectedSubjectTerm(subjectTerms.find(term => term.id === selectedSubjectTerm.id))
+      }
       // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
       if (user && latestTerm) {
         const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
@@ -115,7 +121,8 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
   // ACTIVITY
   // ADDIMG activity
   const handleAddActivity = (activityData) => {
-    const activityWithDeadline = { ...activityData, deadline };
+    const activityWithSubjTerm = { ...activityData, subjTermId: selectedSubjectTerm.id };
+    createActivity(activityWithSubjTerm)
     setShowAA(false);
   };
 
@@ -338,9 +345,9 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
                       <th> Max Score </th>
                       <th> Dead Line </th>
                       {!((user.id.startsWith("st")) && (!isEnrolled)) && (
-                      <th> Detail </th>
+                        <th> Detail </th>
                       )}
-                    </tr> 
+                    </tr>
                   </thead>
                   <tbody>
                     {getActivities().map((activity) => (
@@ -350,15 +357,15 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
                         <td>{activity.maxScore}</td>
                         <td>{moment(activity.deadline).format("DD. MM. YYYY HH:mm")}</td>
                         {!((user.id.startsWith("st")) && (!isEnrolled)) && (
-                        <td>
-                          <Button
-                            variant="outline-primary"
-                            size="sm"
-                            onClick={() => setSelectedActivity(activity)} // Nastaviť vybranú úlohu
-                          >
-                            {"<"}
-                          </Button>
-                        </td>
+                          <td>
+                            <Button
+                              variant="outline-primary"
+                              size="sm"
+                              onClick={() => setSelectedActivity(activity)} // Nastaviť vybranú úlohu
+                            >
+                              {"<"}
+                            </Button>
+                          </td>
                         )}
                       </tr>
                     ))}
@@ -475,12 +482,12 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
         <AddActivity
           show={showAA}
           handleClose={handleClose}
-          handleAddActivity={handleAddActivity}
+          addActivity={handleAddActivity}
         />
         <AddSubjectTerm
           show={showAST}
           handleClose={handleClose}
-          handleAddSubjectTerm={handleAddSubjectTerm}
+          addSubjectTerm={handleAddSubjectTerm}
           subjDetail={subjDetail}
         />
       </>

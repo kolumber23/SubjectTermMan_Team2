@@ -17,11 +17,11 @@ exports.getActivity = async (req, res) => {
   };
 
 exports.createActivity = async (req, res) => {
-  const { name, subjectTermId, description, maxScore, minScore, deadline } = req.body;
+  const { name, subjTermId, description, maxScore, minScore, deadline } = req.body;
 
   const newActivity = {
     name,
-    subjectTermId,
+    subjTermId,
     description,
     maxScore,
     minScore,

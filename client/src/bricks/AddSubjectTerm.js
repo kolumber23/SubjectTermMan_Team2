@@ -21,14 +21,14 @@ function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
     }
   }; */
 
-  const handleAddSubjectTerm = () => {
+  const handleAddSubjectTerm = async () => {
     const { semester, year } = subjectTermData;
 
     const newSubjectTerm = {
       subjectId: subjDetail.id,
       semester: `${semester} ${year}`
     };
-    addSubjectTerm(newSubjectTerm);
+    await addSubjectTerm(newSubjectTerm);
     handleClose("subjectTerm");
 };
   

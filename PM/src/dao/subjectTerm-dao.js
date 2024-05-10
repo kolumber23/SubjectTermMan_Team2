@@ -51,13 +51,13 @@ class SubjectTermDao {
         return subjectTermList[subjectTermIndex];
     }
     
-        async enrollStudent(subjectTermId, studentId) {
+        async enrollStudent(subjTermId, studentId) {
     }
     
-    async removeStudent(subjectTermId, studentId) {
+    async removeStudent(subjTermId, studentId) {
     }
 
-    async listStudents(subjectTermId) {
+    async listStudents(subjTermId) {
     }
     
     async _loadAllSubjectTerms() {

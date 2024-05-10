@@ -52,7 +52,7 @@ return (
             <Form.Control
               type="text"
               name="description"
-              value={activityData.name}
+              value={activityData.description}
               onChange={(e) => setField("description", e.target.value)}
               required
             />
