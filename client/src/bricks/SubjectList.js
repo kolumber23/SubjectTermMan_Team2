@@ -100,7 +100,7 @@ return (
 <Table striped bordered>
   <thead>
     <tr>
-      <th onClick={() => handleSort("id")}>ID</th>
+      <th onClick={() => handleSort("id")}>Id</th>
       <th onClick={() => handleSort("name")}>Subject</th>
       <th onClick={() => handleSort("credits")}>Credits</th>
       <th onClick={() => handleSort("degree")}>Degree</th>

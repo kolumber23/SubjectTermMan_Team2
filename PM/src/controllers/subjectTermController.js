@@ -5,18 +5,18 @@ const SubjectDaoInstance = new SubjectDao();
 const SubjectTermDaoInstance = new SubjectTermDao();
 
 exports.createSubjectTerm = async (req, res) => {
-  const { subjectID, semester, studentList } = req.body;
+  const { subjectId, semester, studentList } = req.body;
 
-  const subject = await SubjectDaoInstance.getSubject(subjectID)
+  const subject = await SubjectDaoInstance.getSubject(subjectId)
 
   if (!subject) {
     // Subject term not found
-    return res.status(400).json({ message: `Subject with id '${subjectID}' not found` });
+    return res.status(400).json({ message: `Subject with id '${subjectId}' not found` });
 }
 
   const newSubjectTerm = {
     semester,
-    subjectID,
+    subjectId,
     studentList: studentList || [],
   };
   const createdSubjectTerm = await SubjectTermDaoInstance.createSubjectTerm(newSubjectTerm)
@@ -51,7 +51,7 @@ exports.updateSubjectTerm = async (req, res) => {
 };
 
 exports.getSubjectTerm = async (req, res) => {
-  const { subjectTermId } = req.body;  // Assuming the ID is passed as a URL parameter
+  const { subjectTermId } = req.body;  // Assuming the Id is passed as a URL parameter
 
   // Find the subject term in the array
   const subjectTerm = await SubjectTermDaoInstance.getSubjectTerm(subjectTermId)
@@ -96,17 +96,17 @@ exports.listSubjectTerms = async (req, res) => {
 // };
 
 // exports.listSubjectTermsBySubjectId = (req, res) => {
-//   const { subjectID } = req.query;  // Access the subjectID query parameter
+//   const { subjectId } = req.query;  // Access the subjectId query parameter
 
-//   // Convert subjectID to an integer for comparison
-//   const subjectIDInt = parseInt(subjectID);
+//   // Convert subjectId to an integer for comparison
+//   const subjectIdInt = parseInt(subjectId);
 
-//   // Filter the subject terms by subjectID
-//   const filteredTerms = staticSubjectTerms.filter(term => term.subjectID === subjectIDInt);
+//   // Filter the subject terms by subjectId
+//   const filteredTerms = staticSubjectTerms.filter(term => term.subjectId === subjectIdInt);
 
 //   if (filteredTerms.length === 0) {
-//       // No subject terms found for the subject ID
-//       return res.status(404).json({ message: "No subject terms found for the provided subject ID" });
+//       // No subject terms found for the subject Id
+//       return res.status(404).json({ message: "No subject terms found for the provided subject Id" });
 //   }
 
 //   // Return the filtered subject terms

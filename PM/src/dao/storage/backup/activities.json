@@ -2,7 +2,7 @@
 	{
 		"id": "0b1886e28829a3bb",
 		"name": "Workshop",
-		"subjTermID": "1487823ca0c33069",
+		"subjTermId": "1487823ca0c33069",
 		"description": "In this mandatory weekend workshop, students will be divided into teams to tackle practical project tasks. They’ll create project plans, manage resources, and practice stakeholder communication. The hands-on group activities will provide a real-world project management experience.",
 		"maxScore": 100,
 		"minScore": 60,

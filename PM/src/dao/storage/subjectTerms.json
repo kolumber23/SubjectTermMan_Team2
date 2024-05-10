@@ -2,14 +2,14 @@
   {
     "id": "1487823ca0c33069",
     "semester": "summer 2024",
-    "subjectID": "ce0067314df27dce",
+    "subjectId": "ce0067314df27dce",
     "studentList": [
       {
-        "studentID": "st-6170-3245",
+        "studentId": "st-6170-3245",
         "scoreList": [
           {
-            "activityID": "0b1886e28829a3bb",
-            "score": "6"
+            "activityId": "0b1886e28829a3bb",
+            "score": "7"
           }
         ],
         "grade": 0
@@ -17,7 +17,7 @@
     ]
   },
   {
-    "subjectID": "ce0067314df27dce",
+    "subjectId": "ce0067314df27dce",
     "studentList": [],
     "id": "2fcdab6161fb0e8d"
   }

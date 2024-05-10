@@ -32,10 +32,10 @@ const listSubjects = async (req, res) => {
   };
 
 const getSubject = async (req, res) => {
-    const { subjectID } = req.body; // Assuming the ID is passed as a URL parameter
+    const { subjectId } = req.body; // Assuming the Id is passed as a URL parameter
 
     // Find the subject in the static array
-    const subject = await SubjectDaoInstance.getSubject(subjectID);
+    const subject = await SubjectDaoInstance.getSubject(subjectId);
 
     if (!subject) {
         // Subject not found

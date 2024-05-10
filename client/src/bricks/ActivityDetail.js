@@ -8,8 +8,8 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     // Filter users enrolled in the selected activity
     const enrolledUsers = users.filter(user =>
         subjectTerm.studentList.some(student => {
-            return student.studentID === user.id &&
-                student.scoreList.some(scoreEntry => scoreEntry.activityID === activity.id)
+            return student.studentId === user.id &&
+                student.scoreList.some(scoreEntry => scoreEntry.activityId === activity.id)
         }
         )
     );
@@ -17,7 +17,7 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     const [studentScores, setStudentScores] = useState(() => {
         const initialScores = {};
         enrolledUsers.forEach(user => {
-            const userScore = subjectTerm.studentList.find(student => student.studentID === user.id).scoreList.find(scoreEntry => scoreEntry.activityID === activity.id).score;
+            const userScore = subjectTerm.studentList.find(student => student.studentId === user.id).scoreList.find(scoreEntry => scoreEntry.activityId === activity.id).score;
             initialScores[user.id] = userScore;
         });
         return initialScores;
@@ -37,10 +37,10 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
                 if (studentScores[user.id]) {
                     const student = subjectTerm.studentList
                         .map((student, id) => { return { ...student, index: id } })
-                        .find(student => student.studentID === user.id)
+                        .find(student => student.studentId === user.id)
                     const activityEntry = student.scoreList
                         .map((scoreEntry, id) => { return { ...scoreEntry, index: id } })
-                        .find(scoreEntry => scoreEntry.activityID === activity.id)
+                        .find(scoreEntry => scoreEntry.activityId === activity.id)
                         updatedSubjectTerm.studentList[student.index].scoreList[activityEntry.index] = { 
                         ...activityEntry, 
                         score: studentScores[user.id],
