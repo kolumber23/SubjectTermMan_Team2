@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
+
 import styles from "../styles/styles.css";
 import StudentDetail from "./StudentDetail";
 

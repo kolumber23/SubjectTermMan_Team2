@@ -20,19 +20,13 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   const [deadline, setDeadline] = useState("");
   const [now, setNow] = useState(0);
 
-  // Function to handle opening and closing the modal
+  // OPEN and CLOSE modal
   const handleOpen = (modal) => {
     switch (modal) {
       case "activity":
         setShowAA(true); 
         break;
       case "subjectTerm":
-        setShowAST(true); 
-        break;
-      case "student":
-        setShowAST(true); 
-        break;
-      case "addActivity":
         setShowAST(true); 
         break;
       default:
@@ -53,35 +47,89 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   };
 
-  // Function to handle adding an activity
+  /* // Function to handle adding a grade to a student within a subject term
+  const addGrade = (studentId, subjectTermId, grade) => {
+    // Find the subject term
+    const subjectTerm = subjectTermL.find(term => term.id === subjectTermId);
+    
+    if (subjectTerm) {
+      // Find the student within the subject term
+      const studentIndex = subjectTerm.studentList.findIndex(student => student.studentId === studentId);
+      
+      if (studentIndex !== -1) {
+        // Update the student's grade
+        subjectTerm.studentList[studentIndex].grade = grade;
+
+        // Update state or data structure containing subject terms
+        // This might involve using useState to update state or modifying data directly
+        
+        // Trigger re-render if necessary
+      } else {
+        console.error('Student not found in subject term.');
+      }
+    } else {
+      console.error('Subject term not found.');
+    }
+  }; */
+                                                                              // SUBJECTTERM
+  // ADDIMG subjectTerm
+  const handleAddSubjectTerm = (subjectTermData) => {
+    setShowAST(false);
+  };
+
+  const handleSubjectTermClick = (term) => {
+    setSelectedSubjectTerm(term);
+    setSelectedActivity(null); // Zrušíme výber aktivity pri zmene subjektu
+  };
+
+  // Získanie subjTerms patriacich k predmetu []
+  const getSubjectTerms = () => {
+    return subjectTermL.filter(term => term.subjectId === subjDetail.id);
+  };
+
+  // pri zobrazeni predmetu, načíta všetky subjectTerms, ktoré k nemu patria a automaticky zobrazí najnovší  
+  useEffect(() => {
+    const subjectTerms = getSubjectTerms();
+    if (subjectTerms.length > 0) {
+      const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
+      setSelectedSubjectTerm(latestTerm);
+    // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
+    if (user && latestTerm) {
+      const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
+      const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentId === user.id);
+      if (!userAlreadyEnrolled) {
+        const newUser = {
+          studentId: user.id,
+          scoreList: [],
+          grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
+        };
+        const updatedStudentList = [...latestTerm.studentList, newUser];
+        setSelectedSubjectTerm(prevTerm => ({
+          ...prevTerm,
+          studentList: updatedStudentList
+        }));
+      }}}
+  }, [subjDetail]);  
+                                                                              // ACTIVITY
+  // ADDIMG activity
   const handleAddActivity = (activityData) => {
     const activityWithDeadline = { ...activityData, deadline };
     setShowAA(false);
   };
 
-  const handleAddSubjectTerm = () => {
-    setShowAST(false);
-
-  };
-
-  // Funkcia na získanie subjTerms predmetu
-  const getSubjectTerms = () => {
-    return subjectTermL.filter(term => term.subjectID === subjDetail.id);
-  };
-
-  // Funkcia na získanie priradení pre daný predmet a vybraný subjekt
+  // Získanie aktivít pre vybraný subjectTerm []
   const getActivities = () => {
     if (selectedSubjectTerm) {
-      return activityL.filter(activity => activity.subjTermID === selectedSubjectTerm.id);
+      return activityL.filter(activity => activity.subjTermId === selectedSubjectTerm.id);
     } else {
       return [];
     }
   };
-
- // Pole so študentami priradenými k vybranému subjectTerm s ich známkami
- const enrolledUsers = selectedSubjectTerm ? selectedSubjectTerm.studentList?.map(student => {
-  if (student.studentID.startsWith("st")) {
-    const user = users.find(user => user.id === student.studentID);
+                                                                               // STUDENT
+ // Študenti priradení k vybranému subjectTerm s ich známkami []
+ const enrolledStudents = selectedSubjectTerm ? selectedSubjectTerm.studentList?.map(student => {
+  if (student.studentId.startsWith("st")) {
+    const user = users.find(user => user.id === student.studentId);
     if (user) {
       return {
         id: user.id,
@@ -97,17 +145,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
   }
 }).filter(student => student !== null) : [];
   
-  const handleSubjectTermClick = (term) => {
-    setSelectedSubjectTerm(term);
-    setSelectedActivity(null); // Zrušíme výber aktivity pri zmene subjektu
-  };
-
-  const handleBack = () => navigate(`/subject`);
-  
+  // ENROLL / REMOVE student
   const handleEnroll = () => {
     // Ak je študent prihlásený, odstráňte ho
     if (isEnrolled) {
-      const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentID !== user.id);
+      const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentId !== user.id);
       setSelectedSubjectTerm(prevTerm => ({
         ...prevTerm,
         studentList: updatedStudentList
@@ -115,7 +157,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     } else {
       // Ak študent nie je prihlásený, pridajte ho
       const newStudent = {
-        studentID: user.id,
+        studentId: user.id,
         scoreList: [],
         grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
       };
@@ -126,48 +168,32 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   };
 
-  useEffect(() => {
-    const subjectTerms = getSubjectTerms();
-    if (subjectTerms.length > 0) {
-      const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
-      setSelectedSubjectTerm(latestTerm);
-    // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
-    if (user && latestTerm) {
-      const enrolledActivities = activityL.filter(activity => activity.subjTermID === latestTerm.id);
-      const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentID === user.id);
-      if (!userAlreadyEnrolled) {
-        const newUser = {
-          studentID: user.id,
-          scoreList: [],
-          grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
-        };
-        const updatedStudentList = [...latestTerm.studentList, newUser];
-        setSelectedSubjectTerm(prevTerm => ({
-          ...prevTerm,
-          studentList: updatedStudentList
-        }));
-      }}}
-  }, [subjDetail]);
+  // zistenie či je prihlásený užívateľ enrolled k SubjTerm
+  const isEnrolled = selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
+                                                                                       // SCORE and GRADE
 
+  // pri zmene subjectTerm alebo user vypočíta študentovi percentá, ktoré z predmetu získal
   useEffect(() => {
     if (selectedSubjectTerm && user) {
       const ratio = calculateSuccessRatio(user.id, selectedSubjectTerm);
       setNow(ratio);
     }
   }, [selectedSubjectTerm, user]);
-  
-  const calculateMaxScore = (subjTermID) => {
+                                                                                     
+  // výpočet MAXIMÁLNEho DOSIAHNUTEĽNÉho SCORE v rámci subjectTerm
+  const calculateMaxScore = (subjTermId) => {
     let maxScore = 0;  
     activityL.forEach(activity => {
-      if (activity.subjTermID === subjTermID.id) {
+      if (activity.subjTermId === subjTermId.id) {
         maxScore += activity.maxScore;
       }
     });
     return maxScore;
   };
   
-  const calculateTotalAchievedScore = (studentID, selectedSubjectTerm) => {
-    const student = selectedSubjectTerm.studentList?.find(student => student.studentID === studentID);
+  // výpočet DOSIAHNUTÉho SCORE za študenta
+  const calculateTotalAchievedScore = (studentId, selectedSubjectTerm) => {
+    const student = selectedSubjectTerm.studentList?.find(student => student.studentId === studentId);
     if (student && student.scoreList) { 
       let totalAchievedScore = 0;
       student.scoreList.forEach(score => {totalAchievedScore += score.score});
@@ -177,16 +203,27 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
     }
   };
   
-  const calculateSuccessRatio = (studentID, subjTermID) => {
-    const maxScore = calculateMaxScore(selectedSubjectTerm);
-    const totalAchievedScore = calculateTotalAchievedScore(studentID, subjTermID);
-    const successRatio = (totalAchievedScore / maxScore) * 100;
-    
-    return Math.round(successRatio);
+  // výpočet známky podľa percenta
+  const calculateGrade = (studentId, subjTermId) => {
+    const ratio = calculateSuccessRatio(studentId, subjTermId);
+    let grade = 0;
+    if (ratio < 60) grade = 0;
+    else if (ratio >= 60 && ratio < 75) grade = 3;
+    else if (ratio >= 75 && ratio < 88) grade = 2;
+    else if (ratio >= 88) grade = 1;
+    return grade;
   };
 
-  const isEnrolled = selectedSubjectTerm && user && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id);
+  // výpočet PERCENTA dosiahnuté score / max možné score
+  const calculateSuccessRatio = (studentId, subjTermId) => {
+    const maxScore = calculateMaxScore(selectedSubjectTerm);
+    const totalAchievedScore = calculateTotalAchievedScore(studentId, subjTermId);
+    const successRatio = (totalAchievedScore / maxScore) * 100;
+  return Math.round(successRatio);
+  };
   
+  const handleBack = () => navigate(`/subject`);
+
   return (
     <>
       <div className="formDetail">
@@ -281,7 +318,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         <br />
 
         {/*         Tabuľka s aktivitami pre vyučujúceho */}        
-        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id)) ? null : (
+        {!selectedSubjectTerm || (user.id.startsWith("st") && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id)) ? null : (
         <Table striped bordered>
           <thead>
             <tr>
@@ -330,12 +367,12 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
             </tr>
           </thead>
           <tbody>
-            {enrolledUsers.map((student) => (
+            {enrolledStudents.map((student) => (
               <tr key={student.id}>
                 <td>{student.name}</td>
                 <td>{student.surname}</td>
                 <td>{calculateTotalAchievedScore(student.id, selectedSubjectTerm)}</td>
-                <td>{student.grade}</td>
+                <td>{calculateGrade(student.id, selectedSubjectTerm)}</td>
                 <td>
                 <Button
                     variant="outline-primary"
@@ -352,11 +389,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
         </>
         )}
 <br />
-{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentID === user.id) && (
+{user.id.startsWith("st") && selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id) && (
   <>
+
 {/*         Tabuľka s aktivitami pre konkrétneho (prihláseného) študenta */}    
 <div> <b>Score of logged in student: </b></div>
-
 <Table striped bordered>
           <thead>
             <tr>
@@ -370,11 +407,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
           <tbody>
           {getActivities().map((activity) => {
       // Overíme, či je prihlásený študent na túto aktivitu
-      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentID === user.id && student.scoreList.some(score => score.activityID === activity.id));
-      
+      const isEnrolled = selectedSubjectTerm.studentList?.some(student => student.studentId === user.id && student.scoreList.some(score => score.activityId === activity.id));
       // Ak je prihlásený, zobrazíme mu detaily aktivity
       if (isEnrolled) {
-        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentID === user.id)?.scoreList.find(score => score.activityID === activity.id)?.score;
+        const studentScore = selectedSubjectTerm.studentList?.find(student => student.studentId === user.id)?.scoreList.find(score => score.activityId === activity.id)?.score;
         return (
           <tr key={activity.id}>
             <td>{activity.name}</td>
@@ -391,9 +427,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL }) {
            
           </tbody>
         </Table>
-
  <br />
-
         <ProgressBar now={now} label={`${now}%`} />
         </>
         )}
