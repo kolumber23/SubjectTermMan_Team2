@@ -337,8 +337,10 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
                       <th> Min Score </th>
                       <th> Max Score </th>
                       <th> Dead Line </th>
+                      {!((user.id.startsWith("st")) && (!isEnrolled)) && (
                       <th> Detail </th>
-                    </tr>
+                      )}
+                    </tr> 
                   </thead>
                   <tbody>
                     {getActivities().map((activity) => (
@@ -347,6 +349,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
                         <td>{activity.minScore}</td>
                         <td>{activity.maxScore}</td>
                         <td>{moment(activity.deadline).format("DD. MM. YYYY HH:mm")}</td>
+                        {!((user.id.startsWith("st")) && (!isEnrolled)) && (
                         <td>
                           <Button
                             variant="outline-primary"
@@ -356,6 +359,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm 
                             {"<"}
                           </Button>
                         </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
