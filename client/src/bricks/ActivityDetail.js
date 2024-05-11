@@ -34,15 +34,15 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
         try {
             const updatedSubjectTerm = { ...subjectTerm };
             enrolledUsers.forEach(user => {
-                if (studentScores[user.id]) {
+                if (studentScores[user.id] || studentScores[user.id] === 0) {
                     const student = subjectTerm.studentList
                         .map((student, id) => { return { ...student, index: id } })
                         .find(student => student.studentId === user.id)
                     const activityEntry = student.scoreList
                         .map((scoreEntry, id) => { return { ...scoreEntry, index: id } })
                         .find(scoreEntry => scoreEntry.activityId === activity.id)
-                        updatedSubjectTerm.studentList[student.index].scoreList[activityEntry.index] = { 
-                        ...activityEntry, 
+                    updatedSubjectTerm.studentList[student.index].scoreList[activityEntry.index] = {
+                        ...activityEntry,
                         score: studentScores[user.id],
                         index: undefined,
                     };
@@ -89,7 +89,25 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
                                             type="number"
                                             max={activity.maxScore}
                                             value={userScore}
-                                            onChange={(e) => setScore(user.id, e.target.value)}
+                                            onChange={(e) => {
+                                                let newScore = parseInt(e.target.value, 10);
+                                                if (newScore > activity.maxScore) {
+                                                    newScore = parseInt(activity.maxScore, 10);
+                                                };
+                                                if (newScore < 0) {
+                                                    newScore = 0;
+                                                }
+                                                else if(newScore < activity.minScore){
+                                                    if (userScore === 0) {
+                                                        newScore = parseInt(activity.minScore, 10);
+                                                    }
+                                                    else {
+                                                        newScore = 0;
+                                                    }
+                                                }
+                                                setScore(user.id, newScore);
+                                            }
+                                            }
                                         />
                                     </td>
                                 </tr>
