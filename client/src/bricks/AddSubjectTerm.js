@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
+function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail,subjTerms }) {
   const [subjectTermData, setsubjectTermData] = useState({
     subjectId: subjDetail.id,
     semester: '',
@@ -10,7 +10,13 @@ function AddSubjectTerm({ show, handleClose, addSubjectTerm, subjDetail }) {
 
   const handleAddSubjectTerm = () => {
     const { semester, year } = subjectTermData;
+    const semesterYear = `${semester} ${year}`;
 
+    // Kontrola existence kombinace roku a semestru
+    if (subjTerms.some(term => term.semester === semesterYear)) {
+      alert("Subject term already exists for this semester and year.");
+      return;
+    }
     const newSubjectTerm = {
       subjectId: subjDetail.id,
       semester: `${semester} ${year}`,
@@ -43,8 +49,8 @@ return (
               required
             >
               <option value="">Select semester</option>
-              <option value="summer">Summer</option>
-              <option value="winter">Winter</option>
+              <option value="Summer">Summer</option>
+              <option value="Winter">Winter</option>
             </Form.Control>
           </Form.Group>
 
