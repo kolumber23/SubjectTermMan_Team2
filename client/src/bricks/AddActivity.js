@@ -7,11 +7,11 @@ function AddActivity({ show, handleClose, addActivity }) {
     minScore: '',
     maxScore: '',
     description: "",
-    deadline: '' 
+    deadline: ''
   });
 
   const handleAddActivity = () => {
-  
+
     const newActivity = {
       name: activityData.name,
       minScore: activityData.minScore,
@@ -21,15 +21,15 @@ function AddActivity({ show, handleClose, addActivity }) {
     };
     addActivity(newActivity);
     handleClose("activity");
-};
-  
-const setField = (name, val) => {
-  setActivityData((activityData) => {
-  return { ...activityData, [name]: val };
-  });
-}; 
-  
-return (
+  };
+
+  const setField = (name, val) => {
+    setActivityData((activityData) => {
+      return { ...activityData, [name]: val };
+    });
+  };
+
+  return (
     <Modal show={show} onHide={() => handleClose("activity")}>
       <Modal.Header closeButton>
         <Modal.Title>Add New Activity</Modal.Title>
@@ -63,7 +63,17 @@ return (
               type="number"
               name="minScore"
               value={activityData.minScore}
-              onChange={(e) => setField("minScore", e.target.value)}
+              onChange={(e) => {
+                let newMinimum = parseInt(e.target.value, 10);
+                if (newMinimum >= activityData.maxScore) {
+                  newMinimum = parseInt(activityData.maxScore, 10) - 1;
+                };
+                if (newMinimum < 0) {
+                  newMinimum = 0;
+                }
+                setField("minScore", newMinimum)
+              }
+              }
               required
             />
           </Form.Group>
@@ -73,7 +83,17 @@ return (
               type="number"
               name="maxScore"
               value={activityData.maxScore}
-              onChange={(e) => setField("maxScore", e.target.value)}
+              onChange={(e) => {
+                let newMaximum = parseInt(e.target.value, 10);
+                if (newMaximum <= activityData.minScore) {
+                  newMaximum = parseInt(activityData.minScore, 10) + 1;
+                };
+                if (newMaximum < 0) {
+                  newMaximum = 0;
+                }
+                setField("maxScore", newMaximum)
+              }
+              }
               required
             />
           </Form.Group>
@@ -87,16 +107,16 @@ return (
               required
             />
           </Form.Group>
-          
+
         </Form>
       </Modal.Body>
       <Modal.Footer>
-          <Button 
-            variant="primary" 
-            onClick={handleAddActivity}         
-          >
-            Add Activity
-          </Button>
+        <Button
+          variant="primary"
+          onClick={handleAddActivity}
+        >
+          Add Activity
+        </Button>
       </Modal.Footer>
     </Modal>
   );
