@@ -13,10 +13,17 @@ export function SubjProvider({ children }) {
     const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/create", "post", reqBody)
     setActivityL([ ...activityL, responseActivity.data]);
   }
-  const updateActivity = async () => {
-    const reqBody = {}
-    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/update", "post", reqBody)
-  };
+  const deleteActivity = async (activityId) => {
+    const reqBody = { activityId: activityId }
+    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/delete", "post", reqBody)
+    if (!responseActivity.error) { //
+      setActivityL(activityL.filter(item => item.id !== activityId));
+    }
+    else
+    {
+      console.error(responseActivity.error);
+    }
+  }
   const createSubjectTerm = async (subjectTermData) => {
     const reqBody = { subjectId: subjectTermData.subjectId, semester: subjectTermData.semester }
     const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/create", "post", reqBody)
@@ -64,7 +71,8 @@ export function SubjProvider({ children }) {
         activityL,
         updateSubjectTerm,
         createSubjectTerm,
-        createActivity
+        createActivity,
+        deleteActivity
       }}
     >
       {children}

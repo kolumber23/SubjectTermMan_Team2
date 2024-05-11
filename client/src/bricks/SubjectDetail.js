@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Navbar, Table, Tab, Tabs, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiTrashCanOutline } from "@mdi/js";
 import UserContext from "../Provider";
 import moment from 'moment';
 
@@ -9,7 +11,7 @@ import AddSubjectTerm from "./AddSubjectTerm";
 import ActivityDetail from "./ActivityDetail";
 import StudentDetail from "./StudentDetail"
 
-function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm, createSubjectTerm, createActivity }) {
+function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm, createSubjectTerm, createActivity, deleteActivity }) {
   const navigate = useNavigate();
   const { users, user, isLoggedIn } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -124,6 +126,11 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
     const activityWithSubjTerm = { ...activityData, subjTermId: selectedSubjectTerm.id };
     createActivity(activityWithSubjTerm)
     setShowAA(false);
+  };
+
+  // DELETE activity
+  const handleDeleteActivity = (activityId) => {
+    deleteActivity(activityId)
   };
 
   // Získanie aktivít pre vybraný subjectTerm []
@@ -365,6 +372,12 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                             >
                               {"<"}
                             </Button>
+                            <Icon
+                              path={mdiTrashCanOutline}
+                              style={{ cursor: 'pointer', color: 'grey' }}a
+                              size={0.8}
+                              onClick={() => handleDeleteActivity(activity.id)}
+                            />
                           </td>
                         )}
                       </tr>
