@@ -1,233 +1,290 @@
 [
     {
-        "id": "te-2123-5555",
-        "name": "Igor",
-        "surname": "Hnízdo",
-        "degree": "",
-        "language": ""
+    "id": "te-2123-5555",
+    "name": "Igor",
+    "surname": "Hnízdo",
+    "degree": "",
+    "language": "",
+    "email": "igor.hnizdo@example.com",
+    "password": "P@ssw0rd"
     },
     {
-        "id": "ad-4123-4888",
-        "name": "Admin",
-        "surname": "Administrator",
-        "degree": "",
-        "language": ""
+    "id": "ad-4123-4888",
+    "name": "Admin",
+    "surname": "Administrator",
+    "degree": "",
+    "language": "",
+    "email": "admin@example.com",
+    "password": "Adm1nP@ss"
     },
     {
-        "id": "st-5492-5764",
-        "surname": "Novák",
-        "name": "Jakub",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-5492-5764",
+    "surname": "Novák",
+    "name": "Jakub",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "jakub.novak@example.com",
+    "password": "Novak123"
     },
     {
-        "id": "st-6824-6544",
-        "surname": "Walters",
-        "name": "Sarah",
-        "degree": "Bc",
-        "language": "en"
-    },
-	{
-        "id": "st-9267-3572",
-        "surname": "Zemanová",
-        "name": "Kateřina",
-        "degree": "Bc",
-        "language": "cz"
-    },
-	{
-        "id": "st-2341-5340",
-        "surname": "Svoboda",
-        "name": "Jan",
-        "degree": "Mgr",
-        "language": "cz"
-    },
-	{
-        "id": "st-4023-4412",
-        "surname": "Matoušek",
-        "name": "Matěj",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-6824-6544",
+    "surname": "Walters",
+    "name": "Sarah",
+    "degree": "Bc",
+    "language": "en",
+    "email": "sarah.walters@example.com",
+    "password": "Walters7"
     },
     {
-        "id": "st-5119-6693",
-        "surname": "McCoy",
-        "name": "Ian",
-        "degree": "Mgr",
-        "language": "en"
-    },
-	{
-        "id": "st-9155-9119",
-        "surname": "Hrubý",
-        "name": "Mikuláš",
-        "degree": "Bc",
-        "language": "cz"
+    "id": "st-9267-3572",
+    "surname": "Zemanová",
+    "name": "Kateřina",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "katerina.zemanova@example.com",
+    "password": "Z3man0va"
     },
     {
-        "id": "st-5290-3216",
-        "surname": "Krausová",
-        "name": "Barbora",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-2341-5340",
+    "surname": "Svoboda",
+    "name": "Jan",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "jan.svoboda@example.com",
+    "password": "Svoboda7"
     },
     {
-        "id": "st-6580-7562",
-        "surname": "Mrázková",
-        "name": "Aneta",
-        "degree": "Bc",
-        "language": "cz"
-    },
-	{
-        "id": "st-5119-6693",
-        "surname": "Čermák",
-        "name": "František",
-        "degree": "Mgr",
-        "language": "cz"
-    },
-	{
-        "id": "st-9155-9132",
-        "surname": "Šikolová",
-        "name": "Jana",
-        "degree": "Bc",
-        "language": "cz"
-    },
-	{
-        "id": "st-1066-4394",
-        "surname": "Štěpánek",
-        "name": "Kryštof",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-4023-4412",
+    "surname": "Matoušek",
+    "name": "Matěj",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "matej.matousek@example.com",
+    "password": "Matousek7"
     },
     {
-        "id": "st-6957-3533",
-        "surname": "Horáková",
-        "name": "Věra",
-        "degree": "Mgr",
-        "language": "cz"
-    },
-	{
-        "id": "st-6567-9443",
-        "surname": "Vránová",
-        "name": "Jitka",
-        "degree": "Bc",
-        "language": "cz"
+    "id": "st-5119-6693",
+    "surname": "McCoy",
+    "name": "Ian",
+    "degree": "Mgr",
+    "language": "en",
+    "email": "ian.mccoy@example.com",
+    "password": "Mccoy77"
     },
     {
-        "id": "st-6943-1948",
-        "surname": "Jameson",
-        "name": "Phil",
-        "degree": "Mgr",
-        "language": "en"
-    },
-	{
-        "id": "st-9611-9860",
-        "surname": "Heřman",
-        "name": "Jiří",
-        "degree": "Bc",
-        "language": "cz"
+    "id": "st-9155-9119",
+    "surname": "Hrubý",
+    "name": "Mikuláš",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "mikulas.hruby@example.com",
+    "password": "Hruby123"
     },
     {
-        "id": "st-6170-3245",
-        "surname": "Kramářová",
-        "name": "Adéla",
-        "degree": "Bc",
-        "language": "cz"
-    },
-	{
-        "id": "st-7846-1627",
-        "surname": "Mlejnková",
-        "name": "Petra",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-5290-3216",
+    "surname": "Krausová",
+    "name": "Barbora",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "barbora.krausova@example.com",
+    "password": "Krausova7"
     },
     {
-        "id": "st-3847-6842",
-        "surname": "Janák",
-        "name": "Karel",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-6580-7562",
+    "surname": "Mrázková",
+    "name": "Aneta",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "aneta.mrazkova@example.com",
+    "password": "Mr4zk0va"
     },
     {
-        "id": "st-9467-5028",
-        "surname": "Hill",
-        "name": "Jane",
-        "degree": "Bc",
-        "language": "en"
-    },
-	{
-        "id": "st-9467-5027",
-        "surname": "Benedict",
-        "name": "Caroline",
-        "degree": "Bc",
-        "language": "en"
-	},
-	{
-        "id": "st-3578-3468",
-        "surname": "Zemák",
-        "name": "Miloš",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-9155-9132",
+    "surname": "Šikolová",
+    "name": "Jana",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "jana.sikolova@example.com",
+    "password": "S1kolova"
     },
     {
-        "id": "st-4357-8327",
-        "surname": "Plummer",
-        "name": "Amanda",
-        "degree": "Bc",
-        "language": "en"
-    },
-	{
-        "id": "st-3847-6542",
-        "surname": "Jirásková",
-        "name": "Pavla",
-        "degree": "Bc",
-        "language": "cz"
-    },
-	{
-        "id": "st-3871-9773",
-        "surname": "Gazda",
-        "name": "Radim",
-        "degree": "Mgr",
-        "language": "cz"
-    },
-	{
-        "id": "st-3418-6548",
-        "surname": "Pokorný",
-        "name": "Roman",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-1066-4394",
+    "surname": "Štěpánek",
+    "name": "Kryštof",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "krystof.stepanek@example.com",
+    "password": "Stepanek7"
     },
     {
-        "id": "st-3875-1698",
-        "surname": "Smith",
-        "name": "Robert",
-        "degree": "Mgr",
-        "language": "en"
-    },
-	{
-        "id": "st-9834-1687",
-        "surname": "Janák",
-        "name": "Zdeněk ",
-        "degree": "Bc",
-        "language": "cz"
+    "id": "st-6957-3533",
+    "surname": "Horáková",
+    "name": "Věra",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "vera.horakova@example.com",
+    "password": "Horak0va"
     },
     {
-        "id": "st-3357-6245",
-        "surname": "Černá",
-        "name": "Andrea",
-        "degree": "Mgr",
-        "language": "cz"
+    "id": "st-6567-9443",
+    "surname": "Vránová",
+    "name": "Jitka",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "jitka.vranova@example.com",
+    "password": "Vranova7"
     },
     {
-        "id": "st-2695-7169",
-        "surname": "Králová",
-        "name": "Simona",
-        "degree": "Bc",
-        "language": "cz"
+    "id": "st-6943-1948",
+    "surname": "Jameson",
+    "name": "Phil",
+    "degree": "Mgr",
+    "language": "en",
+    "email": "phil.jameson@example.com",
+    "password": "James0n7"
     },
-	{
-        "id": "st-3215-4953",
-        "surname": "Peterson",
-        "name": "Emily",
-        "degree": "Mgr",
-        "language": "en"
+    {
+    "id": "st-9611-9860",
+    "surname": "Heřman",
+    "name": "Jiří",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "jiri.herman@example.com",
+    "password": "Herman12"
+    },
+    {
+    "id": "st-6170-3245",
+    "surname": "Kramářová",
+    "name": "Adéla",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "adela.kramarova@example.com",
+    "password": "Kr4marova"
+    },
+    {
+    "id": "st-7846-1627",
+    "surname": "Mlejnková",
+    "name": "Petra",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "petra.mlejnkova@example.com",
+    "password": "Mlejnkova7"
+    },
+    {
+    "id": "st-3847-6842",
+    "surname": "Janák",
+    "name": "Karel",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "karel.janak@example.com",
+    "password": "Janak123"
+    },
+    {
+    "id": "st-9467-5028",
+    "surname": "Hill",
+    "name": "Jane",
+    "degree": "Bc",
+    "language": "en",
+    "email": "jane.hill@example.com",
+    "password": "Hill567"
+    },
+    {
+    "id": "st-9467-5027",
+    "surname": "Benedict",
+    "name": "Caroline",
+    "degree": "Bc",
+    "language": "en",
+    "email": "caroline.benedict@example.com",
+    "password": "Benedict7"
+    },
+    {
+    "id": "st-3578-3468",
+    "surname": "Zemák",
+    "name": "Miloš",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "milos.zemak@example.com",
+    "password": "Zemak777"
+    },
+    {
+    "id": "st-4357-8327",
+    "surname": "Plummer",
+    "name": "Amanda",
+    "degree": "Bc",
+    "language": "en",
+    "email": "amanda.plummer@example.com",
+    "password": "Plummer7"
+    },
+    {
+    "id": "st-3847-6542",
+    "surname": "Jirásková",
+    "name": "Pavla",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "pavla.jiraskova@example.com",
+    "password": "Jiraskova"
+    },
+    {
+    "id": "st-3871-9773",
+    "surname": "Gazda",
+    "name": "Radim",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "radim.gazda@example.com",
+    "password": "Gazda123"
+    },
+    {
+    "id": "st-3418-6548",
+    "surname": "Pokorný",
+    "name": "Roman",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "roman.pokorny@example.com",
+    "password": "Pok0rny"
+    },
+    {
+    "id": "st-3875-1698",
+    "surname": "Smith",
+    "name": "Robert",
+    "degree": "Mgr",
+    "language": "en",
+    "email": "robert.smith@example.com",
+    "password": "Smith123"
+    },
+    {
+    "id": "st-9834-1687",
+    "surname": "Janák",
+    "name": "Zdeněk ",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "zdenek.janak@example.com",
+    "password": "Zden3kJan"
+    },
+    {
+    "id": "st-3357-6245",
+    "surname": "Černá",
+    "name": "Andrea",
+    "degree": "Mgr",
+    "language": "cz",
+    "email": "andrea.cerna@example.com",
+    "password": "Cerna123"
+    },
+    {
+    "id": "st-2695-7169",
+    "surname": "Králová",
+    "name": "Simona",
+    "degree": "Bc",
+    "language": "cz",
+    "email": "simona.kralova@example.com",
+    "password": "Kralova7"
+    },
+    {
+    "id": "st-3215-4953",
+    "surname": "Peterson",
+    "name": "Emily",
+    "degree": "Mgr",
+    "language": "en",
+    "email": "emily.peterson@example.com",
+    "password": "Peters0n"
     }
-]
+    ]
