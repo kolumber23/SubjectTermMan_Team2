@@ -49,30 +49,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
     }
   };
 
-  /* // Function to handle adding a grade to a student within a subject term
-  const addGrade = (studentId, subjectTermId, grade) => {
-    // Find the subject term
-    const subjectTerm = subjectTermL.find(term => term.id === subjectTermId);
-    
-    if (subjectTerm) {
-      // Find the student within the subject term
-      const studentIndex = subjectTerm.studentList.findIndex(student => student.studentId === studentId);
-      
-      if (studentIndex !== -1) {
-        // Update the student's grade
-        subjectTerm.studentList[studentIndex].grade = grade;
-
-        // Update state or data structure containing subject terms
-        // This might involve using useState to update state or modifying data directly
-        
-        // Trigger re-render if necessary
-      } else {
-        console.error('Student not found in subject term.');
-      }
-    } else {
-      console.error('Subject term not found.');
-    }
-  }; */
   // SUBJECTTERM
   // ADDIMG subjectTerm
   const handleAddSubjectTerm = (subjectTermData) => {
@@ -90,36 +66,26 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
     return subjectTermL.filter(term => term.subjectId === subjDetail.id);
   };
 
-  // pri zobrazeni predmetu, načíta všetky subjectTerms, ktoré k nemu patria a automaticky zobrazí najnovší  
+  const subjTerms = getSubjectTerms();
+
+  // Načítanie všetkých subjectTerms, ktoré k patria k zobrazenému subject a automaticky zobrazí najnovší  
   useEffect(() => {
-    const subjectTerms = getSubjectTerms();
-    if (subjectTerms.length > 0) {
-      const latestTerm = subjectTerms[0]; // Predpokladáme, že prvý termín v zozname je najnovší
+    if (subjTerms.length > 0) {
+      const sortedSubjectTerms = subjTerms.sort((a, b) => {
+        const semesterA = a.semester;
+        const semesterB = b.semester;
+        
+        return semesterB.localeCompare(semesterA);
+      });
       if (!selectedSubjectTerm) {
-        setSelectedSubjectTerm(latestTerm);
+        setSelectedSubjectTerm(sortedSubjectTerms[0]);
       }
       else {
-        setSelectedSubjectTerm(subjectTerms.find(term => term.id === selectedSubjectTerm.id))
-      }
-      // Automaticky prihlásiť používateľa ku všetkým aktivitám tohto subject termu
-      if (user && latestTerm) {
-        const enrolledActivities = activityL.filter(activity => activity.subjTermId === latestTerm.id);
-        const userAlreadyEnrolled = latestTerm.studentList.some(student => student.studentId === user.id);
-        // if (!userAlreadyEnrolled) { // Co tohle je? proč při otevření enrollujem usera?
-        //   const newUser = {
-        //     studentId: user.id,
-        //     scoreList: [],
-        //     grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
-        //   };
-        //   const updatedStudentList = [...latestTerm.studentList, newUser];
-        //   setSelectedSubjectTerm(prevTerm => ({
-        //     ...prevTerm,
-        //     studentList: updatedStudentList
-        //   }));
-        // }
+        setSelectedSubjectTerm(subjTerms.find(term => term.id === selectedSubjectTerm.id))
       }
     }
   }, [subjDetail, subjectTermL]);
+  
   // ACTIVITY
   // ADDIMG activity
   const handleAddActivity = (activityData) => {
@@ -193,6 +159,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
 
   // zistenie či je prihlásený užívateľ enrolled k SubjTerm
   const isEnrolled = selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
+  
   // SCORE and GRADE
 
   // pri zmene subjectTerm alebo user vypočíta študentovi percentá, ktoré z predmetu získal
@@ -331,13 +298,15 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                     if (term) handleSubjectTermClick(term);
                   }}
                 >
-                  {getSubjectTerms().map((term) => (
-                    <Tab
-                      key={term.id}
-                      eventKey={term.id}
-                      title={term.semester}
-                    />
-                  ))}
+                  {subjTerms
+                    .sort((a, b) => b.semester.localeCompare(a.semester))
+                    .map((term) => (
+                      <Tab
+                        key={term.id}
+                        eventKey={term.id}
+                        title={term.semester}
+                      />
+                    ))}
                 </Tabs>
               </div>
               <br />
@@ -372,6 +341,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                             >
                               {"<"}
                             </Button>
+                            {" "}
                             <Icon
                               path={mdiTrashCanOutline}
                               style={{ cursor: 'pointer', color: 'grey' }}a
@@ -502,6 +472,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
           handleClose={handleClose}
           addSubjectTerm={handleAddSubjectTerm}
           subjDetail={subjDetail}
+          subjTerms={subjTerms}
         />
       </>
       }
