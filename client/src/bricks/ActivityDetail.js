@@ -3,6 +3,8 @@ import { Modal, Button, Table, Form } from 'react-bootstrap';
 import UserContext from "../Provider";
 
 function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
+    const [validated, setValidated] = useState(false);
+    const [validationErrors, setValidationErrors] = useState({});
     const { users } = useContext(UserContext);
 
     // Filter users enrolled in the selected activity
@@ -31,6 +33,24 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     };
 
     const onSave = async () => {
+        const errors = {};
+        let isValid = true;
+
+        enrolledUsers.forEach(user => {
+            const score = studentScores[user.id];
+            if (score < activity.minScore || score > activity.maxScore) {
+                isValid = false;
+                errors[user.id] = `The entered score must be between ${activity.minScore} and ${activity.maxScore}.`;
+            }
+        });
+
+        setValidationErrors(errors);
+
+        if (!isValid) {
+            setValidated(true);
+            return;
+        }
+
         try {
             const updatedSubjectTerm = { ...subjectTerm };
             enrolledUsers.forEach(user => {
@@ -54,7 +74,6 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
             return;
         }
         onClose();
-
     }
 
     return (
@@ -85,30 +104,18 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
                                     <td>{user.name}</td>
                                     <td>{user.surname}</td>
                                     <td>
+                                    <Form noValidate validated={validated} onSubmit={onSave}>
                                         <Form.Control
                                             type="number"
-                                            max={activity.maxScore}
+                                            //max={activity.maxScore}
                                             value={userScore}
-                                            onChange={(e) => {
-                                                let newScore = parseInt(e.target.value, 10);
-                                                if (newScore > activity.maxScore) {
-                                                    newScore = parseInt(activity.maxScore, 10);
-                                                };
-                                                if (newScore < 0) {
-                                                    newScore = 0;
-                                                }
-                                                else if(newScore < activity.minScore){
-                                                    if (userScore === 0) {
-                                                        newScore = parseInt(activity.minScore, 10);
-                                                    }
-                                                    else {
-                                                        newScore = 0;
-                                                    }
-                                                }
-                                                setScore(user.id, newScore);
-                                            }
-                                            }
+                                            onChange={(e) => setScore(user.id, e.target.value) }
+                                            isInvalid={validated && !!validationErrors[user.id]}
                                         />
+                                        <Form.Control.Feedback type="invalid"> 
+                                            {validationErrors[user.id]}
+                                        </Form.Control.Feedback>
+                                    </Form>
                                     </td>
                                 </tr>
                             );
@@ -127,6 +134,6 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
 export default ActivityDetail;
