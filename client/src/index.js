@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Provider } from "./Provider";
+import { AuthProvider } from "./AuthProvider";
 import { SubjProvider } from "./SubjProvider";
 import App from './App';
 import SubjectR from "./routes/SubjectR";
@@ -15,7 +15,7 @@ import HomeR from "./routes/HomeR";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider>
+    <AuthProvider>
       <SubjProvider>
         <Router>
           <Routes>
@@ -29,7 +29,7 @@ root.render(
           </Routes>
        </Router>
       </SubjProvider>
-    </Provider>
+    </AuthProvider>
   </React.StrictMode>
 );
 

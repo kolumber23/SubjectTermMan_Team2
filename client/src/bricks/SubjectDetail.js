@@ -3,7 +3,7 @@ import { Button, Navbar, Table, Tab, Tabs, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiTrashCanOutline } from "@mdi/js";
-import UserContext from "../Provider";
+import UserContext from "../AuthProvider";
 import moment from 'moment';
 
 import AddActivity from "./AddActivity";
@@ -158,7 +158,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
   };
 
   // zistenie či je prihlásený užívateľ enrolled k SubjTerm
-  const isEnrolled = selectedSubjectTerm && selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
+  const isEnrolled = selectedSubjectTerm && user&& selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
   
   // SCORE and GRADE
 
@@ -230,7 +230,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                         <Button variant="primary" size="sm" onClick={() => handleOpen("subjectTerm")}>
                           + SubjectTerm
                         </Button>
-                        <Button variant="primary" size="sm" onClick={() => handleOpen("activity")}>
+                        <Button variant="primary" size="sm" disabled={selectedSubjectTerm == undefined} onClick={() => handleOpen("activity")}>
                           + Activity
                         </Button>
                       </>

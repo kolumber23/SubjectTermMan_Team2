@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import UserContext from "../Provider";
+import UserContext from "../AuthProvider";
 
 import StudentList from "../bricks/StudentList";
 

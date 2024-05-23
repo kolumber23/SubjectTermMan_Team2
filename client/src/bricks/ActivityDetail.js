@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Modal, Button, Table, Form } from 'react-bootstrap';
-import UserContext from "../Provider";
+import UserContext from "../AuthProvider";
 
 function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     const [validated, setValidated] = useState(false);

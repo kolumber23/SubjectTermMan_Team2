@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { CallBackendAsync } from "./helpers/apiCaller.js"
+import UserContext from "./AuthProvider";
 
 const SubjContext = createContext();
 
@@ -12,18 +13,19 @@ function updateArrayItem(array, newItemData) {
 }
 
 export function SubjProvider({ children }) {
+  const { user } = useContext(UserContext);
   const [subjectL, setSubjectL] = useState([]);
   const [subjectTermL, setSubjectTermL] = useState([]);
   const [activityL, setActivityL] = useState([]);
 
   const createActivity = async (activityData) => {
     const reqBody = { ...activityData }
-    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/create", "post", reqBody)
+    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/create", user.token, "post", reqBody)
     setActivityL([ ...activityL, responseActivity.data]);
   }
   const deleteActivity = async (activityId) => {
     const reqBody = { activityId: activityId }
-    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/delete", "post", reqBody)
+    const responseActivity = await CallBackendAsync("http://localhost:3011/api/activity/delete", user.token, "post", reqBody)
     if (!responseActivity.error) { //
       setActivityL(activityL.filter(item => item.id !== activityId));
     }
@@ -34,20 +36,17 @@ export function SubjProvider({ children }) {
   }
   const createSubjectTerm = async (subjectTermData) => {
     const reqBody = { subjectId: subjectTermData.subjectId, semester: subjectTermData.semester }
-    const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/create", "post", reqBody)
+    const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/create", user.token, "post", reqBody)
 
     setSubjectTermL([ ...subjectTermL, responseSubjectTerm.data]);
 
   }
   const updateSubjectTerm = async (subjectTerm) => {
     const reqBody = { subjectTermId: subjectTerm.id, semester: subjectTerm.semester, studentList: subjectTerm.studentList }
-    const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/update", "put", reqBody)
+    const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/update", user.token, "put", reqBody)
 
     setSubjectTermL(updateArrayItem(subjectTermL, responseSubjectTerm.data));
   };
-  };
-
-
 
   const fetchData = async () => {
     try {

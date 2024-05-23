@@ -22,9 +22,10 @@ const authenticateToken = (req, res, next) => {
       userId: decoded.userId
     };
 
-    next();
+    next()
   });
 };
+
 
 module.exports = { authenticateToken };
 

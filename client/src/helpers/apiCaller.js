@@ -1,9 +1,11 @@
+import UserContext from "../AuthProvider";
+import React, { useContext, useState } from "react";
+
 function CallBackendWithCallback(uri, callbackOnResponse, method = "get", requestBody = undefined) {
   const callSupportData = {
     method: method,
   }
-  if(requestBody) 
-  {
+  if (requestBody) {
     callSupportData.headers = {
       "Content-Type": "application/json",
     };
@@ -18,15 +20,19 @@ function CallBackendWithCallback(uri, callbackOnResponse, method = "get", reques
     });
 }
 
-async function CallBackendAsync(uri, method = "get", requestBody = undefined) {
+async function CallBackendAsync(uri, token, method = "get", requestBody = undefined) {
+  
   const callSupportData = {
     method: method,
   }
-  if(requestBody) 
-  {
+  if (requestBody) {
+
     callSupportData.headers = {
       "Content-Type": "application/json",
     };
+    if (token) {
+      callSupportData.headers['Authorization'] = 'Bearer ' +token;
+    }
     callSupportData.body = JSON.stringify(requestBody);
   }
   return await fetch(uri, callSupportData)
@@ -34,7 +40,7 @@ async function CallBackendAsync(uri, method = "get", requestBody = undefined) {
       return await response.json();
     })
     .catch(async (error) => {
-      return { error: error.message}
+      return { error: error.message }
     });
 
 }

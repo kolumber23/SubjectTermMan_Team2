@@ -1,5 +1,6 @@
 const StudentDao = require('../dao/student-dao.js');
 const StudentDaoInstance = new StudentDao();
+const { authenticateToken } = require('../middleware/authMiddleware.js');
   exports.getStudent = async (req, res) => {
     const { studentId } = req.body;
 

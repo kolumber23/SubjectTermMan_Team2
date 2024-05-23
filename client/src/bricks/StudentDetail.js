@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Table, Modal } from 'react-bootstrap';
 import SubjContext from "../SubjProvider";
-import UserContext from "../Provider";
+import UserContext from "../AuthProvider";
 
 
 function StudentDetail({ selectedStudent, onClose }) {
