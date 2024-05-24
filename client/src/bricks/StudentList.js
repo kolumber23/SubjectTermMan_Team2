@@ -9,7 +9,7 @@ import styles from "../styles/styles.css";
 import StudentDetail from "./StudentDetail";
 
 export default function StudentList ({ studentL }) {
-  const { user, isEnrolled } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
@@ -101,7 +101,7 @@ return (
       <th onClick={() => handleSort("surname")}>Surname</th>
       <th onClick={() => handleSort("name")}>Name</th>
       <th onClick={() => handleSort("degree")}>Degree</th>
-    {!((user.id.startsWith("st")) && (!isEnrolled)) && (
+    {!((user.id.startsWith("st")) && (!isLoggedIn)) && (
       <th> Detail </th>
     )}
     </tr>
@@ -114,7 +114,7 @@ return (
           <td> {student.surname} </td>
           <td> {student.name} </td>
           <td> {student.degree} </td>
-        {!((user.id.startsWith("st")) && (!isEnrolled)) && (
+        {!((user.id.startsWith("st")) && (!isLoggedIn)) && (
           <td>
           <Button
             variant="outline-primary"
