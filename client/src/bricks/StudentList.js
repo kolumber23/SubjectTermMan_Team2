@@ -1,12 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
+import UserContext from "../AuthProvider";
+
 
 import styles from "../styles/styles.css";
 import StudentDetail from "./StudentDetail";
 
 export default function StudentList ({ studentL }) {
+  const { user, isEnrolled } = useContext(UserContext);
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
@@ -60,7 +63,7 @@ export default function StudentList ({ studentL }) {
       setSortDirection("asc");
     }
   };
-
+console.log("user", user);
 return (
 
 <div>
@@ -98,7 +101,9 @@ return (
       <th onClick={() => handleSort("surname")}>Surname</th>
       <th onClick={() => handleSort("name")}>Name</th>
       <th onClick={() => handleSort("degree")}>Degree</th>
+    {!((user.id.startsWith("st")) && (!isEnrolled)) && (
       <th> Detail </th>
+    )}
     </tr>
   </thead>
   <tbody>
@@ -109,6 +114,7 @@ return (
           <td> {student.surname} </td>
           <td> {student.name} </td>
           <td> {student.degree} </td>
+        {!((user.id.startsWith("st")) && (!isEnrolled)) && (
           <td>
           <Button
             variant="outline-primary"
@@ -118,6 +124,7 @@ return (
             {"<"} 
           </Button>
           </td>
+          )}
         </tr>  
       );
     })}
