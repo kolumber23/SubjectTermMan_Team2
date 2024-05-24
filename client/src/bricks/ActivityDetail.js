@@ -28,7 +28,7 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
     const setScore = (userId, score) => {
         setStudentScores(prevScores => ({
             ...prevScores,
-            [userId]: score
+            [userId]: Number(score)
         }));
     };
 
