@@ -3,12 +3,12 @@ const StudentDaoInstance = new StudentDao();
 const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   var userID = 0;
 
-  if (username) {
+  if (email) {
     const listedStudents = await StudentDaoInstance.listStudents();
-    const currentUser = listedStudents.find(student => student.name == username)
+    const currentUser = listedStudents.find(student => student.email == email)
     if (currentUser && currentUser.password == password) {
       userID = currentUser.id;
     }

@@ -33,8 +33,8 @@ export function AuthProvider({ children }) {
     getStudents()
   }, []);
 
-  const login = async (username, password) => {
-    const response = await CallBackendAsync("http://localhost:3011/api/login", null, "post", { username: username, password: password })
+  const login = async (email, password) => {
+    const response = await CallBackendAsync("http://localhost:3011/api/login", null, "post", { email: email, password: password })
     //TODO add error handling
     if (response.error) {
       return { error: response.error };

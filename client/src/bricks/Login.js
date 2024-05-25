@@ -13,7 +13,7 @@ function Login({ show, handleClose }) {
     handleClose();
   };
   const handleLogin = async () => {
-    const response = await login(loginState.username, loginState.password)
+    const response = await login(loginState.email, loginState.password)
     if (response?.error) {
       setLoginState({ ...loginState, error: true })
     }
@@ -38,9 +38,9 @@ function Login({ show, handleClose }) {
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              name="name"
-              value={loginState.username}
-              onChange={(e) => setLoginState({ ...loginState, username: e.target.value })}
+              name="email"
+              value={loginState.email}
+              onChange={(e) => setLoginState({ ...loginState, email: e.target.value })}
             />
           </Form.Group>
           <Form.Group>
