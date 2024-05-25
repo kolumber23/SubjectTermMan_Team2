@@ -3,18 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiPlus } from "@mdi/js";
+import AddSubject from "./AddSubject";
 
 import styles from "../styles/styles.css";
-import AddSubject from "./AddSubject";
 import UserContext from "../AuthProvider";
 
-export default function SubjectList({ subjectL, subjectTermL, activityL, addSubject }) {
+export default function SubjectList ({ subjectL, subjectTermL, activityL, createSubject }) {
   const navigate = useNavigate();
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
-  const [showCreate, setShowCreate] = useState(false)
+  const [show, setShow] = useState(false);
   const { user } = useContext(UserContext);
+
+  const handleOpen = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  const handleAddSubject = (newSubject) => {
+    createSubject(newSubject)
+    setShow(false);
+  };
 
   const handleSubjectClick = (selectedSubject) => {
     navigate(`/subjDetail/${selectedSubject.id}`, { state: { selectedSubject, subjectTermL, activityL } });
@@ -94,58 +102,57 @@ export default function SubjectList({ subjectL, subjectTermL, activityL, addSubj
             {user && user.id && !(user.id.startsWith("st")) && <Button
               style={{ marginRight: "8px" }}
               variant="success"
-              onClick={() => setShowCreate(true)}
+              onClick={handleOpen}
             >
               <Icon size={1} path={mdiPlus} />
             </Button>}
           </Navbar.Collapse>
         </div>
-      </Navbar>
-
-      <div className="overview">
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th onClick={() => handleSort("id")}>Id</th>
-              <th onClick={() => handleSort("name")}>Subject</th>
-              <th onClick={() => handleSort("credits")}>Credits</th>
-              <th onClick={() => handleSort("degree")}>Degree</th>
-              <th onClick={() => handleSort("supervisor")}>Supervisor</th>
-              <th onClick={() => handleSort("goal")}>Goal</th>
-              <th>Detail</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSubjectL.map((subject, index) => {
-              return (
-                <tr key={index}>
-                  <td> {subject.id} </td>
-                  <td> {subject.name} </td>
-                  <td> {subject.credits} </td>
-                  <td> {subject.degree} </td>
-                  <td> {subject.supervisor} </td>
-                  <td> {subject.goal} </td>
-                  <td>
-                    <Button
-                      variant="outline-primary"
-                      size="sm"
-                      onClick={() => handleSubjectClick(subject)}
-                    >
-                      {"<"}
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-
-        <AddSubject
-          show={showCreate}
-          handleClose={() => setShowCreate(false)}
-          addSubject={addSubject}
-        />
-      </div>
-    </div>
-  );
+    </Navbar>
+    
+<div className="overview">
+<Table striped bordered>
+  <thead>
+    <tr>
+      <th onClick={() => handleSort("id")}>Id</th>
+      <th onClick={() => handleSort("name")}>Subject</th>
+      <th onClick={() => handleSort("credits")}>Credits</th>
+      <th onClick={() => handleSort("degree")}>Degree</th>
+      <th onClick={() => handleSort("supervisor")}>Supervisor</th>
+      <th onClick={() => handleSort("goal")}>Goal</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredSubjectL.map((subject, index) => {
+      return (
+        <tr key={index}>
+          <td> {subject.id} </td>
+          <td> {subject.name} </td>
+          <td> {subject.credits} </td>
+          <td> {subject.degree} </td>
+          <td> {subject.supervisor} </td>
+          <td> {subject.goal} </td>
+          <td> 
+            <Button
+              variant="outline-primary"
+              size="sm"
+              onClick={() => handleSubjectClick(subject)}
+            >
+              {"<"} 
+            </Button>         
+          </td>
+        </tr>  
+      );
+    })}
+  </tbody>
+</Table>
+<AddSubject
+  show={show}
+  handleClose={handleClose}
+  addSubject={handleAddSubject}
+/>
+  </div>
+</div>
+);
 };
