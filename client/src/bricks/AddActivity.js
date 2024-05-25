@@ -14,28 +14,6 @@ function AddActivity({ show, handleClose, addActivity }) {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  const [activityData, setActivityData] = useState({
-    name: '',
-    minScore: '',
-    maxScore: '',
-    description: '',
-    deadline: getDefaultDeadline() 
-  });
-
- // Resetovat stav aktivit při změně propu show na true
-  useEffect(() => {
-    if (show) {
-      setActivityData({
-        name: '',
-        minScore: '',
-        maxScore: '',
-        description: '',
-        deadline: getDefaultDeadline() 
-      });
-      setValidated(false);
-    }
-  }, [show]);
-
   const isDeadlineValid = (deadline) => {
     const selectedDate = new Date(deadline);
     const now = new Date();
@@ -53,6 +31,27 @@ function AddActivity({ show, handleClose, addActivity }) {
     if (!isDeadlineValid(deadline)) return false;
     return true;
   };
+
+  const [activityData, setActivityData] = useState({
+    name: '',
+    minScore: '',
+    maxScore: '',
+    description: '',
+    deadline: getDefaultDeadline() 
+  });
+
+  useEffect(() => {
+    if (show) {
+      setActivityData({
+        name: '',
+        minScore: '',
+        maxScore: '',
+        description: '',
+        deadline: getDefaultDeadline() 
+      });
+      setValidated(false);
+    }
+  }, [show]);
 
   const handleAddActivity = (e) => {
 
@@ -88,7 +87,7 @@ return (
       </Modal.Header>
 
       <Modal.Body>
-        <Form noValidate validated={validated} onSubmit={handleAddActivity}>
+        <Form>
           <Form.Group controlId="formActivityName">
             <Form.Label>Name</Form.Label>
             <Form.Control
