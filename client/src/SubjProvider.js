@@ -41,6 +41,20 @@ export function SubjProvider({ children }) {
     setSubjectTermL([ ...subjectTermL, responseSubjectTerm.data]);
 
   }
+  const createSubject = async (subjectData) => {
+    const reqBody = {
+      name: subjectData.name,
+      credits: subjectData.credits,
+      supervisor: subjectData.supervisor,
+      goal: subjectData.goal,
+      degree: subjectData.degree,
+      language: subjectData.language,
+      description: subjectData.description,
+      school: subjectData.school
+    }
+    const responseSubject = await CallBackendAsync("http://localhost:3011/api/subject/create", user.token, "post", reqBody)
+    setSubjectL([...subjectL, responseSubject.data]);
+  }
   const updateSubjectTerm = async (subjectTerm) => {
     const reqBody = { subjectTermId: subjectTerm.id, semester: subjectTerm.semester, studentList: subjectTerm.studentList }
     const responseSubjectTerm = await CallBackendAsync("http://localhost:3011/api/subjectTerm/update", user.token, "put", reqBody)
@@ -76,7 +90,8 @@ export function SubjProvider({ children }) {
         updateSubjectTerm,
         createSubjectTerm,
         createActivity,
-        deleteActivity
+        deleteActivity,
+        createSubject
       }}
     >
       {children}
