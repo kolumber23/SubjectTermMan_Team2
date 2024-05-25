@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import UserContext from '../AuthProvider';
 
@@ -17,7 +17,7 @@ function AddSubject({ show, handleClose, addSubject }) {
     return true;
   };
 
-  const [subjectData, setsubjectData] = useState({
+  const [subjectData, setSubjectData] = useState({
     name: "",
     credits: 1,
     supervisor: "",
@@ -27,6 +27,22 @@ function AddSubject({ show, handleClose, addSubject }) {
     description:  "",
     school: "",
   });
+
+  useEffect(() => {
+    if (show) {
+      setSubjectData({
+        name: '',
+        credits: 1,
+        degree: '',
+        supervisor: '',
+        goal: '',
+        language: '',
+        school: '',
+        description: ''
+      });
+      setValidated(false);
+    }
+  }, [show]);
 
   const handleAddSubject = (e) => {
     
@@ -39,7 +55,7 @@ function AddSubject({ show, handleClose, addSubject }) {
 
     const { name, credits, supervisor, goal, degree, language, description, school } = subjectData;
 
-    const newSubjectTerm = {
+    const newSubject = {
       name: name,
       credits: credits,
       supervisor: supervisor,
@@ -49,12 +65,12 @@ function AddSubject({ show, handleClose, addSubject }) {
       description: description,
       school: school
     };
-    addSubject(newSubjectTerm);
+    addSubject(newSubject);
     handleClose();
 };
   
 const setField = (name, val) => {
-  setsubjectData((prevData) => {
+  setSubjectData((prevData) => {
   return { ...prevData, [name]: val };
   });
 };
@@ -131,7 +147,7 @@ return (
               <option value="">Select degree</option>
               <option value="Bc">Bachelor</option>
               <option value="Mgr">Magister</option>
-              <option value="Ing">Engineer</option>
+              {/* <option value="Ing">Engineer</option> */}
             </Form.Control>
             <Form.Control.Feedback type="invalid"> 
               The degree must be seleted.
