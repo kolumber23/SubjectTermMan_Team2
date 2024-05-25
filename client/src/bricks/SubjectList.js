@@ -1,19 +1,23 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiPlus } from "@mdi/js";
 
 import styles from "../styles/styles.css";
+import AddSubject from "./AddSubject";
+import UserContext from "../AuthProvider";
 
-export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
+export default function SubjectList({ subjectL, subjectTermL, activityL, addSubject }) {
   const navigate = useNavigate();
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
+  const [showCreate, setShowCreate] = useState(false)
+  const { user } = useContext(UserContext);
 
   const handleSubjectClick = (selectedSubject) => {
-    navigate(`/subjDetail/${selectedSubject.id}`, {state: {selectedSubject, subjectTermL, activityL}});
+    navigate(`/subjDetail/${selectedSubject.id}`, { state: { selectedSubject, subjectTermL, activityL } });
   };
 
   const filteredSubjectL = useMemo(() => {
@@ -29,7 +33,7 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
       filteredList.sort((a, b) => {
         const x = sortBy === 'credits' ? a[sortBy] : a[sortBy].toLowerCase();
         const y = sortBy === 'credits' ? b[sortBy] : b[sortBy].toLowerCase();
-    
+
         if (sortBy === 'credits') {
           return sortDirection === 'asc' ? x - y : y - x;
         } else {
@@ -43,13 +47,13 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
     return filteredList;
   }, [searchBy, sortBy, sortDirection, subjectL]);
 
-  function handleSearch(event) { 
+  function handleSearch(event) {
     event.preventDefault();
     setSearchBy(event.target["searchInput"].value);
   };
 
-  function handleSearchDelete(event) {   
-    if (!event.target.value) setSearchBy(""); 
+  function handleSearchDelete(event) {
+    if (!event.target.value) setSearchBy("");
   };
 
   function handleSort(sortKey) {
@@ -61,79 +65,87 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL }) {
     }
   };
 
-return (
+  return (
 
-<div>
-    <Navbar collapseOnSelect expand="sm" bg="light">
+    <div>
+      <Navbar collapseOnSelect expand="sm" bg="light">
         <div className="container-fluid">
-            <Navbar.Brand style={{fontSize: "100%"}}>Overview of subjects</Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
-              <Form className="d-flex" onSubmit={handleSearch}>
-                <Form.Control
-                  id={"searchInput"}
-                  style={{ maxWidth: "150px" }}
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  onChange={handleSearchDelete}
-                />
-                <Button
-                  style={{ marginRight: "8px" }}
-                  variant="outline-primary"
-                  type="submit"
-                >
+          <Navbar.Brand style={{ fontSize: "100%" }}>Overview of subjects</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
+            <Form className="d-flex" onSubmit={handleSearch}>
+              <Form.Control
+                id={"searchInput"}
+                style={{ maxWidth: "150px" }}
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={handleSearchDelete}
+              />
+              <Button
+                style={{ marginRight: "8px" }}
+                variant="outline-primary"
+                type="submit"
+              >
                 <Icon size={1} path={mdiMagnify} />
-                </Button>
-                <Button
-                  style={{ marginRight: "8px" }}
-                  variant="success"
-                >
-                <Icon size={1} path={mdiPlus} />
-                </Button>
-              </Form>         
-            </Navbar.Collapse> 
-        </div>
-    </Navbar>
-    
-<div className="overview">
-<Table striped bordered>
-  <thead>
-    <tr>
-      <th onClick={() => handleSort("id")}>Id</th>
-      <th onClick={() => handleSort("name")}>Subject</th>
-      <th onClick={() => handleSort("credits")}>Credits</th>
-      <th onClick={() => handleSort("degree")}>Degree</th>
-      <th onClick={() => handleSort("supervisor")}>Supervisor</th>
-      <th onClick={() => handleSort("goal")}>Goal</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredSubjectL.map((subject, index) => {
-      return (
-        <tr key={index}>
-          <td> {subject.id} </td>
-          <td> {subject.name} </td>
-          <td> {subject.credits} </td>
-          <td> {subject.degree} </td>
-          <td> {subject.supervisor} </td>
-          <td> {subject.goal} </td>
-          <td> 
-            <Button
-              variant="outline-primary"
-              size="sm"
-              onClick={() => handleSubjectClick(subject)}
+              </Button>
+            </Form>
+
+            {user && user.id && !(user.id.startsWith("st")) && <Button
+              style={{ marginRight: "8px" }}
+              variant="success"
+              onClick={() => setShowCreate(true)}
             >
-              {"<"} 
-            </Button>         
-          </td>
-        </tr>  
-      );
-    })}
-  </tbody>
-</Table>
-  </div>
-</div>
-);
+              <Icon size={1} path={mdiPlus} />
+            </Button>}
+          </Navbar.Collapse>
+        </div>
+      </Navbar>
+
+      <div className="overview">
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th onClick={() => handleSort("id")}>Id</th>
+              <th onClick={() => handleSort("name")}>Subject</th>
+              <th onClick={() => handleSort("credits")}>Credits</th>
+              <th onClick={() => handleSort("degree")}>Degree</th>
+              <th onClick={() => handleSort("supervisor")}>Supervisor</th>
+              <th onClick={() => handleSort("goal")}>Goal</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredSubjectL.map((subject, index) => {
+              return (
+                <tr key={index}>
+                  <td> {subject.id} </td>
+                  <td> {subject.name} </td>
+                  <td> {subject.credits} </td>
+                  <td> {subject.degree} </td>
+                  <td> {subject.supervisor} </td>
+                  <td> {subject.goal} </td>
+                  <td>
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={() => handleSubjectClick(subject)}
+                    >
+                      {"<"}
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+
+        <AddSubject
+          show={showCreate}
+          handleClose={() => setShowCreate(false)}
+          addSubject={addSubject}
+        />
+      </div>
+    </div>
+  );
 };

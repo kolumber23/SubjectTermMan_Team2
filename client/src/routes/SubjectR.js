@@ -4,7 +4,7 @@ import SubjContext from "../SubjProvider";
 
 
 function SubjectR() {
-  const {subjectL, subjectTermL, activityL} = useContext(SubjContext);
+  const {subjectL, subjectTermL, activityL, createSubject} = useContext(SubjContext);
 
   /* const subjectL = [
     {
@@ -292,6 +292,7 @@ function SubjectR() {
         subjectL={subjectL}
         subjectTermL={subjectTermL}
         activityL={activityL}
+        addSubject={createSubject}
       />
     </div>
     );
