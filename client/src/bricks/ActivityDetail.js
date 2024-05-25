@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Modal, Button, Table, Form } from 'react-bootstrap';
 import UserContext from "../AuthProvider";
 
-function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
+function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm, calculateTotalSubjectTermScore }) {
     const [validated, setValidated] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
     const { users } = useContext(UserContext);
@@ -25,10 +25,38 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
         return initialScores;
     });
 
+    const calculateGrade = (student) => {
+        const ratio = calculateSuccessRatio(student.studentId);
+        let grade = 0;
+        if (ratio < 60) grade = 0;
+        else if (ratio >= 60 && ratio < 75) grade = 3;
+        else if (ratio >= 75 && ratio < 88) grade = 2;
+        else if (ratio >= 88) grade = 1;
+        return grade;
+      };
+
+    const calculateSuccessRatio = (studentId) => {
+        const totalAchievedScore = calculateTotalAchievedScore(studentId);
+        const totalScore = calculateTotalSubjectTermScore();
+        const successRatio = (totalAchievedScore / totalScore) * 100;
+        return Math.round(successRatio);
+      };
+
+    const calculateTotalAchievedScore = (studentId) => {
+        const student = subjectTerm.studentList?.find(student => student.studentId === studentId);
+        if (student && student.scoreList) {
+          let totalAchievedScore = 0;
+          student.scoreList.forEach(score => { totalAchievedScore += score.score });
+          return totalAchievedScore;
+        } else {
+          return 0;
+        }
+      };
+
     const setScore = (userId, score) => {
         setStudentScores(prevScores => ({
             ...prevScores,
-            [userId]: score
+            [userId]: Number(score)
         }));
     };
 
@@ -57,24 +85,25 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
                 if (studentScores[user.id] || studentScores[user.id] === 0) {
                     const student = subjectTerm.studentList
                         .map((student, id) => { return { ...student, index: id } })
-                        .find(student => student.studentId === user.id)
+                        .find(student => student.studentId === user.id);
                     const activityEntry = student.scoreList
                         .map((scoreEntry, id) => { return { ...scoreEntry, index: id } })
-                        .find(scoreEntry => scoreEntry.activityId === activity.id)
+                        .find(scoreEntry => scoreEntry.activityId === activity.id);
                     updatedSubjectTerm.studentList[student.index].scoreList[activityEntry.index] = {
                         ...activityEntry,
                         score: studentScores[user.id],
                         index: undefined,
                     };
+                    updatedSubjectTerm.studentList[student.index].grade = calculateGrade(student);
                 }
             });
-            updateSubjectTerm(updatedSubjectTerm)
+            updateSubjectTerm(updatedSubjectTerm);
         } catch (error) {
             console.error(error);
             return;
         }
         onClose();
-    }
+    };
 
     return (
         <Modal show={true} onHide={onClose}>
@@ -107,7 +136,6 @@ function ActivityDetail({ activity, subjectTerm, onClose, updateSubjectTerm }) {
                                     <Form noValidate validated={validated} onSubmit={onSave}>
                                         <Form.Control
                                             type="number"
-                                            //max={activity.maxScore}
                                             value={userScore}
                                             onChange={(e) => setScore(user.id, e.target.value) }
                                             isInvalid={validated && !!validationErrors[user.id]}

@@ -214,6 +214,15 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
 
   const handleBack = () => navigate(`/subject`);
 
+
+  const calculateTotalSubjectTermScore = () => {
+    var totalMaxScore = 0;
+    getActivities().forEach(act => {
+      totalMaxScore = totalMaxScore + act.maxScore
+    });
+    return totalMaxScore;
+  };
+
   return (
     <>
       {subjDetail && <>
@@ -451,6 +460,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
               activity={selectedActivity}
               subjectTerm={selectedSubjectTerm}
               onClose={() => setSelectedActivity(null)}
+              calculateTotalSubjectTermScore={calculateTotalSubjectTermScore}
             />
           )}
           {selectedStudent && (
