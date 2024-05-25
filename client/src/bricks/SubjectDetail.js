@@ -362,7 +362,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                           <td>{student.name}</td>
                           <td>{student.surname}</td>
                           <td>{calculateTotalAchievedScore(student.id, selectedSubjectTerm)}</td>
-                          <td>{calculateGrade(student.id, selectedSubjectTerm)}</td>
+                          <td>{calculateGrade(student.id, selectedSubjectTerm) === 0 ? "-" : calculateGrade(student.id, selectedSubjectTerm)}</td>
                           <td>
                             <Button
                               variant="outline-primary"
