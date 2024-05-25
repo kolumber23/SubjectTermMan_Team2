@@ -36,7 +36,7 @@ function StudentDetail({ selectedStudent, onClose }) {
               // Najít odpovídající předmět v subjectL podle subjectId
               const subject = subjectL.find((subj) => subj.id === subjectTerm.subjectId);
               if (subject) {
-                // Vypočítat celkové skóre studenta v daném termínu
+              // Vypočítat celkové skóre studenta v daném termínu
               const totalScore = studentEntry.scoreList.reduce((acc, curr) => {
                 return acc + curr.score;
               }, 0);
@@ -45,7 +45,7 @@ function StudentDetail({ selectedStudent, onClose }) {
           <td>{subject.name}</td>
           <td>{subjectTerm.semester}</td>
           <td>{totalScore}</td>
-          <td>{studentEntry.grade}</td>
+          <td>{studentEntry.grade === 0 ? "-" : studentEntry.grade}</td>
         </tr>
       );
     }
