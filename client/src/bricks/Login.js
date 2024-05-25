@@ -25,6 +25,7 @@ function Login({ show, handleClose }) {
 
   return (
     <Modal show={show} onHide={() => doClose()}>
+
       <Modal.Header closeButton>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>
@@ -32,10 +33,10 @@ function Login({ show, handleClose }) {
       <Modal.Body>
         <Form>
           {loginState.error && <Form.Group  style={{backgroundColor: "#f78484"}}>
-            <Form.Label style={{display: "block", textAlign: "center"}}>Chyba při přhlášení. Zkontrolujte přihlašovací údaje</Form.Label>
+            <Form.Label style={{display: "block", textAlign: "center"}}>Login error. Please check your login credentials.</Form.Label>
           </Form.Group>}
           <Form.Group>
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
               name="email"
@@ -52,9 +53,9 @@ function Login({ show, handleClose }) {
               onChange={(e) => setLoginState({ ...loginState, password: e.target.value })}
             />
           </Form.Group>
-
         </Form>
       </Modal.Body>
+
       <Modal.Footer>
         <Button
           variant="primary"
@@ -63,6 +64,7 @@ function Login({ show, handleClose }) {
           Login
         </Button>
       </Modal.Footer>
+
     </Modal>
   );
 }
