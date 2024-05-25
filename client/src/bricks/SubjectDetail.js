@@ -107,6 +107,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
       return [];
     }
   };
+
   // STUDENT
   // Študenti priradení k vybranému subjectTerm s ich známkami []
   const enrolledStudents = selectedSubjectTerm ? selectedSubjectTerm.studentList?.map(student => {
@@ -133,10 +134,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
     if (isEnrolled) {
       const updatedStudentList = selectedSubjectTerm.studentList.filter(student => student.studentId !== user.id);
       updateSubjectTerm({ ...selectedSubjectTerm, studentList: updatedStudentList })
-      // setSelectedSubjectTerm(prevTerm => ({
-      //   ...prevTerm,
-      //   studentList: updatedStudentList
-      // }));
     } else {
       // Ak študent nie je prihlásený, pridajte ho
       const newStudent = {
@@ -147,13 +144,9 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
             score: 0
           }
         }),
-        grade: 0 // Tu pridajte požadovanú predvolenú hodnotu pre nového študenta
+        grade: 0 // predvolená hodnota
       };
       updateSubjectTerm({ ...selectedSubjectTerm, studentList: [...selectedSubjectTerm.studentList, newStudent] })
-      // setSelectedSubjectTerm(prevTerm => ({
-      //   ...prevTerm,
-      //   studentList: [...prevTerm.studentList, newStudent]
-      // }));
     }
   };
 
@@ -161,7 +154,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
   const isEnrolled = selectedSubjectTerm && user&& selectedSubjectTerm.studentList?.some(student => student.studentId === user.id);
   
   // SCORE and GRADE
-
   // pri zmene subjectTerm alebo user vypočíta študentovi percentá, ktoré z predmetu získal
   useEffect(() => {
     if (selectedSubjectTerm && user) {
@@ -170,16 +162,14 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
     }
   }, [selectedSubjectTerm, user]);
 
-  // výpočet MAXIMÁLNEho DOSIAHNUTEĽNÉho SCORE v rámci subjectTerm
-  const calculateMaxScore = (subjTermId) => {
-    let maxScore = 0;
-    activityL.forEach(activity => {
-      if (activity.subjTermId === subjTermId.id) {
-        maxScore += activity.maxScore;
-      }
-    });
-    return maxScore;
-  };
+ // výpočet MAXIMÁLNEho DOSIAHNUTEĽNÉho SCORE v rámci subjectTerm
+    const calculateTotalSubjectTermScore = () => {
+      var totalMaxScore = 0;
+      getActivities().forEach(act => {
+        totalMaxScore = totalMaxScore + act.maxScore
+      });
+      return totalMaxScore;
+    };
 
   // výpočet DOSIAHNUTÉho SCORE za študenta
   const calculateTotalAchievedScore = (studentId, selectedSubjectTerm) => {
@@ -206,22 +196,13 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
 
   // výpočet PERCENTA dosiahnuté score / max možné score
   const calculateSuccessRatio = (studentId, subjTermId) => {
-    const maxScore = calculateMaxScore(selectedSubjectTerm);
+    const maxScore = calculateTotalSubjectTermScore(selectedSubjectTerm);
     const totalAchievedScore = calculateTotalAchievedScore(studentId, subjTermId);
     const successRatio = (totalAchievedScore / maxScore) * 100;
     return Math.round(successRatio);
   };
 
   const handleBack = () => navigate(`/subject`);
-
-
-  const calculateTotalSubjectTermScore = () => {
-    var totalMaxScore = 0;
-    getActivities().forEach(act => {
-      totalMaxScore = totalMaxScore + act.maxScore
-    });
-    return totalMaxScore;
-  };
 
   return (
     <>
@@ -252,11 +233,6 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                         onClick={() => handleEnroll()}
                       >
                         {isEnrolled ? "Remove" : "Enroll"}
-                      </Button>
-                    )}
-                    {!user.id.startsWith("st") && (
-                      <Button variant="success" size="sm">
-                        Update
                       </Button>
                     )}
                     <Button variant="outline-secondary" size="sm" onClick={handleBack}>
@@ -346,7 +322,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                             <Button
                               variant="outline-primary"
                               size="sm"
-                              onClick={() => setSelectedActivity(activity)} // Nastaviť vybranú úlohu
+                              onClick={() => setSelectedActivity(activity)}
                             >
                               {"<"}
                             </Button>
@@ -386,7 +362,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                           <td>{student.name}</td>
                           <td>{student.surname}</td>
                           <td>{calculateTotalAchievedScore(student.id, selectedSubjectTerm)}</td>
-                          <td>{calculateGrade(student.id, selectedSubjectTerm)}</td>
+                          <td>{calculateGrade(student.id, selectedSubjectTerm) === 0 ? "-" : calculateGrade(student.id, selectedSubjectTerm)}</td>
                           <td>
                             <Button
                               variant="outline-primary"
@@ -435,7 +411,7 @@ function SubjectDetail({ subjDetail, subjectTermL, activityL, updateSubjectTerm,
                             </tr>
                           );
                         } else {
-                          return null; // Skryjeme riadok pre aktivity, do ktorých študent nie je prihlásený
+                          return null;
                         }
                       })}
 
