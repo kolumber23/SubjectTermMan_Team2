@@ -1,19 +1,455 @@
 [
   {
-    "id": "1487823ca0c33069",
-    "semester": "summer 2024",
-    "subjectId": "ce0067314df27dce",
+    "id": "MA-BC-24S",
+    "subjectId": "MA-BC",
+    "semester": "2024 Summer",
     "studentList": [
+      {
+        "studentId": "st-6824-6544",
+        "scoreList": [
+          {
+            "activityId": "1653285",
+            "score": 7
+          },
+          {
+            "activityId": "9875368",
+            "score": 23
+          },
+          {
+            "activityId": "1845699",
+            "score": 24
+          },
+          {
+            "activityId": "7488150",
+            "score": 31
+          }
+        ],
+        "grade": 1
+      },
+      {
+        "studentId": "st-9267-3572",
+        "scoreList": [
+          {
+            "activityId": "1653285",
+            "score": 8
+          },
+          {
+            "activityId": "9875368",
+            "score": 21
+          },
+          {
+            "activityId": "1845699",
+            "score": 23
+          },
+          {
+            "activityId": "7488150",
+            "score": 30
+          }
+        ],
+        "grade": 1
+      },
       {
         "studentId": "st-6170-3245",
         "scoreList": [
           {
-            "activityId": "0b1886e28829a3bb",
-            "score": "7"
+            "activityId": "9875368",
+            "score": 18
+          },
+          {
+            "activityId": "1845699",
+            "score": 20
+          },
+          {
+            "activityId": "7488150",
+            "score": 28
+          }
+        ],
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "id": "MA-BC-23W",
+    "subjectId": "MA-BC",
+    "semester": "2023 Winter",
+    "studentList": [
+      {
+        "studentId": "st-6580-7562",
+        "scoreList": [
+          {
+            "activityId": "5879634",
+            "score": 6
+          },
+          {
+            "activityId": "4489655",
+            "score": 16
+          },
+          {
+            "activityId": "4112036",
+            "score": 22
+          },
+          {
+            "activityId": "9984221",
+            "score": 31
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-9155-9119",
+        "scoreList": [
+          {
+            "activityId": "5879634",
+            "score": 9
+          },
+          {
+            "activityId": "4489655",
+            "score": 18
+          },
+          {
+            "activityId": "4112036",
+            "score": 21
+          },
+          {
+            "activityId": "9984221",
+            "score": 35
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-9155-9132",
+        "scoreList": [
+          {
+            "activityId": "5879634",
+            "score": 8
+          },
+          {
+            "activityId": "4489655",
+            "score": 21
+          },
+          {
+            "activityId": "4112036",
+            "score": 24
+          },
+          {
+            "activityId": "9984221",
+            "score": 39
+          }
+        ],
+        "grade": 1
+      }
+    ]
+  },
+  {
+    "id": "PM-BC-24S",
+    "subjectId": "PM-BC",
+    "semester": "2024 Summer",
+    "studentList": [
+      {
+        "studentId": "st-6824-6544",
+        "scoreList": [
+          {
+            "activityId": "1155998",
+            "score": 36
+          },
+          {
+            "activityId": "2255996",
+            "score": 54
+          }
+        ],
+        "grade": 1
+      },
+      {
+        "studentId": "st-9267-3572",
+        "scoreList": [
+          {
+            "activityId": "1155998",
+            "score": 28
+          },
+          {
+            "activityId": "2255996",
+            "score": 44
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-6170-3245",
+        "scoreList": [
+          {
+            "activityId": "1155998",
+            "score": 28
+          },
+          {
+            "activityId": "2255996",
+            "score": 59
+          }
+        ],
+        "grade": 2
+      }
+    ]
+  },
+  {
+    "id": "AJ-MG-24S",
+    "subjectId": "AJ-MG",
+    "semester": "2024 Summer",
+    "studentList": [
+      {
+        "studentId": "st-5492-5764",
+        "scoreList": [
+          {
+            "activityId": "2874936",
+            "score": 40
+          },
+          {
+            "activityId": "9856355",
+            "score": 60
+          }
+        ],
+        "grade": 1
+      },
+      {
+        "studentId": "st-2341-5340",
+        "scoreList": [
+          {
+            "activityId": "2874936",
+            "score": 36
+          },
+          {
+            "activityId": "9856355",
+            "score": 42
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-4023-4412",
+        "scoreList": [
+          {
+            "activityId": "2874936",
+            "score": 31
+          },
+          {
+            "activityId": "9856355",
+            "score": 44
+          }
+        ],
+        "grade": 2
+      }
+    ]
+  },
+  {
+    "semester": "2024 Winter",
+    "subjectId": "MA-BC",
+    "studentList": [
+      {
+        "studentId": "st-9467-5027",
+        "scoreList": [
+          {
+            "activityId": "604ac929846a2ef2",
+            "score": 12
+          },
+          {
+            "activityId": "a744e4a1e99cbc3f",
+            "score": 12
+          },
+          {
+            "activityId": "495a936fc70100c7",
+            "score": 49
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-9467-5028",
+        "scoreList": [
+          {
+            "activityId": "604ac929846a2ef2",
+            "score": 12
+          },
+          {
+            "activityId": "a744e4a1e99cbc3f",
+            "score": 20
+          },
+          {
+            "activityId": "495a936fc70100c7",
+            "score": 47
+          }
+        ],
+        "grade": 1
+      },
+      {
+        "studentId": "st-9611-9860",
+        "scoreList": [
+          {
+            "activityId": "604ac929846a2ef2",
+            "score": 10
+          },
+          {
+            "activityId": "a744e4a1e99cbc3f",
+            "score": 19
+          },
+          {
+            "activityId": "495a936fc70100c7",
+            "score": 35
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-4357-8327",
+        "scoreList": [
+          {
+            "activityId": "604ac929846a2ef2",
+            "score": 8
+          },
+          {
+            "activityId": "a744e4a1e99cbc3f",
+            "score": 14
+          },
+          {
+            "activityId": "495a936fc70100c7",
+            "score": 37
+          }
+        ],
+        "grade": 3
+      }
+    ],
+    "id": "MA-BC-24W"
+  },
+  {
+    "semester": "2024 Winter",
+    "subjectId": "PM-BC",
+    "studentList": [
+      {
+        "studentId": "st-9467-5027",
+        "scoreList": [
+          {
+            "activityId": "660060336e4affb6",
+            "score": 7
+          },
+          {
+            "activityId": "9ff0b40bdce228fd",
+            "score": 21
+          },
+          {
+            "activityId": "f7876b2314b57a80",
+            "score": 44
+          }
+        ],
+        "grade": 3
+      },
+      {
+        "studentId": "st-9467-5028",
+        "scoreList": [
+          {
+            "activityId": "660060336e4affb6",
+            "score": 9
+          },
+          {
+            "activityId": "9ff0b40bdce228fd",
+            "score": 39
+          },
+          {
+            "activityId": "f7876b2314b57a80",
+            "score": 38
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-9611-9860",
+        "scoreList": [
+          {
+            "activityId": "660060336e4affb6",
+            "score": 8
+          },
+          {
+            "activityId": "9ff0b40bdce228fd",
+            "score": 31
+          },
+          {
+            "activityId": "f7876b2314b57a80",
+            "score": 45
+          }
+        ],
+        "grade": 2
+      },
+      {
+        "studentId": "st-4357-8327",
+        "scoreList": [
+          {
+            "activityId": "660060336e4affb6",
+            "score": 8
+          },
+          {
+            "activityId": "9ff0b40bdce228fd",
+            "score": 36
+          },
+          {
+            "activityId": "f7876b2314b57a80",
+            "score": 49
+          }
+        ],
+        "grade": 1
+      }
+    ],
+    "id": "PM-BC-24W"
+  },
+  {
+    "semester": "2024 Winter",
+    "subjectId": "AJ-MG",
+    "studentList": [
+      {
+        "studentId": "st-9467-5027",
+        "scoreList": [
+          {
+            "activityId": "0678efa4887bde3c",
+            "score": 21
+          },
+          {
+            "activityId": "ad8a6fd801c00444",
+            "score": 35
           }
         ],
         "grade": 0
+      },
+      {
+        "studentId": "st-3357-6245",
+        "scoreList": [
+          {
+            "activityId": "0678efa4887bde3c",
+            "score": 33
+          },
+          {
+            "activityId": "ad8a6fd801c00444",
+            "score": 39
+          }
+        ],
+        "grade": 3
+      },
+      {
+        "studentId": "st-3871-9773",
+        "scoreList": [
+          {
+            "activityId": "0678efa4887bde3c",
+            "score": 41
+          },
+          {
+            "activityId": "ad8a6fd801c00444",
+            "score": 47
+          }
+        ],
+        "grade": 1
       }
-    ]
+    ],
+    "id": "AJ-MG-24W"
+  },
+  {
+    "semester": "2024 Summer",
+    "subjectId": "MR-BC",
+    "studentList": [],
+    "id": "MR-BC-24S"
   }
 ]

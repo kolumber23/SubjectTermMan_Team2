@@ -1,101 +1,101 @@
 [
-	{
-		"id": "MA-BC",
-		"name": "Mathematic Analysis",
-		"credits": 6,
-		"supervisor": "Marek Novotný",
-		"goal": "Mathematic learning",
-		"degree": "Bc",
-		"language": "cz",
-		"description": "Mathematic Analysis is a fundamental course in mathematics that focuses on the theory and application of calculus. Students will learn techniques for solving problems involving limits, derivatives, and integrals, as well as theorems related to continuity, differentiability, and Riemann sums.",
-		"school": "Union University"
-	},
-	{
-		"id": "PM-BC",
-		"name": "Project management",
-		"credits": 9,
-		"supervisor": "Petr Novák",
-		"goal": "To learn management",
-		"degree": "Bc",
-		"language": "cz",
-		"description": "Project Management introduces students to the principles and practices of planning, executing, and controlling projects effectively. Topics include project initiation, planning, scheduling, budgeting, risk management, and project closure. Students will also learn about different project management methodologies and tools.",
-		"school": "Union University"
-	},
-	{
-		"id": "AJ-MG",
-		"name": "Business English",
-		"credits": 3,
-		"supervisor": "Jozef Mrkva",
-		"goal": "To learn English language",
-		"degree": "Mgr",
-		"language": "en",
-		"description": "Business English is designed to improve students' language skills in the context of international business communication. The course covers vocabulary, grammar, and communication strategies specific to various business contexts such as meetings, negotiations, presentations, and written correspondence.",
-		"school": "Union University"
-	},
-	{
-		"id": "BE-MG",
-		"name": "Backend",
-		"credits": 6,
-		"supervisor": "Jaroslav Svoboda",
-		"goal": "To learn backend",
-		"degree": "Mgr",
-		"language": "en",
-		"description": "Backend development focuses on the server-side logic of web applications. In this course, students will learn about databases, server-side scripting, APIs, security, and scalability. They will also gain practical experience in building and deploying backend systems for various web applications.",
-		"school": "Union University"
-	},
-	{
-		"id": "SP-BC",
-		"name": "Statistical Probability",
-		"credits": 6,
-		"supervisor": "Anna Kováčová",
-		"goal": "To understand statistical analysis",
-		"degree": "Bc",
-		"language": "en",
-		"description": "Statistical Probability introduces students to the principles of probability theory and its applications in statistics. Topics include probability distributions, random variables, expected values, variance, and hypothesis testing. Students will also learn to apply statistical software for data analysis and interpretation.",
-		"school": "Union University"
-	},
-	{
-		"id": "CS-BC",
-		"name": "Computer Science Fundamentals",
-		"credits": 9,
-		"supervisor": "Tomáš Malý",
-		"goal": "To understand basic concepts in computer science",
-		"degree": "Bc",
-		"language": "en",
-		"description": "Computer Science Fundamentals provides an introduction to key concepts in computer science, including algorithms, data structures, programming paradigms, and computational thinking. Students will develop problem-solving skills and gain hands-on experience in programming languages such as Python and Java.",
-		"school": "Union University"
-	},
-	{
-		"id": "EC-MG",
-		"name": "Econometrics",
-		"credits": 6,
-		"supervisor": "Eva Hrušková",
-		"goal": "To analyze economic data",
-		"degree": "Mgr",
-		"language": "en",
-		"description": "Econometrics focuses on the application of statistical methods to analyze economic data and test economic theories. Topics include regression analysis, time series analysis, panel data analysis, and hypothesis testing in the context of economics. Students will also learn to use econometric software for empirical research.",
-		"school": "Union University"
-	},
-	{
-		"id": "IT-MG",
-		"name": "Information Technology Management",
-		"credits": 9,
-		"supervisor": "Martin Vlk",
-		"goal": "To manage IT resources effectively",
-		"degree": "Mgr",
-		"language": "en",
-		"description": "Information Technology Management explores the principles and practices of managing IT resources within organizations. Topics include IT strategy, IT governance, project management, IT infrastructure, cybersecurity, and emerging technologies. Students will develop skills to align IT with business objectives and optimize IT investments.",
-		"school": "Union University"
-	},
-	{
-		"id": "MR-BC",
-		"name": "Marketing Research",
-		"credits": 6,
-		"supervisor": "Miroslav Růžička",
-		"goal": "To conduct marketing research",
-		"degree": "Bc",
-		"language": "en",
-		"description": "Marketing Research focuses on the systematic gathering, recording, and analysis of data related to marketing activities. Topics include research design, data collection methods, sampling techniques, data analysis, and interpretation. Students will also learn about ethical considerations in marketing research.",
-		"school": "Union University"
-	}
+  {
+    "id": "MA-BC",
+    "name": "Mathematic Analysis",
+    "credits": 6,
+    "supervisor": "Marek Novotný",
+    "goal": "Mathematic learning",
+    "degree": "Bc",
+    "language": "cz",
+    "description": "Mathematic Analysis is a fundamental course in mathematics that focuses on the theory and application of calculus. Students will learn techniques for solving problems involving limits, derivatives, and integrals, as well as theorems related to continuity, differentiability, and Riemann sums.",
+    "school": "Union University"
+  },
+  {
+    "id": "PM-BC",
+    "name": "Project management",
+    "credits": 9,
+    "supervisor": "Petr Novák",
+    "goal": "To learn management",
+    "degree": "Bc",
+    "language": "cz",
+    "description": "Project Management introduces students to the principles and practices of planning, executing, and controlling projects effectively. Topics include project initiation, planning, scheduling, budgeting, risk management, and project closure. Students will also learn about different project management methodologies and tools.",
+    "school": "Union University"
+  },
+  {
+    "id": "AJ-MG",
+    "name": "Business English",
+    "credits": 3,
+    "supervisor": "Jozef Mrkva",
+    "goal": "To learn English language",
+    "degree": "Mgr",
+    "language": "en",
+    "description": "Business English is designed to improve students' language skills in the context of international business communication. The course covers vocabulary, grammar, and communication strategies specific to various business contexts such as meetings, negotiations, presentations, and written correspondence.",
+    "school": "Union University"
+  },
+  {
+    "id": "BE-MG",
+    "name": "Backend",
+    "credits": 6,
+    "supervisor": "Jaroslav Svoboda",
+    "goal": "To learn backend",
+    "degree": "Mgr",
+    "language": "en",
+    "description": "Backend development focuses on the server-side logic of web applications. In this course, students will learn about databases, server-side scripting, APIs, security, and scalability. They will also gain practical experience in building and deploying backend systems for various web applications.",
+    "school": "Union University"
+  },
+  {
+    "id": "SP-BC",
+    "name": "Statistical Probability",
+    "credits": 6,
+    "supervisor": "Anna Kováčová",
+    "goal": "To understand statistical analysis",
+    "degree": "Bc",
+    "language": "en",
+    "description": "Statistical Probability introduces students to the principles of probability theory and its applications in statistics. Topics include probability distributions, random variables, expected values, variance, and hypothesis testing. Students will also learn to apply statistical software for data analysis and interpretation.",
+    "school": "Union University"
+  },
+  {
+    "id": "CS-BC",
+    "name": "Computer Science Fundamentals",
+    "credits": 9,
+    "supervisor": "Tomáš Malý",
+    "goal": "To understand basic concepts in computer science",
+    "degree": "Bc",
+    "language": "en",
+    "description": "Computer Science Fundamentals provides an introduction to key concepts in computer science, including algorithms, data structures, programming paradigms, and computational thinking. Students will develop problem-solving skills and gain hands-on experience in programming languages such as Python and Java.",
+    "school": "Union University"
+  },
+  {
+    "id": "EC-MG",
+    "name": "Econometrics",
+    "credits": 6,
+    "supervisor": "Eva Hrušková",
+    "goal": "To analyze economic data",
+    "degree": "Mgr",
+    "language": "en",
+    "description": "Econometrics focuses on the application of statistical methods to analyze economic data and test economic theories. Topics include regression analysis, time series analysis, panel data analysis, and hypothesis testing in the context of economics. Students will also learn to use econometric software for empirical research.",
+    "school": "Union University"
+  },
+  {
+    "id": "IT-MG",
+    "name": "Information Technology Management",
+    "credits": 9,
+    "supervisor": "Martin Vlk",
+    "goal": "To manage IT resources effectively",
+    "degree": "Mgr",
+    "language": "en",
+    "description": "Information Technology Management explores the principles and practices of managing IT resources within organizations. Topics include IT strategy, IT governance, project management, IT infrastructure, cybersecurity, and emerging technologies. Students will develop skills to align IT with business objectives and optimize IT investments.",
+    "school": "Union University"
+  },
+  {
+    "id": "MR-BC",
+    "name": "Marketing Research",
+    "credits": 6,
+    "supervisor": "Miroslav Růžička",
+    "goal": "To conduct marketing research",
+    "degree": "Bc",
+    "language": "en",
+    "description": "Marketing Research focuses on the systematic gathering, recording, and analysis of data related to marketing activities. Topics include research design, data collection methods, sampling techniques, data analysis, and interpretation. Students will also learn about ethical considerations in marketing research.",
+    "school": "Union University"
+  }
 ]

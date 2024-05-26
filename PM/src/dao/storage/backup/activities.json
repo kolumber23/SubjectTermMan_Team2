@@ -1,11 +1,173 @@
 [
-	{
-		"id": "0b1886e28829a3bb",
-		"name": "Workshop",
-		"subjTermId": "1487823ca0c33069",
-		"description": "In this mandatory weekend workshop, students will be divided into teams to tackle practical project tasks. They’ll create project plans, manage resources, and practice stakeholder communication. The hands-on group activities will provide a real-world project management experience.",
-		"maxScore": 100,
-		"minScore": 60,
-		"deadline": "2024-05-12 23:59:59"
-	}
+  {
+    "id": "9875368",
+    "name": "Test1",
+    "subjTermId": "MA-BC-24S",
+    "description": "Test from issues 1-2",
+    "maxScore": 25,
+    "minScore": 15,
+    "deadline": "2024-04-15T23:59"
+  },
+  {
+    "id": "1845699",
+    "name": "Test2",
+    "subjTermId": "MA-BC-24S",
+    "description": "Test from issues 3-4",
+    "maxScore": 25,
+    "minScore": 15,
+    "deadline": "2024-04-30T23:59"
+  },
+  {
+    "id": "7488150",
+    "name": "Test3",
+    "subjTermId": "MA-BC-24S",
+    "description": "Test from issues 5-6",
+    "maxScore": 40,
+    "minScore": 25,
+    "deadline": "2024-05-15T23:59"
+  },
+  {
+    "id": "5879634",
+    "name": "Course",
+    "subjTermId": "MA-BC-23W",
+    "description": "Elementary function - uuCourse",
+    "maxScore": 10,
+    "minScore": 4,
+    "deadline": "2023-10-31T23:59"
+  },
+  {
+    "id": "4489655",
+    "name": "Test1",
+    "subjTermId": "MA-BC-23W",
+    "description": "Test from issues 1-2",
+    "maxScore": 25,
+    "minScore": 15,
+    "deadline": "2023-10-15T23:59"
+  },
+  {
+    "id": "4112036",
+    "name": "Test2",
+    "subjTermId": "MA-BC-23W",
+    "description": "Test from issues 3-4",
+    "maxScore": 25,
+    "minScore": 15,
+    "deadline": "2023-11-20T23:59"
+  },
+  {
+    "id": "9984221",
+    "name": "Test3",
+    "subjTermId": "MA-BC-23W",
+    "description": "Test from issues 5-6",
+    "maxScore": 40,
+    "minScore": 25,
+    "deadline": "2024-01-15T23:59"
+  },
+  {
+    "id": "1155998",
+    "name": "Test1",
+    "subjTermId": "PM-BC-24S",
+    "description": "Test1",
+    "maxScore": 40,
+    "minScore": 25,
+    "deadline": "2024-05-15T23:59"
+  },
+  {
+    "id": "2255996",
+    "name": "Test2",
+    "subjTermId": "PM-BC-24S",
+    "description": "Test2",
+    "maxScore": 60,
+    "minScore": 40,
+    "deadline": "2024-05-30T23:59"
+  },
+  {
+    "id": "2874936",
+    "name": "Homework",
+    "subjTermId": "AJ-MG-24S",
+    "description": "Essay",
+    "maxScore": 40,
+    "minScore": 25,
+    "deadline": "2024-05-15T23:59"
+  },
+  {
+    "id": "9856355",
+    "name": "Test",
+    "subjTermId": "AJ-MG-24S",
+    "description": "Test from issues 1-6",
+    "maxScore": 60,
+    "minScore": 40,
+    "deadline": "2024-05-30T23:59"
+  },
+  {
+    "name": "Activity 1",
+    "subjTermId": "MA-BC-24W",
+    "description": "Activity1",
+    "maxScore": 15,
+    "minScore": 5,
+    "deadline": "2024-10-31T23:59",
+    "id": "604ac929846a2ef2"
+  },
+  {
+    "name": "Activity 2",
+    "subjTermId": "MA-BC-24W",
+    "description": "Activity2",
+    "maxScore": 20,
+    "minScore": 10,
+    "deadline": "2024-11-01T23:59",
+    "id": "a744e4a1e99cbc3f"
+  },
+  {
+    "name": "Activity 3",
+    "subjTermId": "MA-BC-24W",
+    "description": "Activity3",
+    "maxScore": 50,
+    "minScore": 10,
+    "deadline": "2025-01-10T23:59",
+    "id": "495a936fc70100c7"
+  },
+  {
+    "name": "uuCourse",
+    "subjTermId": "PM-BC-24W",
+    "description": "course PM",
+    "maxScore": 10,
+    "minScore": 3,
+    "deadline": "2024-10-10T23:59",
+    "id": "660060336e4affb6"
+  },
+  {
+    "name": "Test",
+    "subjTermId": "PM-BC-24W",
+    "description": "test",
+    "maxScore": 40,
+    "minScore": 15,
+    "deadline": "2024-11-20T23:59",
+    "id": "9ff0b40bdce228fd"
+  },
+  {
+    "name": "Workshop",
+    "subjTermId": "PM-BC-24W",
+    "description": "workshop",
+    "maxScore": 50,
+    "minScore": 30,
+    "deadline": "2025-01-16T23:59",
+    "id": "f7876b2314b57a80"
+  },
+  {
+    "name": "Test",
+    "subjTermId": "AJ-MG-24W",
+    "description": "test",
+    "maxScore": 50,
+    "minScore": 20,
+    "deadline": "2024-11-15T23:59",
+    "id": "0678efa4887bde3c"
+  },
+  {
+    "name": "Oral exam",
+    "subjTermId": "AJ-MG-24W",
+    "description": "oral exam",
+    "maxScore": 50,
+    "minScore": 30,
+    "deadline": "2025-01-15T23:59",
+    "id": "ad8a6fd801c00444"
+  }
 ]
