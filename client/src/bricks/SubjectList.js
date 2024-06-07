@@ -1,14 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiPlus } from "@mdi/js";
 import AddSubject from "./AddSubject";
+import UserContext from "../AuthProvider";
+
 
 import styles from "../styles/styles.css";
 
 export default function SubjectList ({ subjectL, subjectTermL, activityL, createSubject }) {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [searchBy, setSearchBy] = useState("");
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
@@ -70,7 +73,7 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
       setSortDirection("asc");
     }
   };
-
+console.log(user);
 return (
 
 <div>
@@ -95,6 +98,7 @@ return (
                 >
                 <Icon size={1} path={mdiMagnify} />
                 </Button>
+                {user?.id?.startsWith("ad") && (
                 <Button
                   style={{ marginRight: "8px" }}
                   variant="success"
@@ -102,6 +106,7 @@ return (
                 >
                 <Icon size={1} path={mdiPlus} />
                 </Button>
+                 )}
               </Form>         
             </Navbar.Collapse> 
         </div>
