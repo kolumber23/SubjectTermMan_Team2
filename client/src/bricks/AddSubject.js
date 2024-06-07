@@ -19,7 +19,7 @@ function AddSubject({ show, handleClose, addSubject }) {
 
   const [subjectData, setSubjectData] = useState({
     name: "",
-    credits: 1,
+    credits: "",
     supervisor: "",
     goal: "",
     degree: "",
@@ -32,7 +32,7 @@ function AddSubject({ show, handleClose, addSubject }) {
     if (show) {
       setSubjectData({
         name: '',
-        credits: 1,
+        credits: "",
         degree: '',
         supervisor: '',
         goal: '',
@@ -160,10 +160,10 @@ return (
               name="credits"
               value={subjectData.credits}
               onChange={(e) => setField("credits", e.target.value)}
-              isInvalid={validated && (isNaN(subjectData.credits) || subjectData.credits < 1 || subjectData.credits > 100)}
+              isInvalid={validated && (isNaN(subjectData.credits) || subjectData.credits < 0 || subjectData.credits > 100)}
             />
             <Form.Control.Feedback type="invalid"> 
-              The credits must be a number between 1-100.
+              The credits must be a number between 0-100.
             </Form.Control.Feedback>
           </Form.Group>
         <Form.Group controlId="formSchool">
