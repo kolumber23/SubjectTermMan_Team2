@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, Navbar, Form, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
@@ -6,7 +6,6 @@ import { mdiMagnify, mdiPlus } from "@mdi/js";
 import AddSubject from "./AddSubject";
 
 import styles from "../styles/styles.css";
-import UserContext from "../AuthProvider";
 
 export default function SubjectList ({ subjectL, subjectTermL, activityL, createSubject }) {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
   const [sortBy, setSortBy] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
   const [show, setShow] = useState(false);
-  const { user } = useContext(UserContext);
 
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -25,7 +23,7 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
   };
 
   const handleSubjectClick = (selectedSubject) => {
-    navigate(`/subjDetail/${selectedSubject.id}`, { state: { selectedSubject, subjectTermL, activityL } });
+    navigate(`/subjDetail/${selectedSubject.id}`, {state: {selectedSubject, subjectTermL, activityL}});
   };
 
   const filteredSubjectL = useMemo(() => {
@@ -41,7 +39,7 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
       filteredList.sort((a, b) => {
         const x = sortBy === 'credits' ? a[sortBy] : a[sortBy].toLowerCase();
         const y = sortBy === 'credits' ? b[sortBy] : b[sortBy].toLowerCase();
-
+    
         if (sortBy === 'credits') {
           return sortDirection === 'asc' ? x - y : y - x;
         } else {
@@ -55,13 +53,13 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
     return filteredList;
   }, [searchBy, sortBy, sortDirection, subjectL]);
 
-  function handleSearch(event) {
+  function handleSearch(event) { 
     event.preventDefault();
     setSearchBy(event.target["searchInput"].value);
   };
 
-  function handleSearchDelete(event) {
-    if (!event.target.value) setSearchBy("");
+  function handleSearchDelete(event) {   
+    if (!event.target.value) setSearchBy(""); 
   };
 
   function handleSort(sortKey) {
@@ -73,40 +71,39 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
     }
   };
 
-  return (
+return (
 
-    <div>
-      <Navbar collapseOnSelect expand="sm" bg="light">
+<div>
+    <Navbar collapseOnSelect expand="sm" bg="light">
         <div className="container-fluid">
-          <Navbar.Brand style={{ fontSize: "100%" }}>Overview of subjects</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
-            <Form className="d-flex" onSubmit={handleSearch}>
-              <Form.Control
-                id={"searchInput"}
-                style={{ maxWidth: "150px" }}
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                onChange={handleSearchDelete}
-              />
-              <Button
-                style={{ marginRight: "8px" }}
-                variant="outline-primary"
-                type="submit"
-              >
+            <Navbar.Brand style={{fontSize: "100%"}}>Overview of subjects</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
+              <Form className="d-flex" onSubmit={handleSearch}>
+                <Form.Control
+                  id={"searchInput"}
+                  style={{ maxWidth: "150px" }}
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  onChange={handleSearchDelete}
+                />
+                <Button
+                  style={{ marginRight: "8px" }}
+                  variant="outline-primary"
+                  type="submit"
+                >
                 <Icon size={1} path={mdiMagnify} />
-              </Button>
-            </Form>
-
-            {user && user.id && !(user.id.startsWith("st")) && <Button
-              style={{ marginRight: "8px" }}
-              variant="success"
-              onClick={handleOpen}
-            >
-              <Icon size={1} path={mdiPlus} />
-            </Button>}
-          </Navbar.Collapse>
+                </Button>
+                <Button
+                  style={{ marginRight: "8px" }}
+                  variant="success"
+                  onClick={handleOpen}
+                >
+                <Icon size={1} path={mdiPlus} />
+                </Button>
+              </Form>         
+            </Navbar.Collapse> 
         </div>
     </Navbar>
     
@@ -114,7 +111,6 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
 <Table striped bordered>
   <thead>
     <tr>
-      <th onClick={() => handleSort("id")}>Id</th>
       <th onClick={() => handleSort("name")}>Subject</th>
       <th onClick={() => handleSort("credits")}>Credits</th>
       <th onClick={() => handleSort("degree")}>Degree</th>
@@ -127,12 +123,11 @@ export default function SubjectList ({ subjectL, subjectTermL, activityL, create
     {filteredSubjectL.map((subject, index) => {
       return (
         <tr key={index}>
-          <td> {subject.id} </td>
-          <td> {subject.name} </td>
+          <td style={{ textAlign: "left" }}> {subject.name} </td>
           <td> {subject.credits} </td>
           <td> {subject.degree} </td>
           <td> {subject.supervisor} </td>
-          <td> {subject.goal} </td>
+          <td style={{ textAlign: "left" }}> {subject.goal} </td>
           <td> 
             <Button
               variant="outline-primary"
